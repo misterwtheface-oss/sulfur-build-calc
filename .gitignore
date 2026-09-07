@@ -1,19 +1,34 @@
 # --- SULFUR Build Calculator ---
-# Rule of thumb: if the SPA doesn't load it at runtime, it doesn't belong here.
+# This repo IS the public GitHub-Pages deploy surface. Commit ONLY what the
+# browser needs to run the site. Everything below stays LOCAL (rebuild as needed,
+# see WIKI_CONTEXT.md) and is intentionally NOT deployed.
+#
+# Runtime files that ARE committed: index.html, styles.css, app.js,
+# data.js (generated), and assets/weapons/*.png (the icons the site loads).
 
 node_modules/
 *.log
 .DS_Store
 Thumbs.db
 
-# The datamine workspace lives as a SIBLING (../_sulfur_extract) and is NEVER
-# committed here — raw dumps, decompiled C#, and the ~1.7 GB Unity export stay out.
-# If it is ever nested under this repo, ignore it:
+# build + preview tooling (not needed to run the deployed site)
+build-data.mjs
+tools/
+
+# source data — compiled into data.js; the CSVs themselves are never served
+references/
+
+# build inputs / assets the site does not (yet) load
+assets/icon_manifest.csv
+assets/oils/
+assets/scrolls/
+assets/consumables/
+
+# internal dev docs — kept local, never on the public site
+SPEC_PLAN.md
+WIKI_CONTEXT.md
+Progress.md
+README.md
+
+# the datamine workspace lives as a SIBLING and is never committed here
 _*_extract/
-
-# raw / intermediate data that is NOT the shipped subset
-references/data/_raw/
-assets/_full_export/
-
-# NOTE: data.js IS committed on purpose — GitHub Pages serves it directly.
-# references/data/*.csv and assets/**/*.png ARE committed — the SPA reads them.

@@ -5,13 +5,13 @@
   P0 flow: pick a weapon -> apply Oils/Scrolls -> pick a target enemy -> live totals.
   State persists to localStorage under "sulfurbc.build".
 
-  Math is the VERIFIED engine from _sulfur_extract/code/PROCEDURAL_MAP.md:
-   §1 stat engine  — Flat (sum) -> PercentAdd (pooled, ×clamp(1+Σ,0.01,10)) -> PercentMult (each ×(1+v))
-   §3 outgoing dmg — weapon Damage stat, then ×(1+GlobalDamageMultiplier)
-   §4 incoming     — crit flat ×2, resistance ×((100-r)/100)
+  Damage math mirrors the game's own logic:
+   - stat engine  — Flat (sum) -> PercentAdd (pooled, ×clamp(1+Σ,0.01,10)) -> PercentMult (each ×(1+v))
+   - outgoing dmg — weapon Damage stat, then ×(1+GlobalDamageMultiplier)
+   - incoming     — crit flat ×2, resistance ×((100-r)/100)
   NOTE (P0 scope): player class/element ExtraDamage_*, headshots, status/DoT synergies
-  and endless-loop scaling are P1 — see Progress.md. They are surfaced in the ledger
-  but not yet folded into the headline damage numbers.
+  and endless-loop scaling are not yet folded into the headline numbers; they are
+  surfaced in the modifier ledger for now.
 */
 (function () {
   "use strict";
@@ -57,7 +57,7 @@
   function persist() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
   // =====================================================================
-  //  Stat engine (PROCEDURAL_MAP §1) — CalculateFinalValue for one attribute
+  //  Stat engine — final value for one attribute (Flat -> pooled PercentAdd -> PercentMult)
   // =====================================================================
   function calcStat(base, mods) {
     let num = base, pooledAdd = 0, hasAdd = false;
@@ -85,7 +85,7 @@
   }
 
   // =====================================================================
-  //  Damage computation (PROCEDURAL_MAP §3 outgoing, §4 incoming)
+  //  Damage computation (outgoing weapon damage, then incoming crit + resistance)
   // =====================================================================
   function compute() {
     const w = state.weapon ? weaponByKey.get(state.weapon) : null;
