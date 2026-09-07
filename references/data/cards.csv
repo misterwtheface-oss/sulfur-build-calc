@@ -1,0 +1,46 @@
+name,cardKey,displayName,description,cardType,buffType,buffAmount,rewardType,preselectionChance
+Card_AmmoGain,Card_AmmoGain,Ammo Gain Increase,Increase ammo gain by AMOUNT_X (permanent per run),2,3,0.5,6,0.3
+Card_Bonanza,Card_Bonanza,Bonanza,Enemies will drop normal loot this level.,3,6,0,7,0.3
+Card_Chonk,Card_Chonk,Chonk,"Enemies will be AMOUNT_X slower, AMOUNT_Y larger, but have AMOUNT_Z health next level. XP increased by AMOUNT_W increased.",3,0,0,7,0.3
+Card_DoubleDamage,Card_DoubleDamage,Double Damage,Your damage output is doubled for the duration of the level.,2,5,0,6,0.3
+Card_Escape,Card_Escape,Escape,Travel back to the Church.,3,0,0,7,0.3
+Card_ExplodableBarrels,Card_ExplodableBarrels,Explodable Barrels,Spawns explodable barrels on the next level.,3,0,0,7,0.3
+Card_FullHealth,Card_FullHealth,Full Health,Replenishes your health to it's maximum value.,2,5,0,6,0.3
+Card_GearChest,Card_GearChest,Gear Chest,Summons AMOUNT_X gear chests in the level.,1,0,0,1,0
+Card_Honor,Card_Honor,Honor,"Melee only next level, AMOUNT_X increased XP.",3,0,0,7,0.3
+Card_Indestructible,Card_Indestructible,Indestructible,No durability loss on any items for the duration of the level.,2,6,0,7,0.3
+Card_InfiniteAmmo,Card_InfiniteAmmo,Infinite Ammo,No ammo will be consumed when reloading during this level,2,6,0,7,0.3
+Card_Inflation,Card_Inflation,Inflation,Enemies grow continuously in size and health next level. AMOUNT_X increased XP.,3,0,0,7,0.3
+Card_Lifesteal,Card_Lifesteal,Lifesteal,AMOUNT_X lifesteal for the duration of the level.,2,6,0,6,0.3
+Card_MaxHP,Card_MaxHP,Max Health,Increase Max Health by AMOUNT_X (permanent for run).,2,6,0,6,0.3
+Card_MeleeDamage,Card_MeleeDamage,Melee Damage,Melee damage will AMOUNT_X for the remainder of the level,2,5,0,6,0.3
+Card_MeleeXP,Card_MeleeXP,Melee Experience,Defeating enemies with melee provides double the XP shards for the duration of the level.,2,4,0,7,0.3
+Card_MoveSpeed,Card_MoveSpeed,Movement Speed,AMOUNT_X increased movement speed (permanent for run).,2,6,0,6,0.3
+Card_Pass,Card_Pass,Get Stamps!,Pass on the offer. Get stamps.,3,0,0,7,1
+Card_RandomAmmo,Card_RandomAmmo,Random Ammo,Receive AMOUNT_X of a random ammo type.,0,0,0,9,0.5
+Card_RandomEnchantment,Card_RandomEnchantment,Random Enchantment,This gives a random Enchantment.,0,0,0,1,0.3
+Card_RandomGear,Card_RandomGear,Random Gear,This gives a random wearble.,0,0,0,1,0.3
+Card_RandomOil,Card_RandomOil,Random Oil,This gives AMOUNT_X of random Oils.,0,0,0,1,0.3
+Card_RandomTrinket,Card_RandomTrinket,Random Trinket,This gives a random Trinket,0,0,0,1,0.3
+Card_RandomWeapon,Card_RandomWeapon,Random Weapon,This gives a random weapon.,0,0,0,1,0.3
+Card_Raptor,Card_Raptor,Raptor,"Enemies will be AMOUNT_X faster, AMOUNT_Y smaller, but have AMOUNT_Z health next level. XP increased by AMOUNT_W increased.",3,0,0,7,0.3
+Card_RepairAll,Card_RepairAll,Repair All,Repairs everything you hare carrying in your inventory.,2,0,0,7,0.3
+Card_Reroll,Card_Reroll,New choices!,Don’t like your choices? Get new ones.,3,0,0,7,0.3
+Card_SeveralItems,Card_SeveralItems,Recieve AMOUNT_Xx ITEM_X,AMOUNT_X ITEM_X will spawn in the level.,0,0,0,1,1
+Card_SlowMotion,Card_SlowMotion,Slow Motion,Slows time for the remainder of the level.,2,5,0,6,0.3
+Card_SpecificItem,Card_SpecificItem,ITEM_X,Recieve ITEM_X,0,0,0,1,1
+Card_SummonAlly,Card_SummonAlly,Ally,Summons a tough ALLY_X to fight for you.,1,0,0,5,1
+Card_SummonCommonChest,Card_SummonCommonChest,Common Chest,Summons AMOUNT_X common chests in the level.,1,0,0,1,0
+Card_SummonCooking,Card_SummonCooking,Cooking Station,Summons a cooking station in the level.,1,0,0,4,0
+Card_SummonNPC,Card_SummonNPC,NPC_X,Summons a NPC_X vendor in the level.,1,0,0,8,1
+Card_SummonRandomAllies,Card_SummonRandomAllies,Allies,Summons AMOUNT_X tough random allies to fight for you this level.,1,0,0,5,0
+Card_SummonRandomService,Card_SummonRandomService,Random Service Station,Summons a random Service station in the level.,1,0,0,4,0.6
+Card_SummonRandomStorage,Card_SummonRandomStorage,Random Storage,Summons a random Storage in the level.,1,0,0,4,0.3
+Card_TheOoze,Card_TheOoze,The Ooze,All enemies have an extra random mutation next level. AMOUNT_X increased XP.,3,0,0,7,0.3
+Card_Thorns,Card_Thorns,Thorns,"Return AMOUNT_X of damage taken, before armor reduction (permanent per run).",2,6,0,6,0.3
+Card_ValuableGear,Card_ValuableGear,,,0,0,0,1,1
+Card_Volatile,Card_Volatile,Volatile,All enemies are Bombs next level. AMOUNT_X increased XP.,3,0,0,7,0.3
+Card_WeaponChest,Card_WeaponChest,Weapon Chest,Summons AMOUNT_X weapon chests in the level.,1,0,0,1,0.3
+Card_WeaponTypeBuff,Card_WeaponTypeBuff,WEAPONTYPE_X buff,Any WEAPONTYPE_X weapon does AMOUNT_X extra damage for the duration of the level.,2,4,0,6,0.3
+Card_XpIncrease,Card_XpIncrease,Increase XP,Increase amount of XP from shards by AMOUNT_X (permanent per run).,2,2,0.1,6,0.342
+Card_XpRange,Card_XpRange,Shard Pull Range,Increase the shard pull range by AMOUNT_X (permanent for run).,2,1,2,6,0.3

@@ -1,0 +1,315 @@
+name,id,enchantmentName,IsElemental,CostsDurability,modifiersApplied,category
+EnchantmentDefinition_ActionOil,1,Action Oil,0,1,KickMultiplier=1(PercentAdd);ReloadSpeed=0.8(PercentAdd),Oils/Reload
+EnchantmentDefinition_AddDamageOil,2,Add Damage Oil,0,1,Damage=15(Flat),Oils/DamageFlat
+EnchantmentDefinition_Aftershock,3,Aftershock,1,1,ProjectileOnHitAftershock=1(Flat),Upgraded
+EnchantmentDefinition_AimlessOil,4,Aimless Oil,0,1,CritChance=0.3(Flat);DisableADS=1(Flat),Oils/CritChance
+EnchantmentDefinition_AirSoftOil,5,Airsoft Oil,0,1,Damage=-15(Flat);ProjectileDrag=7(Flat);ReloadSpeed=1.2(PercentAdd),Oils/Reload
+EnchantmentDefinition_AltruisticOil,6,Altruistic Oil,0,1,Spread=-0.7(Flat);ItemStat_LootChanceMultiplier=-0.3(PercentAdd),Oils/Spread
+EnchantmentDefinition_ArkanoidOil,7,Arkanoid Oil,0,1,ProjectileBounce=10(Flat);ProjectileTimeScale=-0.8(Flat),Oils/Bounce
+EnchantmentDefinition_ArrowOil,8,Arrow Oil,0,1,ProjectileTimeScale=0.8(Flat);Damage=-0.15(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_ArteryOil,9,Artery Oil,0,1,CritChance=0.1(Flat);ProjectileScale=-0.5(PercentMult),Oils/CritChance
+EnchantmentDefinition_ArtilleryOil,10,Artillery Oil,0,1,Spread=-2(Flat);ProjectileMass=15(Flat),Oils/Spread
+EnchantmentDefinition_AsceticOil,11,Ascetic Oil,0,1,Damage=30(Flat);DisableLootMoney=1(Flat),Oils/DamageFlat
+EnchantmentDefinition_AssassinDartOil,12,Assassin Dart Oil,0,1,ProjectileTimeScale=0.7(Flat);ItemStat_MoveSpeed=-0.25(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_AttackSpeedOil,13,Attack Speed Oil,0,1,RPM=0.2(PercentAdd),Oils/RPM
+EnchantmentDefinition_AxeOil,14,Axe Oil,0,1,CritChance=0.25(Flat);ProjectileMass=10(Flat),Oils/CritChance
+EnchantmentDefinition_BBOil,17,BB Oil,0,1,RPM=0.3(PercentAdd);ProjectileScale=-0.7(PercentMult),Oils/RPM
+EnchantmentDefinition_BadPlanetOil,15,Bad Planet Oil,0,1,ProjectilePenetration=2(Flat);ItemStat_JumpPower=-0.3(PercentAdd),Oils/Penetration
+EnchantmentDefinition_BanditOil,16,Bandit Oil,0,1,ProjectileBounce=2(Flat);DisableLootMoney=1(Flat),Oils/Bounce
+EnchantmentDefinition_Beamgun,292,Beamgun,1,1,ProjectileBeam=1(Flat);ProjectileMoveAsLight=1(Flat);FullAuto=1(Flat);RPM=9(PercentMult);Damage=-0.9(PercentMult);KickMultiplier=-0.7(PercentMult);DisableMuzzleFlash=1(Flat);ProjectileTurnOffBulletHoles=1(Flat);ShootEffectSoundOnly=1(Flat);ImpactEffectSoundOnly=1(Flat);Spread=2(PercentMult),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_Big,18,Bigger Bullets Oil,0,1,ProjectileScale=0.5(PercentMult);ProjectileMass=20(Flat);Damage=0.25(PercentAdd),.
+EnchantmentDefinition_BigOil,19,Big Oil,0,1,ProjectileMass=20(Flat);ProjectileTimeScale=-0.2(Flat);Damage=35(Flat),Oils/DamageFlat
+EnchantmentDefinition_BigTaxOil,20,Big Tax Oil,0,0,ProjectileScale=1(PercentAdd);DisableLootMoney=1(Flat),Oils/Size
+EnchantmentDefinition_BirthOil,21,Birth Oil,0,0,ProjectileScale=3(PercentAdd);MaxDurability=-0.3(PercentAdd),Oils/Size
+EnchantmentDefinition_BlackFridayOil,22,Black Friday Oil,0,1,MaxDurability=-0.3(PercentAdd);ProjectileAmount=2(PercentAdd);Damage=-0.3(PercentAdd);Spread=0.3(PercentAdd),Oils/Multishot
+EnchantmentDefinition_BlindfoldOil,23,Blindfold Oil,0,1,CritChance=0.2(Flat);Spread=2(Flat),Oils/CritChance
+EnchantmentDefinition_Blizzard,312,Blizzard,1,1,ProjectileBlizzard=1(Flat);ProjectileLifeTime=6(Flat),Upgraded
+EnchantmentDefinition_BlurtOil,24,Blurt Oil,0,1,RPM=0.4(PercentAdd);ProjectileTimeScale=-0.2(Flat),Oils/RPM
+EnchantmentDefinition_BoltOil,25,Bolt Oil,0,1,ProjectileTimeScale=0.6(Flat);Damage=-15(Flat),Oils/BulletSpeed
+EnchantmentDefinition_BombardOil,26,Bombard Oil,0,1,Damage=-0.1(PercentAdd);ProjectileAmount=2(PercentAdd);ProjectileMass=10(Flat);Spread=1.4(Flat),Oils/Multishot
+EnchantmentDefinition_BoomstickOil,27,Boomstick Oil,0,1,Damage=-0.25(PercentAdd);ProjectileAmount=2(PercentAdd);KickMultiplier=2(PercentAdd);DisableADS=1(Flat);Spread=1.5(PercentAdd),Oils/Multishot
+EnchantmentDefinition_BoulderOil,28,Boulder Oil,0,1,Damage=0.2(PercentAdd);ProjectileMass=10(Flat);ProjectileBounce=1(Flat);ProjectileBounciness=0.8(Flat),Oils/Weight
+EnchantmentDefinition_Bounce,29,Bounce Oil,0,1,ProjectileBounce=1(Flat),.
+EnchantmentDefinition_BowlOil,30,BowlOil,0,1,Spread=-0.75(Flat);ProjectileTimeScale=-0.2(PercentAdd),Oils/Spread
+EnchantmentDefinition_BracedOil,31,Braced Oil,0,1,KickMultiplier=-0.3(PercentAdd);ItemStat_JumpPower=-0.2(PercentAdd),Oils/Recoil
+EnchantmentDefinition_Brutality,32,Damage Oil,0,1,Damage=0.5(PercentAdd),.
+EnchantmentDefinition_BruteOil,33,Brute Oil,0,1,Damage=30(Flat);Spread=0.7(Flat),Oils/DamageFlat
+EnchantmentDefinition_BulkOil,34,Bulk Oil,0,1,ConsumeAmmoChance=-0.4(Flat);ProjectileMass=15(Flat),Oils/Recycle
+EnchantmentDefinition_BystanderOil,35,Bystander Oil,0,1,ProjectilePenetration=2(Flat);DisableADS=1(Flat),Oils/Penetration
+EnchantmentDefinition_CarefreeOil,36,Carefree Oil,0,1,ConsumeAmmoChance=-0.2(Flat);Spread=1(Flat),Oils/Recycle
+EnchantmentDefinition_CarefulOil,37,Careful Oil,0,1,Spread=-0.7(Flat);RPM=-0.25(PercentAdd),Oils/Spread
+EnchantmentDefinition_CarelessSplitterOil,38,Careless Splitter Oil,0,1,Damage=-0.25(PercentAdd);ProjectileAmount=3(PercentAdd);KickMultiplier=2(PercentAdd);Spread=2(PercentAdd);MaxDurability=-0.75(PercentAdd),Oils/Multishot
+EnchantmentDefinition_CartoonOil,39,Cartoon Oil,0,1,ProjectileBounce=6(Flat);KickMultiplier=2(PercentAdd),Oils/Bounce
+EnchantmentDefinition_CasualOil,40,Casual Oil,0,1,KickMultiplier=-0.3(PercentAdd);ItemStat_LootChanceMultiplier=-0.2(PercentAdd),Oils/Recoil
+EnchantmentDefinition_ChainLightning,41,ChainLightning,1,1,ProjectileOnHitChainLightning=1(Flat),GunsAndMagic - EnchantmentDefinitions
+EnchantmentDefinition_ChaosStrike,42,Chaos Strike,1,1,ProjectileChaosStrike=3(Flat);ProjectileDark=50(Flat);ProjectileApplyStun=1(Flat);EnchantmentSwapUnits=1(Flat);ProjectileScale=1(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_Charm,43,Charm,1,1,ProjectileApplyCharm=1(Flat),Upgraded
+EnchantmentDefinition_CheapOil,44,Cheap Oil,0,1,Damage=-0.2(PercentAdd);ConsumeAmmoChance=-0.3(Flat),Oils/Recycle
+EnchantmentDefinition_ChonkOil,45,Chonk Oil,0,0,ProjectileScale=1(PercentAdd);Spread=0.3(Flat),Oils/Size
+EnchantmentDefinition_ChubOil,46,Chub Oil,0,0,ProjectileScale=1(PercentAdd);Damage=-0.2(PercentAdd),Oils/Size
+EnchantmentDefinition_ClashOil,296,Clash Oil,0,0,ItemStat_JumpPower=-0.15(PercentAdd);KnockbackPower=3(Flat),Oils/Knockback
+EnchantmentDefinition_ClumpOil,47,Clump Oil,0,0,ProjectileScale=2(PercentAdd);ConsumeExtraAmmoChance=0.3(Flat),Oils/Size
+EnchantmentDefinition_CollateralOil,48,Collateral Oil,0,1,ProjectilePenetration=2(Flat);KickMultiplier=1(PercentAdd),Oils/Penetration
+EnchantmentDefinition_ComplicatedOil,49,Complicated Oil,0,1,Damage=0.3(PercentAdd);ReloadSpeed=-0.25(PercentMult),Oils/DamagePercentage
+EnchantmentDefinition_CompoOil,50,CompoOil,0,1,ReloadSpeed=1.6(PercentAdd);ItemStat_MoveSpeed=-0.6(PercentAdd);Spread=-0.1(PercentAdd);KickMultiplier=-0.1(PercentAdd),Oils/Reload
+EnchantmentDefinition_ConfidenceOil,51,Confidence Oil,0,1,CritChance=0.2(Flat);ReloadSpeed=-0.25(PercentMult),Oils/CritChance
+EnchantmentDefinition_CongestionOil,52,Congestion Oil,0,0,ProjectileScale=1(PercentAdd);ItemStat_LootChanceMultiplier=-0.5(PercentAdd),Oils/Size
+EnchantmentDefinition_ConsiderateOil,53,Considerate Oil,0,1,ProjectilePenetration=2(Flat);Damage=-25(Flat),Oils/Penetration
+EnchantmentDefinition_ContainedForceOil,54,Contained Force Oil,0,1,KickMultiplier=-0.45(PercentAdd);MaxDurability=-0.1(PercentAdd),Oils/Recoil
+EnchantmentDefinition_CorpseExplosion,55,Corpse Explosion,1,1,ProjectileOnHitCorpseExplosion=1(Flat),Upgraded
+EnchantmentDefinition_CorrosiveBlood,56,Poison Blood,1,1,ProjectileOnHitCorrosiveBlood=1(Flat),Upgraded
+EnchantmentDefinition_CriticalOil,57,Critical Oil,0,1,CritChance=0.15(Flat),Oils/CritChance
+EnchantmentDefinition_Crusader,58,Crusader,1,1,ProjectileApplyCrusader=1(Flat),Upgraded
+EnchantmentDefinition_CryoRocketLauncher,289,Cryo Rocket Launcher,1,1,ProjectileKinematicForce=7500(Flat);ProjectileVisualCryoRocket=1(Flat);ProjectileForce=16(Flat);ProjectileGravityFactor=-0.99(PercentMult),Upgraded
+EnchantmentDefinition_CryoSnakes,290,Cryo Snakes,1,1,ProjectileCryoSnakes=1(Flat),Upgraded
+EnchantmentDefinition_CycleOil,59,Cycle Oil,0,1,Spread=1(Flat);ReloadSpeed=0.9(PercentAdd),Oils/Reload
+EnchantmentDefinition_DamageOil,60,Damage Oil,0,1,Damage=0.2(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_Dark,61,Dark,1,1,Damage=-0.8(PercentAdd);ProjectileApplyBlind=1(Flat),.
+EnchantmentDefinition_DartOil,62,Dart Oil,0,1,ProjectileTimeScale=0.5(Flat);ItemStat_JumpPower=-0.2(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_DeadCenterOil,63,Dead Center Oil,0,1,Spread=-2(Flat);KickMultiplier=1(Flat),Oils/Spread
+EnchantmentDefinition_DelayedHyperTubeOil,64,Delayed Hyper Tube Oil,0,1,ProjectileTimeScale=1(Flat);RPM=-0.5(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_DenseOil,65,Dense Oil,0,0,MaxDurability=0.3(PercentAdd);ItemStat_JumpPower=-0.2(PercentAdd),Oils/Durability
+EnchantmentDefinition_DetuneOil,66,Detune Oil,0,0,MaxDurability=0.5(PercentAdd);Damage=-0.25(PercentAdd),Oils/Durability
+EnchantmentDefinition_DieselOil,67,Diesel Oil,0,1,ProjectileTimeScale=0.5(Flat);KickMultiplier=0.3(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_DischargeOil,68,Discharge Oil,0,1,Damage=30(Flat);ConsumeExtraAmmoChance=0.3(Flat),Oils/DamageFlat
+EnchantmentDefinition_DisposableOil,69,Disposable Oil,0,1,Damage=50(Flat);MaxDurability=-0.75(PercentAdd),Oils/DamageFlat
+EnchantmentDefinition_DivisionOil,70,Division Oil,0,1,Damage=-0.2(PercentAdd);ProjectileAmount=1(PercentAdd);Spread=1.7(Flat);ProjectileScale=-0.7(PercentMult),Oils/Multishot
+EnchantmentDefinition_DoOverOil,71,Do-over Oil,0,1,ConsumeAmmoChance=-0.2(Flat);RPM=-0.25(PercentAdd),Oils/Recycle
+EnchantmentDefinition_DoubleFireOil,72,Double Fire Oil,0,1,RPM=0.5(PercentAdd);ConsumeExtraAmmoChance=0.25(Flat),Oils/RPM
+EnchantmentDefinition_DoubleLockOil,73,Double Lock Oil,0,1,ReloadSpeed=0.6(PercentAdd);RPM=-0.2(PercentAdd),Oils/Reload
+EnchantmentDefinition_DoubleNothingOil,74,Double Nothing Oil,0,1,Damage=-0.25(PercentAdd);ProjectileAmount=1(PercentAdd);ItemStat_LootChanceMultiplier=-1(PercentAdd);Spread=0.7(Flat),Oils/Multishot
+EnchantmentDefinition_Duality,75,Oil of Yin,0,1,ProjectileAmount=1(PercentAdd);Damage=-0.25(PercentAdd),.
+EnchantmentDefinition_DumDumOil,76,Dum Dum Oil,0,1,Damage=0.22(PercentAdd);DisableLootOrgans=1(Flat),Oils/DamagePercentage
+EnchantmentDefinition_DynamicOil,77,Dynamic Oil,0,1,Damage=-15(Flat);ReloadSpeed=1(PercentAdd),Oils/Reload
+EnchantmentDefinition_Earth,78,Earth,1,1,ProjectileApplyStun=1(Flat),.
+EnchantmentDefinition_EasyOil,79,Easy Oil,0,1,KickMultiplier=-0.2(PercentAdd);DisableLootMoney=1(Flat),Oils/Recoil
+EnchantmentDefinition_EasyPlopOil,80,Easy Plop Oil,0,1,KickMultiplier=-0.65(PercentAdd);ProjectileMass=5(Flat),Oils/Recoil
+EnchantmentDefinition_ElephantOil,81,Elephant Oil,0,1,ProjectileAmount=2(PercentAdd);Damage=-0.25(PercentAdd);KickMultiplier=0.1(PercentAdd);ItemStat_MoveSpeed=-0.5(PercentAdd);ProjectileMass=10(Flat);ProjectileScale=2(PercentAdd);Spread=2(Flat),Oils/Multishot
+EnchantmentDefinition_Embers,82,Embers,1,1,ProjectileApplyFire=1(Flat),.
+EnchantmentDefinition_EternalOil,83,Eternal Oil,0,1,,Oils
+EnchantmentDefinition_ExcessiveForceOil,297,Excessive Force Oil,0,0,KnockbackPower=6(Flat);ConsumeExtraAmmoChance=0.2(Flat),Oils/Knockback
+EnchantmentDefinition_ExcessivePowderOil,298,Excessive Powder Oil,0,1,KnockbackPower=6(Flat);DurabilityLoss=1(Flat),Oils/Knockback
+EnchantmentDefinition_ExoticBarrelOil,84,Exotic Barrel Oil,0,1,Spread=-2(Flat);MaxDurability=-0.25(PercentAdd),Oils/Spread
+EnchantmentDefinition_ExpanderOil,85,Expander Oil,0,1,Damage=20(Flat);DisableLootOrgans=1(Flat),Oils/DamageFlat
+EnchantmentDefinition_Explosion,86,Explosion,1,1,ProjectileOnHitExplosion=1(Flat),Upgraded
+EnchantmentDefinition_ExtraPowderOil,87,Extra Powder Oil,0,1,ProjectileTimeScale=0.5(Flat);ReloadSpeed=-0.15(PercentMult),Oils/BulletSpeed
+EnchantmentDefinition_FarsightedOil,88,Farsighted Oil,0,1,ProjectilePenetration=3(Flat);ConsumeExtraAmmoChance=0.3(Flat),Oils/Penetration
+EnchantmentDefinition_FastBetOil,89,Fast Bet Oil,0,1,ProjectileTimeScale=0.35(Flat);DisableLootMoney=1(Flat),Oils/BulletSpeed
+EnchantmentDefinition_FastForwardOil,90,Fast Forward Oil,0,1,ProjectileTimeScale=2(Flat);EnchantmentDurabilityCost=0(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_Fear,91,Fear,1,1,ProjectileApplyFear=1(Flat),Upgraded
+EnchantmentDefinition_FeatureGunOil,92,Feature Gun Oil,0,0,MaxDurability=0.3(PercentAdd);DisableADS=1(Flat),Oils/Durability
+EnchantmentDefinition_FidgetLordOil,93,Fidget Lord Oil,0,1,ItemStat_MoveSpeed=-0.4(PercentAdd);ReloadSpeed=1.4(PercentAdd),Oils/Reload
+EnchantmentDefinition_FidgetOil,94,Fidget Oil,0,1,Damage=20(Flat);ReloadSpeed=-0.25(PercentMult),Oils/DamageFlat
+EnchantmentDefinition_FirstBloodOil,95,First Blood Oil,0,1,Damage=0.3(PercentAdd);Spread=1(Flat),Oils/DamagePercentage
+EnchantmentDefinition_FlameThrower,96,Flame Thrower,1,1,Spread=1.5(PercentMult);ProjectileTimeScale=-0.7(Flat);ProjectileMoveAsSpray=10(Flat);ProjectileDrag=8(Flat);ProjectileForce=-0.6(Flat);ProjectileTurnOffBulletHoles=1(Flat);Damage=-0.86(PercentMult);ProjectilieFlameThrower=1(Flat);ProjectileLifeTime=0.8(Flat);ProjectileBounciness=-0.8(Flat);ProjectileDisableDamageComponentEffects=1(Flat);ProjectileBounce=1(Flat);ShootEffectSoundOnly=1(Flat);ImpactEffectSoundOnly=1(Flat);ProjectileTrailLength=-0.5(PercentMult),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_FlatEnergyOil,299,Flat Energy Oil,0,0,KnockbackPower=8(Flat);Damage=-0.2(PercentAdd),Oils/Knockback
+EnchantmentDefinition_FleaOil,97,Flea Oil,0,1,ProjectileBounce=4(Flat);ProjectileScale=-0.5(PercentMult);Damage=-0.5(PercentAdd),Oils/Bounce
+EnchantmentDefinition_FlopOil,98,Flop Oil,0,0,ProjectileScale=0.7(PercentAdd);ItemStat_JumpPower=-0.1(PercentAdd),Oils/Size
+EnchantmentDefinition_FlowFunnelOil,99,Flow Funnel Oil,0,1,KickMultiplier=-0.65(PercentAdd);Spread=3(Flat),Oils/Recoil
+EnchantmentDefinition_Flutter,100,Rate of Fire Oil,0,1,RPM=25(Flat),.
+EnchantmentDefinition_FoodStampOil,101,Food Stamp Oil,0,1,DisableLootMoney=1(Flat);ConsumeAmmoChance=-0.2(Flat),Oils/Recycle
+EnchantmentDefinition_ForceOil,102,Force Oil,0,1,ProjectileForce=2(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_FoulFate,286,Foul Fate,1,1,ProjectileFoulFate=1(Flat);DurabilityLoss=1(Flat),Upgraded
+EnchantmentDefinition_FragileSystemOil,103,Fragile System Oil,0,1,RPM=0.5(PercentAdd);MaxDurability=-0.15(PercentAdd),Oils/RPM
+EnchantmentDefinition_FranciscanOil,104,Franciscan Oil,0,1,Damage=0.2(PercentAdd);DisableLootMoney=1(Flat),Oils/DamagePercentage
+EnchantmentDefinition_Frostbite,105,Frostbite,1,1,ProjectileApplyFrost=1(Flat),.
+EnchantmentDefinition_FrugalOil,106,Frugal Oil,0,1,Damage=25(Flat);ItemStat_LootChanceMultiplier=-0.35(PercentAdd),Oils/DamageFlat
+EnchantmentDefinition_GamblerOil,107,Gambler Oil,0,1,CritChance=0.2(Flat);Damage=-0.1(PercentAdd),Oils/CritChance
+EnchantmentDefinition_GargantuanOil,108,Gargantuan Oil,0,0,ProjectileScale=2(PercentAdd);ReloadSpeed=-0.5(PercentMult),Oils/Size
+EnchantmentDefinition_GeminiOil,109,Gemini Oil,0,1,Damage=-30(Flat);ProjectileAmount=1(PercentAdd);Spread=0.7(Flat),Oils/Multishot
+EnchantmentDefinition_GentleOil,110,Gentle Oil,0,0,MaxDurability=0.25(PercentAdd);ProjectileScale=-0.3(PercentMult),Oils/Durability
+EnchantmentDefinition_GlassCannonOil,111,Glass Cannon Oil,0,1,Damage=0.5(PercentAdd);MaxDurability=-0.25(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_GreatOil,112,Great Oil,0,1,ProjectileMass=35(Flat);ProjectileTimeScale=-0.2(Flat);Damage=0.6(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_GroundedOil,113,Grounded Oil,0,1,Damage=0.25(PercentAdd);ItemStat_JumpPower=-0.15(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_GunslingerOil,114,Gunslinger Oil,0,1,DisableADS=1(Flat);ReloadSpeed=0.75(PercentAdd),Oils/Reload
+EnchantmentDefinition_HappyAccidentOil,115,Happy Accident Oil,0,1,CritChance=0.15(Flat);KickMultiplier=0.4(PercentAdd),Oils/CritChance
+EnchantmentDefinition_HeavyLeadOil,116,Heavy Lead Oil,0,1,ProjectilePenetration=4(Flat);ProjectileMass=20(Flat),Oils/Penetration
+EnchantmentDefinition_HeavyOil,117,Heavy Oil,0,1,Damage=0.6(PercentAdd);ProjectileMass=10(Flat);ProjectileScale=0.5(PercentMult),Oils/DamagePercentage
+EnchantmentDefinition_HeavyPocketsOil,118,Heavy Pockets Oil,0,1,ItemStat_JumpPower=-1(PercentAdd);ConsumeAmmoChance=-0.2(Flat),Oils/Recycle
+EnchantmentDefinition_HeftyOil,119,Hefty Oil,0,0,MaxDurability=0.45(PercentAdd);ItemStat_MoveSpeed=-0.2(PercentAdd),Oils/Durability
+EnchantmentDefinition_HeliumOil,120,Helium Oil,0,1,ConsumeAmmoChance=-0.4(Flat);ProjectileTimeScale=-0.4(PercentAdd),Oils/Recycle
+EnchantmentDefinition_HighGradeOil,121,High Grade Oil,0,0,MaxDurability=0.2(PercentAdd),Oils/Durability
+EnchantmentDefinition_HipBlasterOil,122,Hip Blaster Oil,0,1,Damage=0.25(PercentAdd);DisableADS=1(Flat),Oils/DamagePercentage
+EnchantmentDefinition_HipMarksmanOil,123,Slick Oil,0,1,Spread=-0.8(Flat);DisableADS=1(Flat),Oils/Spread
+EnchantmentDefinition_HolyFire,124,Holy Fire,1,1,ProjectileHolyFire=1(Flat);ProjectileMoveAsLight=1(Flat);ProjectilePenetration=999(Flat);ProjectilePenetrationDamageMultiplier=0.5(Flat);RPM=-0.5(PercentMult),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_HolyPurge,125,Holy Purge,1,1,EnchantmentDamageAoe=0.1(Flat);EnchantmentBlindAoe=1(Flat);DurabilityLoss=2.5(PercentMult);EnchantmentSelfDamage=10(Flat);EnchantmentRemoveBullets=1(Flat);ProjectileHoly=1(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_HolyWater,287,Holy Water,1,1,ProjectileOnAllyHitHeal=1(Flat);ProjectileOnHitWater=1(Flat);ProjectileHolyWater=1(Flat);ExtraDamageGhost=51.2(Flat);DisableBloodOnHit=1(Flat);ProjectileTurnOffBulletHoles=1(Flat),Upgraded
+EnchantmentDefinition_HoopOil,126,Hoop Oil,0,1,ProjectileBounce=4(Flat);ProjectileMass=10(Flat),Oils/Bounce
+EnchantmentDefinition_HunterOil,127,Hunter Oil,0,1,CritChance=0.15(Flat);ItemStat_MoveSpeed=-0.3(PercentAdd),Oils/CritChance
+EnchantmentDefinition_HustlerOil,128,Hustler Oil,0,1,CritChance=0.25(Flat);Damage=-15(Flat),Oils/CritChance
+EnchantmentDefinition_HyperLeadOil,129,Hyper Lead Oil,0,1,Damage=0.4(PercentAdd);ProjectileMass=40(Flat);ProjectileTimeScale=1(Flat),Oils/Weight
+EnchantmentDefinition_IceBeam,294,Ice Beam,1,1,ProjectileIceBeam=1(Flat);ProjectileBeam=1(Flat);ProjectileMoveAsLight=1(Flat);FullAuto=1(Flat);RPM=9(PercentMult);Damage=-0.9(PercentMult);ProjectileApplyFrost=1(Flat);KickMultiplier=-0.7(PercentMult);DisableMuzzleFlash=1(Flat);ProjectileTurnOffBulletHoles=1(Flat);ShootEffectSoundOnly=1(Flat);ImpactEffectSoundOnly=1(Flat);Spread=2(PercentMult),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_ImperfectOil,130,Imperfect Oil,0,1,ProjectileBounce=3(Flat);MaxDurability=-0.15(PercentAdd),Oils/Bounce
+EnchantmentDefinition_InconsiderateOil,131,Inconsiderate Oil,0,1,ProjectilePenetration=2(Flat);Spread=2(Flat),Oils/Penetration
+EnchantmentDefinition_InheritedOil,132,Inherited Oil,0,0,MaxDurability=0.5(PercentAdd);ItemStat_LootChanceMultiplier=-1(PercentAdd),Oils/Durability
+EnchantmentDefinition_InstantOil,133,Instant Oil,0,1,ProjectileTimeScale=1.5(Flat);DisableADS=1(Flat),Oils/BulletSpeed
+EnchantmentDefinition_JudgementOil,134,Terminator Oil,0,1,Damage=25(Flat);ItemStat_MoveSpeed=-0.15(PercentAdd),Oils/DamageFlat
+EnchantmentDefinition_JudoOil,300,Judo Oil,0,0,KnockbackPower=12(Flat);ReloadSpeed=-0.5(PercentMult),Oils/Knockback
+EnchantmentDefinition_JungianOil,135,Jungian Oil,0,1,ProjectilePenetration=2(Flat);ItemStat_MoveSpeed=-0.15(PercentAdd),Oils/Penetration
+EnchantmentDefinition_KeepOil,136,Keep Oil,0,1,ConsumeAmmoChance=-0.2(Flat);DisableLootOrgans=1(Flat),Oils/Recycle
+EnchantmentDefinition_KickerOil,137,Kicker Oil,0,1,Damage=20(Flat);KickMultiplier=0.5(PercentAdd),Oils/DamageFlat
+EnchantmentDefinition_KineticOil,138,Kinetic Oil,0,1,ProjectileTimeScale=1(Flat);ProjectileMass=20(Flat),Oils/BulletSpeed
+EnchantmentDefinition_KnockbackOil,301,Knockback Oil,0,0,KnockbackPower=2(Flat),Oils/Knockback
+EnchantmentDefinition_KravMagaOil,302,Krav Maga Oil,0,0,KnockbackPower=6(Flat);DisableADS=1(Flat),Oils/Knockback
+EnchantmentDefinition_LastDropOil,139,Last Drop Oil,0,1,ConsumeAmmoChance=-0.3(Flat);MaxDurability=-0.25(PercentAdd),Oils/Recycle
+EnchantmentDefinition_LateBoomOil,140,Late Boom Oil,0,1,Damage=30(Flat);ProjectileTimeScale=-0.3(Flat),Oils/DamageFlat
+EnchantmentDefinition_LauncherOil,141,Launcher Oil,0,1,Damage=0.25(PercentAdd);RPM=-0.2(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_Lava,142,Lava,1,1,ProjectileOnHitLava=1(Flat);ProjectileMass=25(Flat);ProjectileTurnOffBulletHoles=1(Flat),Upgraded
+EnchantmentDefinition_LazyOil,143,Lazy Oil,0,1,ProjectileBounce=2(Flat);ReloadSpeed=-0.15(PercentMult),Oils/Bounce
+EnchantmentDefinition_LeastResistance,144,Least Resistance,1,1,Homing=1(Flat);ProjectileTimeScale=-0.9(Flat);DurabilityLoss=2(PercentMult),Upgraded
+EnchantmentDefinition_LessRecoilOil,145,Less Recoil Oil,0,1,KickMultiplier=-0.2(PercentAdd),Oils/Recoil
+EnchantmentDefinition_Light,146,Light,1,1,ProjectileMoveAsLight=1(Flat);ProjectilePenetration=999(Flat);ProjectilePenetrationDamageMultiplier=-0.5(Flat);RPM=-0.5(PercentMult),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_LightweightOil,147,Lightweight Oil,0,1,RPM=0.5(PercentAdd);KickMultiplier=0.5(PercentAdd),Oils/RPM
+EnchantmentDefinition_LongshotOil,148,Longshot Oil,0,1,ProjectileBounce=3(Flat);DisableADS=1(Flat),Oils/Bounce
+EnchantmentDefinition_LostInFocusOil,149,Lost In Focus Oil,0,1,Spread=-2(Flat);ConsumeExtraAmmoChance=0.3(Flat),Oils/Spread
+EnchantmentDefinition_LowRollerOil,150,Low Roller Oil,0,1,CritChance=0.1(Flat);DisableLootMoney=1(Flat),Oils/CritChance
+EnchantmentDefinition_MachineOil,151,Machine Oil,0,1,RPM=0.6(PercentAdd);ItemStat_MoveSpeed=-0.3(PercentAdd),Oils/RPM
+EnchantmentDefinition_MainDisciplineOil,152,Main Discipline Oil,0,1,ItemStat_LootChanceMultiplier=-0.3(PercentAdd);ReloadSpeed=0.8(PercentAdd),Oils/Reload
+EnchantmentDefinition_MainFocusOil,153,Main Focus Oil,0,1,DisableLootMoney=1(Flat);ReloadSpeed=0.5(PercentAdd),Oils/Reload
+EnchantmentDefinition_ManifestationOil,154,Manifestation Oil,0,1,CritChance=0.25(Flat);ReloadSpeed=-0.5(PercentMult),Oils/CritChance
+EnchantmentDefinition_MantisShrimpOil,303,Mantis Shrimp Oil,0,0,KnockbackPower=15(Flat);RPM=-0.7(PercentAdd),Oils/Knockback
+EnchantmentDefinition_MatrixOil,155,Matrix Oil,0,1,ProjectileTimeScale=-0.9(Flat);ProjectileAmount=3(PercentAdd);Damage=-0.3(PercentAdd);ProjectileDrag=40(Flat);Spread=4(Flat);ProjectileBehaviourTimeout=3(Flat),Oils/Multishot
+EnchantmentDefinition_MedicinBallOil,304,Medicine Ball Oil,0,0,KnockbackPower=15(Flat);ProjectileScale=5(PercentAdd);ProjectileMass=30(Flat),Oils/Knockback
+EnchantmentDefinition_Metamorph,288,Metamorph,1,1,ProjectileMetamorph=1(Flat);Damage=-0.9(PercentMult),Upgraded
+EnchantmentDefinition_MicroWingOil,156,Micro Wing Oil,0,1,ProjectileTimeScale=0.8(Flat);ConsumeExtraAmmoChance=0.2(Flat),Oils/BulletSpeed
+EnchantmentDefinition_ModernTechnologyOil,157,Modern Technology Oil,0,1,KickMultiplier=-0.35(PercentAdd);ConsumeExtraAmmoChance=0.1(Flat),Oils/Recoil
+EnchantmentDefinition_MooseOil,305,Moose Oil,0,0,KnockbackPower=8(Flat);ProjectileTimeScale=-0.5(Flat),Oils/Knockback
+EnchantmentDefinition_MosquitoOil,158,Mosquito Oil,0,1,ConsumeAmmoChance=-0.4(Flat);Damage=-0.15(PercentAdd);ProjectileTimeScale=-0.3(PercentAdd),Oils/Recycle
+EnchantmentDefinition_MuleOil,306,Mule Oil,0,0,KnockbackPower=10(Flat);KickMultiplier=1(PercentAdd),Oils/Knockback
+EnchantmentDefinition_MultichamberOil,159,Multichamber Oil,0,1,ConsumeExtraAmmoChance=1(Flat);ProjectileAmount=1(PercentAdd);Spread=1(PercentAdd),Oils/Multishot
+EnchantmentDefinition_MultishotOil,160,Multishot Oil,0,1,Damage=-0.7(PercentAdd);ProjectileAmount=2(PercentAdd);Spread=0.4(PercentAdd),Oils/Multishot
+EnchantmentDefinition_Nature,161,Nature,1,1,ProjectileApplyRoot=20(Flat),.
+EnchantmentDefinition_NeedleeyeOil,162,Needleye Oil,0,1,ProjectilePenetration=2(Flat);RPM=-0.25(PercentAdd),Oils/Penetration
+EnchantmentDefinition_NerfOil,163,Nerf Oil,0,1,Damage=-0.1(PercentAdd);ReloadSpeed=1.2(PercentAdd);ProjectileMass=5(Flat),Oils/Reload
+EnchantmentDefinition_NoLookOil,164,No Look Oil,0,1,RPM=0.3(PercentAdd);DisableADS=1(Flat),Oils/RPM
+EnchantmentDefinition_NoNeedOil,165,No Need Oil,0,1,CritChance=0.15(Flat);ItemStat_LootChanceMultiplier=-0.25(PercentAdd),Oils/CritChance
+EnchantmentDefinition_Noxiosa,166,Noxiosa,1,1,ProjectileOnHitNoxiosaCloud=1(Flat);ProjectileTurnOffBulletHoles=1(Flat),Upgraded
+EnchantmentDefinition_OutOfTheBoxOil,167,Out of the Box Oil,0,1,CritChance=0.2(Flat);MaxDurability=-0.15(PercentAdd),Oils/CritChance
+EnchantmentDefinition_OverOil,170,Over Oil,0,0,ProjectileScale=1(PercentAdd);KickMultiplier=0.3(PercentAdd),Oils/Size
+EnchantmentDefinition_OverclockOil,168,Overclock Oil,0,1,Damage=0.4(PercentAdd);ConsumeExtraAmmoChance=0.3(Flat),Oils/DamagePercentage
+EnchantmentDefinition_OverdoseOil,169,Overdose Oil,0,1,ProjectilePenetration=3(Flat);MaxDurability=-0.25(PercentAdd),Oils/Penetration
+EnchantmentDefinition_ParallelMagOil,171,Parallell Mag Oil,0,1,ProjectileAmount=1(PercentAdd);ReloadSpeed=-0.5(PercentMult);Spread=0.7(Flat),Oils/Multishot
+EnchantmentDefinition_PeaShooterOil,172,Peashooter Oil,0,1,KickMultiplier=-0.25(PercentAdd);ProjectileScale=-1(PercentMult),Oils/Recoil
+EnchantmentDefinition_PenetrationOil,173,Penetration Oil,0,1,ProjectilePenetration=1(Flat),Oils/Penetration
+EnchantmentDefinition_PerfectBounceOil,174,Perfect Bounce Oil,0,1,ProjectileBounce=1(Flat),Oils/Bounce
+EnchantmentDefinition_PerforateOil,175,Perforate Oil,0,1,RPM=0.25(PercentAdd);DisableLootOrgans=1(Flat),Oils/RPM
+EnchantmentDefinition_Pesticide,176,Pesticide,1,1,Spread=1.5(PercentMult);ProjectileTimeScale=-0.7(Flat);ProjectileMoveAsSpray=10(Flat);ProjectileDrag=8(Flat);ProjectileForce=-0.6(Flat);ProjectileTurnOffBulletHoles=1(Flat);Damage=-0.86(PercentMult);ProjectilePesticide=1(Flat);ProjectileLifeTime=0.8(Flat);ProjectileBounciness=-0.8(Flat);ProjectileDisableDamageComponentEffects=1(Flat);ProjectileBounce=1(Flat);ShootEffectSoundOnly=1(Flat);ImpactEffectSoundOnly=1(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_Petrification,177,Petrification,1,1,ProjectileApplyPetrification=10(Flat),Upgraded
+EnchantmentDefinition_Petroleum,178,Petroleum,1,1,ProjectileOnHitOil=1(Flat);ProjectileApplyOil=1(Flat);ProjectileMass=25(Flat);ProjectileTurnOffBulletHoles=1(Flat),Upgraded
+EnchantmentDefinition_Plague,179,Plague,1,1,ProjectileApplyPoison=1(Flat),.
+EnchantmentDefinition_PlinkerOil,180,Plinker Oil,0,1,Spread=-0.9(Flat);Damage=-0.2(PercentAdd),Oils/Spread
+EnchantmentDefinition_PlopBackOil,181,Plop Back Oil,0,1,KickMultiplier=1.25(PercentAdd);ConsumeAmmoChance=-0.2(Flat),Oils/Recycle
+EnchantmentDefinition_Pollen,285,Pollen,1,1,ProjectilePollen=1(Flat);DurabilityLoss=1(Flat),Upgraded
+EnchantmentDefinition_PoolOil,182,Pool Oil,0,1,ProjectileBounce=5(Flat);ItemStat_MoveSpeed=-0.3(PercentAdd),Oils/Bounce
+EnchantmentDefinition_PotShotOil,184,Potshot Oil,0,1,Damage=35(Flat);DisableADS=1(Flat),Oils/DamageFlat
+EnchantmentDefinition_PotatoOil,183,Potato Oil,0,0,ProjectileScale=1.5(PercentAdd);DisableADS=1(Flat),Oils/Size
+EnchantmentDefinition_Prism,185,Prism,1,1,ProjectilePrism=1(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_PuncherOil,186,Puncher Oil,0,1,Damage=0.3(PercentAdd);KickMultiplier=1.5(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_PunctureOil,187,Puncture Oil,0,1,CritChance=0.15(Flat);DisableLootOrgans=1(Flat),Oils/CritChance
+EnchantmentDefinition_PurseGunOil,188,Purse Gun Oil,0,1,KickMultiplier=-0.35(PercentAdd);ReloadSpeed=-0.3(PercentMult),Oils/Recoil
+EnchantmentDefinition_RamOil,307,Ram Oil,0,0,KnockbackPower=6(Flat);RPM=-0.3(PercentAdd),Oils/Knockback
+EnchantmentDefinition_RapidInternalsOil,189,Rapid Internals Oil,0,1,RPM=0.5(PercentAdd);Damage=-0.15(PercentAdd),Oils/RPM
+EnchantmentDefinition_ReadyOil,190,Ready Oil,0,1,KickMultiplier=-0.45(PercentAdd);RPM=-0.3(PercentAdd),Oils/Recoil
+EnchantmentDefinition_ReboundOil,191,Rebound Oil,0,1,ProjectileBounce=3(Flat);Damage=-15(Flat),Oils/Bounce
+EnchantmentDefinition_RecycleOil,192,Recycle Oil,0,1,ConsumeAmmoChance=-0.15(Flat),Oils/Recycle
+EnchantmentDefinition_RelaxOil,193,Relax Oil,0,1,KickMultiplier=-0.5(PercentAdd);ProjectileTimeScale=-0.2(Flat),Oils/Recoil
+EnchantmentDefinition_ReleaseOil,194,Release Oil,0,0,MaxDurability=0.4(PercentAdd);KickMultiplier=1.5(PercentAdd),Oils/Durability
+EnchantmentDefinition_ReloadOil,195,Reload Oil,0,1,ReloadSpeed=0.4(PercentAdd),Oils/Reload
+EnchantmentDefinition_RicochetOil,196,Ricochet Oil,0,1,ProjectileBounce=3(Flat);Damage=-0.1(PercentAdd),Oils/Bounce
+EnchantmentDefinition_RigidSystemOil,197,Rigid System Oil,0,0,MaxDurability=0.4(PercentAdd);ConsumeExtraAmmoChance=0.2(Flat),Oils/Durability
+EnchantmentDefinition_RigorOil,198,Rigor Oil,0,1,ProjectilePenetration=2(Flat);ProjectileTimeScale=-0.5(Flat),Oils/Penetration
+EnchantmentDefinition_RiotOil,308,Riot Oil,0,0,KnockbackPower=8(Flat);Spread=3(Flat),Oils/Knockback
+EnchantmentDefinition_RobustMechanicsOil,199,Robust Mechanics Oil,0,0,MaxDurability=0.35(PercentAdd);RPM=-0.25(PercentAdd),Oils/Durability
+EnchantmentDefinition_RocketLauncher,200,Rocket Launcher,1,1,ProjectileKinematicForce=7500(Flat);ProjectileVisualRocket=1(Flat);ProjectileOnHitExplosionRPG=1(Flat);ProjectileForce=16(Flat);ProjectileGravityFactor=-0.99(PercentMult);KnockbackPower=-0.99(Flat),Upgraded
+EnchantmentDefinition_RookieOil,201,Rookie Oil,0,1,RPM=0.5(PercentAdd);ReloadSpeed=-0.75(PercentMult),Oils/RPM
+EnchantmentDefinition_RubberOil,202,Rubber Oil,0,0,MaxDurability=0.3(PercentAdd);Damage=-10(Flat),Oils/Durability
+EnchantmentDefinition_RushJobOil,203,Rush Job Oil,0,1,ReloadSpeed=1.3(PercentAdd);ConsumeExtraAmmoChance=0.3(Flat),Oils/Reload
+EnchantmentDefinition_SacredGround,284,Sacred Ground,1,1,ProjectileSacredGround=1(Flat);ExtraDamageGhost=3(Flat);Damage=-0.5(PercentAdd);DurabilityLoss=1(Flat),Upgraded
+EnchantmentDefinition_Sacrifice,204,Sacrifice,1,1,ProjectileSacrifice=0.05(Flat);Damage=1(PercentAdd),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_SafetyOil,205,Safety Oil,0,1,KickMultiplier=-0.45(PercentAdd);Damage=-0.08(PercentAdd),Oils/Recoil
+EnchantmentDefinition_Satiety,206,Translucent Oil,0,1,ConsumeAmmoChance=-0.3(Flat),.
+EnchantmentDefinition_SaviourOil,207,Saviour Oil,0,1,ConsumeAmmoChance=-0.3(Flat);ItemStat_LootChanceMultiplier=-1(PercentAdd),Oils/Recycle
+EnchantmentDefinition_ScatterOil,208,Scatter Oil,0,1,Damage=-0.15(PercentAdd);ProjectileAmount=1(PercentAdd);Spread=1.7(Flat),Oils/Multishot
+EnchantmentDefinition_ScrambleOil,209,Scramble Oil,0,1,ProjectileBounce=2(Flat);DisableLootOrgans=1(Flat),Oils/Bounce
+EnchantmentDefinition_SeatedFitOil,210,Seated Fit Oil,0,0,MaxDurability=0.7(PercentAdd);ProjectileMass=10(Flat),Oils/Durability
+EnchantmentDefinition_SeatedOil,211,Seated Oil,0,1,Damage=30(Flat);ItemStat_JumpPower=-0.15(PercentAdd),Oils/DamageFlat
+EnchantmentDefinition_SectOil,212,Sect Oil,0,1,ProjectilePenetration=1(Flat);DisableLootMoney=1(Flat),Oils/Penetration
+EnchantmentDefinition_SenderOil,213,Sender Oil,0,1,Damage=25(Flat);RPM=-0.25(PercentAdd),Oils/DamageFlat
+EnchantmentDefinition_SensibleOil,214,Sensible Oil,0,0,MaxDurability=0.25(PercentAdd);DisableLootOrgans=1(Flat),Oils/Durability
+EnchantmentDefinition_ShavedClipOil,215,Shaved Clip Oil,0,1,ReloadSpeed=1(PercentAdd);MaxDurability=-0.15(PercentAdd),Oils/Reload
+EnchantmentDefinition_ShellManOil,216,Shellman Oil,0,1,Spread=-0.7(Flat);ReloadSpeed=-0.25(PercentMult),Oils/Spread
+EnchantmentDefinition_SherlockOil,217,Sherlock Oil,0,1,ProjectileBounce=5(Flat);RPM=-0.5(PercentAdd),Oils/Bounce
+EnchantmentDefinition_ShoveOil,309,Shove Oil,0,0,KnockbackPower=5(Flat);Damage=-10(Flat),Oils/Knockback
+EnchantmentDefinition_ShowerOil,218,Shower Oil,0,1,RPM=0.6(PercentAdd);ProjectileMass=10(Flat),Oils/RPM
+EnchantmentDefinition_ShredderOil,219,Shredder Oil,0,1,Damage=-0.2(PercentAdd);ProjectileAmount=1(PercentAdd);Spread=1.7(Flat);DisableLootOrgans=1(Flat),Oils/Multishot
+EnchantmentDefinition_SizeUpOil,220,Size Up Oil,0,0,ProjectileScale=0.5(PercentAdd),Oils/Size
+EnchantmentDefinition_SkipOil,221,Skip Oil,0,1,ProjectileBounce=2(Flat);ItemStat_LootChanceMultiplier=-0.25(PercentAdd),Oils/Bounce
+EnchantmentDefinition_Slayer,222,Crit Oil,0,1,CritChance=0.2(Flat),.
+EnchantmentDefinition_SlickOil,223,Slick Oil,0,1,Spread=-0.6(Flat);ItemStat_JumpPower=-0.1(PercentAdd),Oils/Spread
+EnchantmentDefinition_SlippyCoatingOil,224,Slippy Coating Oil,0,0,MaxDurability=0.3(PercentAdd);Spread=1(Flat),Oils/Durability
+EnchantmentDefinition_SlotmachineOil,225,Slotmachine Oil,0,1,CritChance=0.25(Flat);ConsumeExtraAmmoChance=0.2(Flat),Oils/CritChance
+EnchantmentDefinition_SlowMoOil,226,Slow Mo Oil,0,1,ProjectileTimeScale=-0.8(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_SlowPunchOil,227,Slow Punch Oil,0,1,Damage=0.5(PercentAdd);ProjectileTimeScale=-0.5(Flat),Oils/DamagePercentage
+EnchantmentDefinition_Slush,228,Slush,1,1,ProjectileFrostPuddle=1(Flat);EnchantmentSolidFreezeChance=0.1(PercentAdd);ProjectileMass=40(Flat);ProjectileTurnOffBulletHoles=1(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_SmartBulletOil,229,Smart Bullet Oil,0,1,CritChance=0.2(Flat);ProjectileTimeScale=-0.6(Flat),Oils/CritChance
+EnchantmentDefinition_SmashOil,230,Smash Oil,0,0,ProjectileScale=3(PercentAdd);DisableLootOrgans=1(Flat),Oils/Size
+EnchantmentDefinition_SnowmanHead,314,Snowman Head,1,1,ProjectileSnowmanHead=1(Flat);EnchantmentRemoveBullets=1(Flat);ProjectileApplyFrost=1(Flat);RPM=-0.6(PercentAdd);Damage=-0.5(PercentAdd);KnockbackPower=10(Flat),Upgraded
+EnchantmentDefinition_SoftBulletOil,231,Soft Bullet Oil,0,0,MaxDurability=0.3(PercentAdd);ProjectileTimeScale=-0.3(Flat),Oils/Durability
+EnchantmentDefinition_SolidOil,232,Solid Oil,0,1,Damage=40(Flat);ProjectileMass=10(Flat);ProjectileScale=0.5(PercentMult),Oils/DamageFlat
+EnchantmentDefinition_SpartanOil,233,Spartan Oil,0,1,Damage=0.2(PercentAdd);ItemStat_LootChanceMultiplier=-0.5(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_SpeedTradeOil,234,Speed Trade Oil,0,1,ProjectileTimeScale=-0.3(Flat);ReloadSpeed=0.8(PercentAdd),Oils/Reload
+EnchantmentDefinition_SpitterOil,235,Spitter Oil,0,1,RPM=0.35(PercentAdd);Spread=1(Flat),Oils/RPM
+EnchantmentDefinition_SpreadOil,236,Spread Oil,0,1,Spread=-0.5(Flat),Oils/Spread
+EnchantmentDefinition_StabilityOil,237,Stability Oil,0,1,KickMultiplier=-0.45(PercentAdd);Damage=-10(Flat),Oils/Recoil
+EnchantmentDefinition_StableHipOil,238,Stable Hip Oil,0,1,KickMultiplier=-0.62(PercentAdd);DisableADS=1(Flat),Oils/Recoil
+EnchantmentDefinition_StationaryOil,239,Stationary Oil,0,1,RPM=0.8(PercentAdd);ItemStat_MoveSpeed=-0.9(PercentAdd);ItemStat_JumpPower=-0.9(PercentAdd);KickMultiplier=-0.85(PercentAdd),Oils/RPM
+EnchantmentDefinition_Steam,240,Steam,1,1,ProjectileSteam=1(Flat);ProjectileLifeTime=0.8(Flat);ProjectileDrag=8(Flat);KnockbackPower=1(Flat);ProjectileBounce=1(Flat);Spread=5(PercentMult);Damage=-1(PercentMult);ConsumeAmmoChance=-1(Flat);ProjectileTimeScale=-0.7(Flat);ProjectileMoveAsSpray=10(Flat);ProjectileForce=-0.7(Flat);ProjectileTurnOffBulletHoles=1(Flat);ProjectileBounciness=-0.8(Flat);ProjectileDisableDamageComponentEffects=1(Flat);ShootEffectSoundOnly=1(Flat);ImpactEffectSoundOnly=1(Flat);DurabilityLoss=2(PercentMult),Upgraded
+EnchantmentDefinition_StiffyFitOil,241,Stiffy Fit Oil,0,0,MaxDurability=0.45(PercentAdd);ReloadSpeed=-0.5(PercentMult),Oils/Durability
+EnchantmentDefinition_StoicOil,242,Stoic Oil,0,1,Spread=-0.6(Flat);DisableLootMoney=1(Flat),Oils/Spread
+EnchantmentDefinition_StormSurge,243,Storm Surge,1,1,ProjectileOnHitStormSurge=1(Flat);ProjectileMass=25(Flat);ProjectileTurnOffBulletHoles=1(Flat),Upgraded
+EnchantmentDefinition_SturdyOil,310,Sturdy Oil,0,0,KnockbackPower=8(Flat);ItemStat_MoveSpeed=-0.2(PercentAdd),Oils/Knockback
+EnchantmentDefinition_SuperSoaker,295,Mega Soaker,1,1,ProjectileBeam=1(Flat);ProjectileMoveAsLight=1(Flat);FullAuto=1(Flat);RPM=9(PercentMult);Damage=-0.99(PercentMult);Spread=2(PercentMult);KickMultiplier=-0.7(PercentMult);DisableMuzzleFlash=1(Flat);ProjectileTurnOffBulletHoles=1(Flat);ShootEffectSoundOnly=1(Flat);ImpactEffectSoundOnly=1(Flat);ProjectileApplyWet=100(Flat);ConsumeAmmoChance=-2(Flat);ProjectileSuperSoaker=1(Flat);KnockbackPower=10(Flat);DisableBloodOnHit=1(Flat),.
+EnchantmentDefinition_SupressiveOil,244,Supressive Oil,0,1,AimMovingBonus=-2(PercentAdd);ProjectileAmount=3(PercentAdd);Damage=-0.4(PercentAdd);Spread=2.1(Flat),Oils/Multishot
+EnchantmentDefinition_Surge,245,Surge,1,1,ProjectileApplyElectricity=1(Flat),.
+EnchantmentDefinition_SurgicalLaserOil,246,Surgical Laser Oil,0,1,ProjectilePenetration=3(Flat);Damage=-0.3(PercentAdd),Oils/Penetration
+EnchantmentDefinition_SynchronicityOil,247,Synchronicity Oil,0,1,ProjectileBounce=4(Flat);ConsumeExtraAmmoChance=0.25(Flat),Oils/Bounce
+EnchantmentDefinition_TacticalOil,248,Tactical Oil,0,1,Damage=-0.1(PercentAdd);ReloadSpeed=1.1(PercentAdd),Oils/Reload
+EnchantmentDefinition_TandemOil,249,Tandem Oil,0,1,Damage=-0.15(PercentAdd);ProjectileAmount=1(PercentAdd);Spread=0.7(Flat),Oils/Multishot
+EnchantmentDefinition_TaskOil,250,Task Oil,0,1,DisableLootOrgans=1(Flat);ReloadSpeed=0.6(PercentAdd),Oils/Reload
+EnchantmentDefinition_TechSupportOil,251,Tech Support Oil,0,1,ItemStat_JumpPower=-0.3(PercentAdd);ReloadSpeed=0.8(PercentAdd),Oils/Reload
+EnchantmentDefinition_TensionOil,252,Tension Oil,0,1,KickMultiplier=-0.35(PercentAdd);ItemStat_MoveSpeed=-0.15(PercentAdd),Oils/Recoil
+EnchantmentDefinition_TerminatorOil,253,Terminator Oil,0,1,Damage=0.3(PercentAdd);ItemStat_MoveSpeed=-0.15(PercentAdd),Oils/DamagePercentage
+EnchantmentDefinition_TestOil,254,Test Oil,0,1,KickMultiplier=4(PercentAdd),.
+EnchantmentDefinition_TestOil2,255,Test Oil 2,0,1,MaxDurability=-400(Flat),.
+EnchantmentDefinition_TetrisOil,256,Tetris Oil,0,1,ConsumeAmmoChance=-0.2(Flat);ReloadSpeed=-0.4(PercentMult),Oils/Recycle
+EnchantmentDefinition_ThoroughOil,257,Thorough Oil,0,1,Spread=-0.8(Flat);ItemStat_MoveSpeed=-0.15(PercentAdd),Oils/Spread
+EnchantmentDefinition_Thunderbolt,258,Thunderbolt,1,1,ProjectileMoveAsLight=1(Flat);ProjectileThunderbolt=1(Flat);RPM=-0.5(PercentMult),Upgraded
+EnchantmentDefinition_TightBarrelOil,259,Tight Barrel Oil,0,1,ProjectileTimeScale=0.7(Flat);MaxDurability=-0.1(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_TightOil,260,Tight Oil,0,0,ProjectileScale=1(PercentAdd);RPM=-0.1(PercentAdd),Oils/Size
+EnchantmentDefinition_Titanic,293,Titanic,1,1,ProjectileTitanic=1(Flat);ProjectileApplyFrost=100(Flat);RPM=-0.5(PercentMult),.
+EnchantmentDefinition_TooMuchOil,261,Too Much Oil,0,1,ProjectilePenetration=1(Flat);DisableLootOrgans=1(Flat),Oils/Penetration
+EnchantmentDefinition_ToxicLobotomy,262,Toxic Lobotomy,1,1,ProjectileToxicLobotomy=1(Flat);EnchantmentIncreaseHeadshotDamage=3(Flat);EnchantmentAlwaysSpawnOrgan=1(Flat);DurabilityLoss=3.5(PercentMult);ProjectileMoveAsLight=1(Flat),GunsAndMagic_EnchantmentDefinitions
+EnchantmentDefinition_Trinity,263,Triple Oil,0,1,ProjectileAmount=2(PercentAdd);Damage=-0.5(PercentAdd),.
+EnchantmentDefinition_TrustyOldOil,264,Trusty Old Oil,0,0,MaxDurability=0.25(PercentAdd);DisableLootMoney=1(Flat),Oils/Durability
+EnchantmentDefinition_TurbulenceOil,265,Turbulence Oil,0,1,ProjectileTimeScale=0.4(Flat);DisableLootOrgans=1(Flat),Oils/BulletSpeed
+EnchantmentDefinition_TwiceOil,266,Twice Oil,0,1,Damage=-0.25(PercentAdd);ProjectileAmount=1(PercentAdd);Spread=0.7(Flat),Oils/Multishot
+EnchantmentDefinition_TwoTimeOil,267,Two Time Oil,0,1,Damage=-0.1(PercentAdd);ProjectileAmount=2(PercentAdd);DisableLootMoney=1(Flat);Spread=4.4(Flat),Oils/Multishot
+EnchantmentDefinition_UnlabeledOil,268,Unlabeled Oil,0,1,EnchantmentAddRandomOilAttributes=1(Flat),Oils
+EnchantmentDefinition_UntechnicalOil,269,Untechnical Oil,0,1,ProjectilePenetration=2(Flat);ReloadSpeed=-0.25(PercentMult),Oils/Penetration
+EnchantmentDefinition_UntightenedScrewOil,311,Untightened Screw Oil,0,0,KnockbackPower=10(Flat);MaxDurability=-0.2(PercentAdd),Oils/Knockback
+EnchantmentDefinition_VasectomyOil,270,Vasectomy Oil,0,1,ProjectilePenetration=2(Flat);ItemStat_LootChanceMultiplier=-0.5(PercentAdd),Oils/Penetration
+EnchantmentDefinition_VeganOil,271,Vegan Oil,0,1,Spread=-0.6(Flat);DisableLootOrgans=1(Flat),Oils/Spread
+EnchantmentDefinition_VegetableOil,272,Vegetable Oil,0,1,KickMultiplier=-0.3(PercentAdd);DisableLootOrgans=1(Flat),Oils/Recoil
+EnchantmentDefinition_VelocityOil,273,Velocity Oil,0,1,ProjectileTimeScale=0.25(Flat),Oils/BulletSpeed
+EnchantmentDefinition_Vinesprout,291,Vinesprout,1,1,ProjectileVinesprout=1(Flat);Damage=-0.5(PercentMult),.
+EnchantmentDefinition_Voodoo,274,Voodoo,1,1,ProjectileApplyVoodoo=1(Flat),Upgraded
+EnchantmentDefinition_WalkEasyOil,275,Walk Easy Oil,0,1,ConsumeAmmoChance=-0.15(Flat);ItemStat_MoveSpeed=-0.1(PercentAdd),Oils/Recycle
+EnchantmentDefinition_WasterOil,276,Waster Oil,0,1,RPM=0.25(PercentAdd);DisableLootMoney=1(Flat),Oils/RPM
+EnchantmentDefinition_Water,277,Water,1,1,ProjectileTurnOffBulletHoles=1(Flat);Damage=-0.99(PercentAdd);ProjectileOnHitWater=1(Flat);ProjectileMass=5(Flat),.
+EnchantmentDefinition_WaterBomb,313,Water Bomb,1,1,ProjectileWaterBomb=1(Flat);ProjectileOnHitWater=1(Flat);ProjectileScale=5(PercentAdd);ProjectileMass=40(Flat);ProjectileForce=-0.3(Flat);KnockbackPower=20(Flat);RPM=-0.5(PercentAdd);ProjectileTimeScale=-0.25(PercentAdd);Damage=-0.99(PercentMult),Upgraded
+EnchantmentDefinition_WhimOil,278,Whim Oil,0,1,ProjectileTimeScale=0.5(Flat);ItemStat_LootChanceMultiplier=-0.25(PercentAdd),Oils/BulletSpeed
+EnchantmentDefinition_WhosCountingOil,279,Whos Counting Oil,0,1,ConsumeAmmoChance=-0.25(Flat);DisableADS=1(Flat),Oils/Recycle
+EnchantmentDefinition_WobbleOil,280,Wobble Oil,0,1,ProjectileBounce=2(Flat);Spread=1(Flat),Oils/Bounce
+EnchantmentDefinition_XanaxOil,281,Xanax Oil,0,0,ProjectileScale=3(PercentAdd);ItemStat_MoveSpeed=-0.25(PercentAdd),Oils/Size
+EnchantmentDefinition_ZeroFucksOil,282,Zero Fucks Oil,0,1,RPM=0.5(PercentAdd);ItemStat_LootChanceMultiplier=-1(PercentAdd),Oils/RPM
+EnchantmentDefinition_ZoomingOil,283,Zooming Oil,0,1,ProjectileTimeScale=0.8(Flat);Spread=1(Flat),Oils/BulletSpeed

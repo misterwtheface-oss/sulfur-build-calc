@@ -1,0 +1,75 @@
+name,displayName,itemQuality,itemQuality_name,weaponType,weaponType_name,caliber,caliber_name,caliber_baseDamage,pellets,damageMultiplier,weaponType_dmg_mult,computed_base_damage,rpm,shot_interval_s,iAmmoMax,fReloadTime,weightClass,weightClass_name,basePrice,damageType,damageType_name,bulletSpeed,shotsToReachFullSpread,iMaxAmmoPerShot,adsEnabled,category
+Weapon_Arbiter2,Arbiter 2,0,Common,8,Shotgun,2,_12ga,20,8,2,1.0,40.0,45,1.33333,3,0,2,SMG,600,7,Normal,500,0,3,1,Weapons
+Weapon_Augusta,Augusta,2,Rare,8,Shotgun,7,Laser,50,1,1,1.0,50.0,500,0.12,6,0,3,Rifle,3000,7,Normal,750,0,3,1,Weapons
+Weapon_Balthazar,.357 Balthazar,3,Epic,6,Revolver,4,_762mm,100,1,1.25,1.6,200.0,80,0.75,4,1,1,Pistol,3200,7,Normal,500,2,1,1,Weapons
+Weapon_Beck,Beck 8,1,Uncommon,5,Pistol,1,_9mm,60,1,1,1.0,60.0,800,0.075,26,2,2,SMG,1800,7,Normal,750,3,1,1,Weapons
+Weapon_Blackwater,Blackwater,3,Epic,6,Revolver,5,_50BMG,200,1,1,1.6,320.0,200,0.3,12,1,3,Rifle,3200,7,Normal,500,2,1,1,Weapons
+Weapon_Bo,Bo,0,Common,4,Melee,0,None,,,1,1.0,,0,,0,0,0,Knife,4000,7,Normal,0,0,1,0,Weapons
+Weapon_Breacher8,Breacher 8,2,Rare,8,Shotgun,2,_12ga,20,8,2,1.0,40.0,60,1.0,8,2,5,Bigga,1900,7,Normal,600,0,8,1,Weapons
+Weapon_Bronco,Bronco 89,1,Uncommon,5,Pistol,1,_9mm,60,1,1.5,1.0,90.0,80,0.75,10,0,1,Pistol,1500,7,Normal,750,2,1,1,Weapons
+Weapon_CYB47,CYB47,2,Rare,1,AssaultRifle,7,Laser,50,1,1,1.2,60.0,500,0.12,47,2,3,Rifle,4500,7,Normal,750,2,1,1,Weapons
+Weapon_Catacoil,Catacoil Rapid X,3,Epic,1,AssaultRifle,7,Laser,50,1,1,1.2,60.0,893,0.06719,30,2,2,SMG,8000,7,Normal,750,2,1,1,Weapons
+Weapon_Cavalier,Cavalier,1,Uncommon,5,Pistol,1,_9mm,60,1,1,1.0,60.0,400,0.15,30,2,1,Pistol,4000,7,Normal,750,3,1,1,Weapons
+Weapon_Chat-Pardeur98,Chat-Pardeur 98,3,Epic,3,LMG,4,_762mm,100,1,1.2,1.0,120.0,400,0.15,20,2,5,Bigga,3500,7,Normal,800,0,1,1,Weapons
+Weapon_ChimeraRapid,Chimera Rapid,2,Rare,9,SMG,3,_556mm,80,1,1.1,1.0,88.0,750,0.08,22,2,2,SMG,4000,7,Normal,750,3,1,1,Weapons
+Weapon_Corpsemaker,Corpsemaker,2,Rare,1,AssaultRifle,3,_556mm,80,1,1,1.2,96.0,666,0.09009,30,2,3,Rifle,4000,7,Normal,900,4,1,1,Weapons
+Weapon_CryoGrenade,Cryogenic Grenade,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,150,7,Normal,0,0,1,0,Weapons
+Weapon_D4RT,D4RT,3,Epic,10,Sniper,7,Laser,50,1,5,2.0,500.0,100,0.6,1,0.1,3,Rifle,3200,7,Normal,750,0,1,1,Weapons
+Weapon_DeathStar,Death Star,3,Epic,9,SMG,3,_556mm,80,1,1,1.0,80.0,450,0.13333,15,2,2,SMG,3200,7,Normal,750,0,1,1,Weapons
+Weapon_DeathsToll,Death's Toll,3,Epic,6,Revolver,4,_762mm,100,1,1.2,1.6,192.0,72,0.83333,4,1,2,SMG,7000,7,Normal,500,2,1,1,Weapons
+Weapon_Dirk,P38 Dirk,0,Common,5,Pistol,1,_9mm,60,1,1,1.0,60.0,450,0.13333,7,1,1,Pistol,1,7,Normal,750,1,1,1,Weapons
+Weapon_Dolphin99,Dolphin 99,1,Uncommon,10,Sniper,5,_50BMG,200,1,1.25,2.0,500.0,100,0.6,5,1,3,Rifle,3200,7,Normal,750,0,1,1,Weapons
+Weapon_Drifter9,Drifter 9,0,Common,9,SMG,1,_9mm,60,1,1,1.0,60.0,350,0.17143,20,1,2,SMG,500,7,Normal,525,3,1,1,Weapons
+Weapon_Duhar,Duhar,2,Rare,3,LMG,4,_762mm,100,1,1,1.0,100.0,1400,0.04286,40,1,3,Rifle,8000,7,Normal,750,0,1,1,Weapons
+Weapon_Dynamite,Dynamite,1,Uncommon,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,200,7,Normal,0,0,1,0,Weapons
+Weapon_Farsight,Farsight,3,Epic,7,Rifle,3,_556mm,80,1,1.1,2.0,176.0,450,0.13333,8,2,3,Rifle,5500,7,Normal,750,0,1,1,Weapons
+Weapon_Ferryman,Ferryman,2,Rare,9,SMG,5,_50BMG,200,1,1.5,1.0,300.0,580,0.10345,20,1,3,Rifle,9000,7,Normal,750,0,1,1,Weapons
+Weapon_FlickerZip,Flicker Zip,2,Rare,5,Pistol,1,_9mm,60,1,1,1.0,60.0,200,0.3,5,1,0,Knife,2000,7,Normal,750,1,1,1,Weapons
+Weapon_Flock,Flock,2,Rare,8,Shotgun,2,_12ga,20,8,2,1.0,40.0,470,0.12766,10,2,2,SMG,3500,7,Normal,750,3,1,1,Weapons
+Weapon_Gravekeeper,Gravekeeper,0,Common,5,Pistol,3,_556mm,80,1,1,1.0,80.0,300,0.2,7,1,1,Pistol,1000,7,Normal,800,1,1,1,Weapons
+Weapon_HellnBack,HellnBack,2,Rare,5,Pistol,4,_762mm,100,1,1,1.0,100.0,450,0.13333,14,1,1,Pistol,3000,7,Normal,750,1,1,1,Weapons
+Weapon_ImpalaGravita,Impala Gravita,2,Rare,10,Sniper,4,_762mm,100,1,2,2.0,400.0,100,0.6,8,2,3,Rifle,3200,7,Normal,750,0,1,1,Weapons
+Weapon_JarOfLove,Jar of love notes,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,100,7,Normal,0,0,1,0,Weapons
+Weapon_Katana,Katana,0,Common,4,Melee,0,None,,,1,1.0,,0,,0,0,0,Knife,4200,7,Normal,0,0,1,0,Weapons
+Weapon_KleinBauer,Klein Bauer,3,Epic,5,Pistol,1,_9mm,60,1,1,1.0,60.0,2400,0.025,138,2,1,Pistol,4000,7,Normal,800,4,1,1,Weapons
+Weapon_Knop,Knop .22,0,Common,7,Rifle,1,_9mm,60,1,1,2.0,120.0,480,0.125,1,1,1,Pistol,1500,7,Normal,750,0,1,1,Weapons
+Weapon_LilyOfTheNight,Nightlily,2,Rare,1,AssaultRifle,3,_556mm,80,1,1.1,1.2,105.6,850,0.07059,70,2,3,Rifle,9000,7,Normal,900,4,1,1,Weapons
+Weapon_Longboy,Longboy,1,Uncommon,10,Sniper,5,_50BMG,200,1,1,2.0,400.0,100,0.6,6,1,4,Sniper,9000,7,Normal,750,0,1,1,Weapons
+Weapon_M11Ramshack,M11A2 Fisk,3,Epic,1,AssaultRifle,3,_556mm,80,1,1,1.2,96.0,740,0.08108,30,2,3,Rifle,7700,7,Normal,800,4,1,1,Weapons
+Weapon_Majordome,Majordome,2,Rare,8,Shotgun,2,_12ga,20,8,2,1.0,40.0,350,0.17143,6,2,3,Rifle,8000,7,Normal,750,3,1,1,Weapons
+Weapon_Mario,1884 Mario,0,Common,8,Shotgun,2,_12ga,20,8,2,1.0,40.0,500,0.12,2,0,3,Rifle,1200,7,Normal,750,0,1,1,Weapons
+Weapon_MolotovCocktail,Molotov Cocktail,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,100,7,Normal,0,0,1,0,Weapons
+Weapon_Mossman,Mossman,1,Uncommon,8,Shotgun,2,_12ga,20,8,2,1.0,40.0,80,0.75,6,0,3,Rifle,1500,7,Normal,750,0,1,1,Weapons
+Weapon_Mowlock,Mowlock,2,Rare,9,SMG,1,_9mm,60,1,1.1,1.0,66.0,470,0.12766,20,2,2,SMG,2200,7,Normal,900,4,1,1,Weapons
+Weapon_NeuraxisF22,Neuraxis F22,4,Legendary,3,LMG,7,Laser,50,1,1,1.0,50.0,400,0.15,100,2,4,Sniper,5000,7,Normal,1200,2,1,1,Weapons
+Weapon_Nunchaku,Nunchaku,0,Common,4,Melee,0,None,,,1,1.0,,0,,0,0,0,Knife,3500,7,Normal,0,0,1,0,Weapons
+Weapon_PalehorseTopclipper,Palehorse Topclipper,3,Epic,6,Revolver,3,_556mm,80,1,1,1.6,128.0,80,0.75,7,1,1,Pistol,3000,7,Normal,750,2,1,1,Weapons
+Weapon_PierreFusil,M182 Pierre-Fusil,1,Uncommon,7,Rifle,4,_762mm,100,1,1,2.0,200.0,350,0.17143,6,2,3,Rifle,5000,7,Normal,800,0,1,1,Weapons
+Weapon_PineappleGrenade,Pineapple Grenade,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,200,7,Normal,0,0,1,0,Weapons
+Weapon_PloikaC,Ploika Compact,0,Common,9,SMG,1,_9mm,60,1,1,1.0,60.0,1500,0.04,40,1,2,SMG,910,7,Normal,750,5,1,1,Weapons
+Weapon_PoisonGrenade,Jar of Poison,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,100,7,Normal,0,0,1,0,Weapons
+Weapon_ProximityMine,Proximity Mine,2,Rare,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,400,7,Normal,0,0,1,0,Weapons
+Weapon_Rektor,Rektor 100rd,4,Legendary,3,LMG,4,_762mm,100,1,1,1.0,100.0,800,0.075,100,2,5,Bigga,8000,7,Normal,1200,2,1,1,Weapons
+Weapon_Rokua,Rokua .308,4,Legendary,10,Sniper,4,_762mm,100,1,1,2.0,200.0,210,0.28571,5,1,4,Sniper,7000,7,Normal,750,0,1,1,Weapons
+Weapon_Sai,Sai,0,Common,4,Melee,0,None,,,1,1.0,,0,,0,0,0,Knife,3800,7,Normal,0,0,1,0,Weapons
+Weapon_Salamander,Salamander,2,Rare,5,Pistol,4,_762mm,100,1,1.2,1.0,120.0,170,0.35294,8,1,1,Pistol,5000,7,Normal,750,0,1,1,Weapons
+Weapon_Snowball,Snowball,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,50,7,Normal,0,0,1,0,Weapons
+Weapon_Snut38,Snut .38,0,Common,6,Revolver,1,_9mm,60,1,1,1.6,96.0,80,0.75,6,1,1,Pistol,500,7,Normal,500,2,1,1,Weapons
+Weapon_Socom9,Socom 9,2,Rare,5,Pistol,1,_9mm,60,1,1,1.0,60.0,600,0.1,12,1,1,Pistol,1900,7,Normal,750,1,1,1,Weapons
+Weapon_SocomACR,Socom ACR,0,Common,1,AssaultRifle,1,_9mm,60,1,1,1.2,72.0,900,0.06667,42,1,3,Rifle,3500,7,Normal,750,6,1,1,Weapons
+Weapon_Songbird,Songbird,0,Common,9,SMG,1,_9mm,60,1,1,1.0,60.0,950,0.06316,40,1,2,SMG,6500,7,Normal,750,5,1,1,Weapons
+Weapon_StarAndWitness,Star & Witness,2,Rare,5,Pistol,1,_9mm,60,1,1,1.0,60.0,600,0.1,30,1,1,Pistol,2500,7,Normal,750,1,1,1,Weapons
+Weapon_StickGrenade,Stick Grenade,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,200,7,Normal,0,0,1,0,Weapons
+Weapon_SulfurGrenade,Sulfur Grenade,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,50,7,Normal,0,0,1,0,Weapons
+Weapon_TailorMarksman,TailorMarksman,1,Uncommon,7,Rifle,3,_556mm,80,1,1,2.0,160.0,80,0.75,8,1,2,SMG,3500,7,Normal,500,2,1,1,Weapons
+Weapon_Termite,M3 Termite,1,Uncommon,9,SMG,1,_9mm,60,1,1.1,1.0,66.0,800,0.075,30,2,2,SMG,1400,7,Normal,750,3,1,1,Weapons
+Weapon_TerrierURB,Terrier URB,0,Common,5,Pistol,3,_556mm,80,1,1.3,1.0,104.0,800,0.075,14,1,1,Pistol,3000,7,Normal,800,1,1,1,Weapons
+Weapon_ThrowingKnives,Throwing Knives,0,Common,11,Throwable,0,None,,,1,1.0,,0,,1,0,0,Knife,50,7,Normal,0,0,1,0,Weapons
+Weapon_Typhoon,Type 80 Typhoon,3,Epic,1,AssaultRifle,4,_762mm,100,1,1,1.2,120.0,575,0.10435,20,2,3,Rifle,5000,7,Normal,800,0,1,1,Weapons
+Weapon_Unknown,Unknown,2,Rare,5,Pistol,7,Laser,50,1,1,1.0,50.0,600,0.1,10,2,1,Pistol,2400,7,Normal,750,2,1,1,Weapons
+Weapon_Valet,Valet,2,Rare,9,SMG,1,_9mm,60,1,1.2,1.0,72.0,600,0.1,24,2,2,SMG,4800,7,Normal,750,3,1,1,Weapons
+Weapon_Vrede,Vrede,2,Rare,9,SMG,1,_9mm,60,1,1,1.0,60.0,800,0.075,30,2,2,SMG,3000,7,Normal,750,3,1,1,Weapons
+Weapon_Wakizashi,Wakizashi,0,Common,4,Melee,0,None,,,1,1.0,,0,,0,0,0,Knife,1,7,Normal,0,0,1,0,Weapons
+Weapon_Warpig,Warpig,3,Epic,3,LMG,3,_556mm,80,1,1,1.0,80.0,600,0.1,55,2,3,Rifle,7000,7,Normal,800,0,1,1,Weapons
+Weapon_Wingman,Wingman,2,Rare,1,AssaultRifle,4,_762mm,100,1,1,1.2,120.0,500,0.12,18,2,3,Rifle,6000,7,Normal,900,4,1,1,Weapons
+Weapon_WyattPulsar,Wyatt PULSAR,2,Rare,6,Revolver,7,Laser,50,1,1,1.6,80.0,200,0.3,18,1,1,Pistol,2000,7,Normal,750,0,1,1,Weapons

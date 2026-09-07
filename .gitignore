@@ -1,0 +1,19 @@
+# --- SULFUR Build Calculator ---
+# Rule of thumb: if the SPA doesn't load it at runtime, it doesn't belong here.
+
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+
+# The datamine workspace lives as a SIBLING (../_sulfur_extract) and is NEVER
+# committed here — raw dumps, decompiled C#, and the ~1.7 GB Unity export stay out.
+# If it is ever nested under this repo, ignore it:
+_*_extract/
+
+# raw / intermediate data that is NOT the shipped subset
+references/data/_raw/
+assets/_full_export/
+
+# NOTE: data.js IS committed on purpose — GitHub Pages serves it directly.
+# references/data/*.csv and assets/**/*.png ARE committed — the SPA reads them.

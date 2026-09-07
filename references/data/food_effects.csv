@@ -1,0 +1,199 @@
+name,display,category,slots,basePrice,buffs_readable,primary_attribute,primary_total_effect,total_effect_per_slot
+Item_Americano,Americano,Consumables/Drinks,1,35,Stat_HealthRegen Flat total=15 over 10s,Stat_HealthRegen,15,15.0
+Item_Aspic,Aspic,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=15 over 0.1s,Stat_HealthRegen,15,7.5
+Item_Banana,Banana,Consumables/Foodstuffs,2,30,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,5.0
+Item_BananaBread,Banana Bread,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_BananaSulfs,Banana Sulfs,Consumables/Foodstuffs,1,20,Stat_HealthRegen Flat total=20 over 1s,Stat_HealthRegen,20,20.0
+Item_BarkBread,Bark bread,Consumables/Foodstuffs,2,35,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,5.0
+Item_Beans,Beans,Consumables/Foodstuffs,1,120,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,25.0
+Item_BeefJerky,Beef Jerky,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,10.0
+Item_Berries,Berries,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,10.0
+Item_BiscuitsAndGravy,Biscuiits and Gravy,Consumables/Foodstuffs,2,130,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,12.5
+Item_BlackPepper,Black Pepper,Consumables/Foodstuffs,1,30,Stat_HealthRegen Flat total=1 over 10s,Stat_HealthRegen,1,1.0
+Item_Blood,Blood,Consumables/Other,1,60,Stat_HealthRegen Flat total=5 over 10s,Stat_HealthRegen,5,5.0
+Item_BloodPudding,Blood Pudding,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_BobaTea,Boba Tea,Consumables/Drinks,2,60,Stat_HealthRegen Flat total=15 over 10s,Stat_HealthRegen,15,7.5
+Item_BottledWater,Bottled Water,Consumables/Drinks,2,40,Stat_HealthRegen PercentAdd total=5 over 5s,Stat_HealthRegen,5,2.5
+Item_Bread,Bread,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=15 over 10s,Stat_HealthRegen,15,7.5
+Item_Broth,Broth,Consumables/Foodstuffs,2,40,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,5.0
+Item_Butter,Butter,Consumables/Foodstuffs,2,60,Stat_HealthRegen Flat total=15 over 10s,Stat_HealthRegen,15,7.5
+Item_ButtermilkPancakes,Buttermilk Pancakes,Consumables/Foodstuffs,2,220,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_Cacao,Cacao,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=5 over 10s,Stat_HealthRegen,5,5.0
+Item_Cactus,Cactus,Consumables/Foodstuffs,2,40,Stat_HealthRegen Flat total=3 over 10s,Stat_HealthRegen,3,1.5
+Item_CactusDrink,Cactus Softdrink,Consumables/Drinks,2,60,Stat_HealthRegen Flat total=15 over 10s,Stat_HealthRegen,15,7.5
+Item_CactusGrilled,Grilled Cactus,Consumables/Foodstuffs,2,80,Stat_HealthRegen Flat total=20 over 10s,Stat_HealthRegen,20,10.0
+Item_CactusSweets,Lackerol Cactus,Consumables/Foodstuffs,1,30,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,10.0
+Item_CandyCane,Candy Cane,Consumables/Foodstuffs/Christmas,1,90,Stat_HealthRegen Flat total=20 over 0.1s,Stat_HealthRegen,20,20.0
+Item_Cappuccino,Cappuccino,Consumables/Drinks,1,35,Stat_HealthRegen Flat total=35 over 10s,Stat_HealthRegen,35,35.0
+Item_CaviarBottle,Bottled Caviar,Consumables/Foodstuffs,1,120,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,25.0
+Item_CaviarTubed,Tube Caviar,Consumables/Foodstuffs,2,240,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_Cereal,Cereal,Consumables/Foodstuffs,4,110,Stat_HealthRegen Flat total=35 over 10s,Stat_HealthRegen,35,8.75
+Item_Cevapi,Cevapi,Consumables/Foodstuffs,2,220,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,12.5
+Item_Cheese,Cheese,Consumables/Foodstuffs,1,100,Stat_HealthRegen Flat total=15 over 10s,Stat_HealthRegen,15,15.0
+Item_CheeseTops,Cheese Tops,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,25.0
+Item_Cheeseburger,Cheeseburger,Consumables/Foodstuffs,1,250,Stat_HealthRegen Flat total=45 over 10s,Stat_HealthRegen,45,45.0
+Item_ChickenNashvilleHot,Nashville Hot Chicken,Consumables/Foodstuffs,1,220,Stat_HealthRegen Flat total=25 over 10s; Resistance_Frost Flat total=6000 over 240s,Resistance_Frost,6000,6000.0
+Item_ChocolateBall,Chocolate Ball,Consumables/Foodstuffs,1,85,Stat_HealthRegen Flat total=20 over 10s,Stat_HealthRegen,20,20.0
+Item_ChocolateBar,Chocolate Bar,Consumables/Foodstuffs,2,180,Stat_HealthRegen Flat total=25 over 1s,Stat_HealthRegen,25,12.5
+Item_ChocolateSyrup,Chocolate Syrup,Consumables/Foodstuffs,2,100,Stat_HealthRegen Flat total=10 over 1s,Stat_HealthRegen,10,5.0
+Item_ChristmasSpice,Christmas Spice,Consumables/Foodstuffs,1,10,Stat_HealthRegen Flat total=1 over 2s,Stat_HealthRegen,1,1.0
+Item_Cocktail,Cocktail,Consumables/Drinks,4,400,Stat_HealthRegen Flat total=15 over 10s; Stat_Charisma Flat total=3600 over 120s,Stat_Charisma,3600,900.0
+Item_Coffee,Coffee,Consumables/Drinks,1,35,Stat_HealthRegen Flat total=20 over 10s,Stat_HealthRegen,20,20.0
+Item_CordonBleu,Cordon Bleu,Consumables/Foodstuffs,2,350,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,12.5
+Item_CottonCandy,Cotton Candy,Consumables/Foodstuffs,2,130,Stat_HealthRegen Flat total=20 over 1s,Stat_HealthRegen,20,10.0
+Item_CuissesDeGrenouille,Cuisses De Grenouille,Consumables/Foodstuffs,2,240,Stat_HealthRegen Flat total=35 over 10s,Stat_HealthRegen,35,17.5
+Item_Curry,Curry,Consumables/Foodstuffs,2,30,Stat_HealthRegen Flat total=35 over 4s,Stat_HealthRegen,35,17.5
+Item_Currywurst,Currywurst,Consumables/Foodstuffs,2,225,Stat_HealthRegen Flat total=45 over 5s,Stat_HealthRegen,45,22.5
+Item_Dimmie,Dimmie,Consumables/Foodstuffs,1,50,Stat_HealthRegen Flat total=20 over 15s,Stat_HealthRegen,20,20.0
+Item_DoppIGrytan,Dopp I Grytan,Consumables/Foodstuffs,4,130,Stat_HealthRegen Flat total=35 over 10s,Stat_HealthRegen,35,8.75
+Item_DoubleCheeseburger,Double Cheeseburger,Consumables/Foodstuffs,1,600,Stat_HealthRegen Flat total=200 over 10s,Stat_HealthRegen,200,200.0
+Item_Egg,Egg,Consumables/Foodstuffs,1,30,Stat_HealthRegen Flat total=5 over 10s,Stat_HealthRegen,5,5.0
+Item_EggToddy,Egg Toddy,Consumables/Drinks,1,180,Stat_HealthRegen Flat total=10 over 10s; Stat_Charisma Flat total=7200 over 240s,Stat_Charisma,7200,7200.0
+Item_EnergyGum,Energy Gum,Consumables/Foodstuffs,1,80,Resistance_Fire Flat total=4500 over 90s; Resistance_Frost Flat total=4500 over 90s; Resistance_Electric Flat total=4500 over 90s,Resistance_Fire,4500,4500.0
+Item_Escargot,Escargot,Consumables/Foodstuffs,2,300,Stat_HealthRegen Flat total=30 over 2.5s,Stat_HealthRegen,30,15.0
+Item_FalseSulfcap,False Sulfcap,Consumables/Foodstuffs,2,30,status:NegativeEffect_Poisoned=5,NegativeEffect_Poisoned,5,2.5
+Item_FatbergChunk,Fatberg Chunk,Consumables/Foodstuffs,4,50,status:NegativeEffect_Poisoned=5,NegativeEffect_Poisoned,5,1.25
+Item_FirstAidKit,First Aid Kit,Consumables/Other,4,60,Stat_HealthRegen Flat total=100 over 5s,Stat_HealthRegen,100,25.0
+Item_Fish,Fish,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=10 over 2.5s,Stat_HealthRegen,10,10.0
+Item_FishNChips,Fish and chips,Consumables/Foodstuffs,2,250,Stat_HealthRegen Flat total=50 over 5s,Stat_HealthRegen,50,25.0
+Item_FishSalted,Salted Fish,Consumables/Foodstuffs,1,90,Stat_HealthRegen Flat total=20 over 2.5s,Stat_HealthRegen,20,20.0
+Item_Flour,Flour,Consumables/Foodstuffs,4,60,Stat_HealthRegen Flat total=5 over 2.5s,Stat_HealthRegen,5,1.25
+Item_Fondue,Fondue,Consumables/Foodstuffs,2,300,Stat_HealthRegen Flat total=50 over 4s,Stat_HealthRegen,50,25.0
+Item_FrenchHotdog,French Hotdog,Consumables/Foodstuffs,2,110,Stat_HealthRegen Flat total=30 over 2.5s,Stat_HealthRegen,30,15.0
+Item_FrenchToast,French Toast,Consumables/Foodstuffs,1,150,Stat_HealthRegen Flat total=15 over 5s,Stat_HealthRegen,15,15.0
+Item_FrogLeg,Frog Leg,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=3 over 2.5s,Stat_HealthRegen,3,3.0
+Item_FullEnglishBreakfast,Full English Breakfast,Consumables/Foodstuffs,2,550,Stat_HealthRegen Flat total=35 over 10s,Stat_HealthRegen,35,17.5
+Item_Gonster,Gonster,Consumables/Drinks,2,40,Stat_HealthRegen Flat total=25 over 10s; Stat_Charisma Flat total=1200 over 120s,Stat_Charisma,1200,600.0
+Item_GravadLax,Gravad Lax,Consumables/Foodstuffs/Christmas,2,90,Stat_HealthRegen Flat total=20 over 0.1s,Stat_HealthRegen,20,10.0
+Item_Gravy,Gravy,Consumables/Foodstuffs,2,60,Stat_HealthRegen Flat total=20 over 10s,Stat_HealthRegen,20,10.0
+Item_GrilledPoultry,Grilled Poultry,Consumables/Foodstuffs,2,400,Stat_HealthRegen Flat total=100 over 5s,Stat_HealthRegen,100,50.0
+Item_GumHubba,Sweet Gum,Consumables/Foodstuffs,1,80,Stat_HealthRegen Flat total=10 over 1s,Stat_HealthRegen,10,10.0
+Item_Haggis,Haggis,Consumables/Foodstuffs,2,30,Stat_HealthRegen Flat total=20 over 6s,Stat_HealthRegen,20,10.0
+Item_HardBread,Hard Bread,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=8 over 2.5s,Stat_HealthRegen,8,8.0
+Item_HardshellTaco,Hardshell Taco,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=25 over 2.5s,Stat_HealthRegen,25,25.0
+Item_Hazelnut,Hazelnut,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=2 over 2.5s,Stat_HealthRegen,2,2.0
+Item_HealthPotion,Health Potion,Consumables/Drinks,1,60,Stat_HealthRegen Flat total=80 over 5s,Stat_HealthRegen,80,80.0
+Item_Herb,Herbs,Consumables/Foodstuffs,1,20,Stat_HealthRegen Flat total=3 over 2.5s,Stat_HealthRegen,3,3.0
+Item_HerbalTea,Herbal Tea,Consumables/Drinks,1,70,Stat_SprintBonus Flat total=20 over 10s; Stat_HealthRegen Flat total=10 over 5s,Stat_SprintBonus,20,20.0
+Item_HolyToast,Holy Toast,Consumables/Foodstuffs,1,250,Stat_CoyoteTime Flat total=90 over 90s,Stat_CoyoteTime,90,90.0
+Item_HolyWater,Holy Water,Consumables/Drinks,1,500,Stat_CoyoteTime Flat total=90 over 90s,Stat_CoyoteTime,90,90.0
+Item_HotPot,Hot Pot,Consumables/Foodstuffs,6,300,Stat_HealthRegen Flat total=50 over 4s,Stat_HealthRegen,50,8.3333
+Item_HotSauce,Hot Sauce,Consumables/Foodstuffs,1,180,Stat_HealthRegen Flat total=5 over 2.5s; Resistance_Frost Flat total=12000 over 240s,Resistance_Frost,12000,12000.0
+Item_HotSnax,Hot Snacks,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=15 over 2s,Stat_HealthRegen,15,15.0
+Item_Jam,Berry Jam,Consumables/Foodstuffs,1,90,Stat_HealthRegen Flat total=15 over 1s,Stat_HealthRegen,15,15.0
+Item_JamUnsweetened,Berry Jam (Unsweetened),Consumables/Foodstuffs,1,50,Stat_HealthRegen Flat total=10 over 2.5s,Stat_HealthRegen,10,10.0
+Item_JanssonsTemptation,Jansson's Temptation,Consumables/Foodstuffs/Christmas,3,200,Stat_HealthRegen Flat total=45 over 7s,Stat_HealthRegen,45,15.0
+Item_Jello,Jello,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=15 over 0.1s,Stat_HealthRegen,15,7.5
+Item_Julmust,Julmust,Consumables/Foodstuffs/Christmas,2,90,Stat_HealthRegen Flat total=18 over 1s; Stat_CritChanceADS Flat total=1 over 15s,Stat_HealthRegen,18,9.0
+Item_KarlOskar,Karl-Oskar,Consumables/Foodstuffs,1,10,Stat_HealthRegen Flat total=5 over 1.5s,Stat_HealthRegen,5,5.0
+Item_KidneyPie,Kidney Pie,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=35 over 2.5s,Stat_HealthRegen,35,17.5
+Item_KidneyStone,Kidney Stone,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=5 over 2.5s,Stat_HealthRegen,5,5.0
+Item_Kombucha,Kombucha,Consumables/Drinks,1,60,Stat_HealthRegen Flat total=15 over 3s; Stat_CoyoteTime Flat total=90 over 90s,Stat_CoyoteTime,90,90.0
+Item_Latte,Latte,Consumables/Drinks,1,35,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,30.0
+Item_Lemonade,Lemonade,Consumables/Drinks,1,60,Stat_SprintBonus Flat total=30 over 30s,Stat_SprintBonus,30,30.0
+Item_Leverpastej,Leverpastej,Consumables/Foodstuffs,2,60,Stat_HealthRegen Flat total=20 over 5s,Stat_HealthRegen,20,10.0
+Item_Liquor,Liquor,Consumables/Drinks,2,60,Stat_Charisma Flat total=1800 over 120s,Stat_Charisma,1800,900.0
+Item_LiverDumpling,Dumpling,Consumables/Foodstuffs,1,50,Stat_HealthRegen Flat total=20 over 15s,Stat_HealthRegen,20,20.0
+Item_Lussekatt,Lussekatt,Consumables/Foodstuffs,2,160,Stat_HealthRegen Flat total=30 over 2s,Stat_HealthRegen,30,15.0
+Item_Lutfisk,Lutfisk,Consumables/Foodstuffs/Christmas,2,90,Stat_HealthRegen Flat total=25 over 5s,Stat_HealthRegen,25,12.5
+Item_MacNCheese,Mac'n'Cheese,Consumables/Foodstuffs,2,90,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_Maki,Maki,Consumables/Foodstuffs,2,150,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_Marshmallow,Marshmallows,Consumables/Foodstuffs,2,200,Stat_HealthRegen Flat total=40 over 2s,Stat_HealthRegen,40,20.0
+Item_MashedPotatoes,Mashed Potatoes,Consumables/Foodstuffs,2,100,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_MatchaGum,Green Tea Gum,Consumables/Foodstuffs,1,80,Stat_HealthRegen Flat total=10 over 1s; ExtraDamage_Melee PercentAdd total=144 over 120s,ExtraDamage_Melee,144,144.0
+Item_MatchaTeaCup,Green Tea,Consumables/Drinks,1,80,ExtraDamage_Melee PercentAdd total=90 over 60s; Stat_HealthRegen Flat total=10 over 5s,ExtraDamage_Melee,90,90.0
+Item_MatchaTeaPowder,Matcha,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=5 over 5s,Stat_HealthRegen,5,5.0
+Item_MeatSkewers,Meat Skewers,Consumables/Foodstuffs,2,80,Stat_HealthRegen Flat total=20 over 2s,Stat_HealthRegen,20,10.0
+Item_Meringue,Meringue,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=15 over 4s,Stat_HealthRegen,15,15.0
+Item_MilkBlue,Skimmed Milk,Consumables/Drinks,2,40,Stat_AimMovingBonus PercentAdd total=45 over 90s; Stat_HealthRegen Flat total=10 over 5s,Stat_AimMovingBonus,45,22.5
+Item_MilkButtermilk,Buttermilk,Consumables/Drinks,2,50,Stat_AimMovingBonus PercentAdd total=15 over 120s; Stat_HealthRegen Flat total=15 over 10s,Stat_AimMovingBonus,15,7.5
+Item_MilkGreen,Low Fat Milk,Consumables/Drinks,2,40,Stat_AimMovingBonus PercentAdd total=45 over 90s; Stat_HealthRegen Flat total=15 over 6s,Stat_AimMovingBonus,45,22.5
+Item_MilkRed,Whole Milk,Consumables/Drinks,2,40,Stat_AimMovingBonus PercentAdd total=45 over 90s; Stat_HealthRegen Flat total=20 over 8s,Stat_AimMovingBonus,45,22.5
+Item_MilkshakeBerries,Berry Milkshake,Consumables/Drinks,2,60,Stat_HealthRegen Flat total=35 over 3s,Stat_HealthRegen,35,17.5
+Item_MilkshakeChocolate,Chocolate Milkshake,Consumables/Drinks,2,60,Stat_HealthRegen Flat total=35 over 3s,Stat_HealthRegen,35,17.5
+Item_MineralWater,Bottled Water,Consumables/Drinks,2,120,Stat_AimMovingBonus PercentAdd total=90 over 180s; Resistance_Fire PercentAdd total=90 over 180s,Stat_AimMovingBonus,90,45.0
+Item_Mochi,Mochi,Consumables/Foodstuffs,1,65,Stat_HealthRegen Flat total=25 over 5s,Stat_HealthRegen,25,25.0
+Item_Mudcake,Chocolate Mudcake,Consumables/Foodstuffs,1,280,Stat_HealthRegen Flat total=50 over 3s,Stat_HealthRegen,50,50.0
+Item_MulledWine,Mulled Wine,Consumables/Drinks,1,200,Stat_HealthRegen Flat total=30 over 10s; Stat_Charisma Flat total=1200 over 120s,Stat_Charisma,1200,1200.0
+Item_MushroomFried,'Fried Mushroom ',Consumables/Foodstuffs,2,130,Stat_HealthRegen Flat total=15 over 4s,Stat_HealthRegen,15,7.5
+Item_MushroomOmelette,Mushroom Omelette,Consumables/Foodstuffs,2,70,Stat_HealthRegen Flat total=20 over 4s,Stat_HealthRegen,20,10.0
+Item_MushroomSkewer,Mushroom Skewer,Consumables/Foodstuffs,2,100,Stat_HealthRegen Flat total=15 over 3s,Stat_HealthRegen,15,7.5
+Item_MushroomSoup,Mushroom Soup,Consumables/Foodstuffs,2,70,Stat_HealthRegen Flat total=20 over 9s,Stat_HealthRegen,20,10.0
+Item_MycotaSquamata,Mycota Squamata,Consumables/Foodstuffs,2,120,Stat_HealthRegen Flat total=5 over 5s,Stat_HealthRegen,5,2.5
+Item_MysteryMeat,Mystery Meat,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=15 over 5s,Stat_HealthRegen,15,15.0
+Item_Nigiri,Nigiri,Consumables/Foodstuffs,2,210,Stat_HealthRegen Flat total=20 over 5s,Stat_HealthRegen,20,10.0
+Item_Nuggets,Nuggets,Consumables/Foodstuffs,2,80,Stat_HealthRegen Flat total=25 over 10s,Stat_HealthRegen,25,12.5
+Item_NutMix,Nut Mix,Consumables/Foodstuffs,1,200,Stat_HealthRegen Flat total=25 over 5s,Stat_HealthRegen,25,25.0
+Item_NutSpread,Nut Spread,Consumables/Foodstuffs,4,220,Stat_HealthRegen Flat total=40 over 5s,Stat_HealthRegen,40,10.0
+Item_Oats,Oats,Consumables/Foodstuffs,2,50,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,5.0
+Item_Omelette,Omelette,Consumables/Foodstuffs,2,50,Stat_HealthRegen Flat total=22 over 5s,Stat_HealthRegen,22,11.0
+Item_Onigiri,Onigiri,Consumables/Foodstuffs,2,210,Stat_HealthRegen Flat total=35 over 3s,Stat_HealthRegen,35,17.5
+Item_PastaBolognese,Spaghetti Bolognese,Consumables/Foodstuffs,2,250,Stat_HealthRegen Flat total=50 over 5s,Stat_HealthRegen,50,25.0
+Item_Peanut,Peanut,Consumables/Foodstuffs,1,20,Stat_HealthRegen Flat total=5 over 5s,Stat_HealthRegen,5,5.0
+Item_PeanutButter,Peanut Butter,Consumables/Foodstuffs,4,250,Stat_HealthRegen Flat total=45 over 10s,Stat_HealthRegen,45,11.25
+Item_Pilk,Pilk,Consumables/Drinks,2,400,Stat_HealthRegen Flat total=60 over 10s; Stat_ExtraJumps Flat total=180 over 60s,Stat_ExtraJumps,180,90.0
+Item_PineNut,Pine nuts,Consumables/Foodstuffs,1,20,Stat_HealthRegen Flat total=5 over 5s,Stat_HealthRegen,5,5.0
+Item_PizzaLarge,Pizza,Consumables/Foodstuffs,4,400,Stat_HealthRegen Flat total=150 over 10s; Stat_JumpPower Flat total=-1.5 over 15s; Stat_MovementSpeed Flat total=-1.5 over 15s,Stat_HealthRegen,150,37.5
+Item_PizzaSlice,Pizza Slice,Consumables/Foodstuffs,1,150,Stat_HealthRegen Flat total=100 over 5s,Stat_HealthRegen,100,100.0
+Item_PoisonGum,Anti-Poison Gum,Consumables/Foodstuffs,1,150,Resistance_Poison Flat total=9600 over 120s,Resistance_Poison,9600,9600.0
+Item_Polsa,Pölsa,Consumables/Foodstuffs,2,30,Stat_HealthRegen Flat total=20 over 10s,Stat_HealthRegen,20,10.0
+Item_Polse,Pølse,Consumables/Foodstuffs,2,50,Stat_HealthRegen Flat total=15 over 3s,Stat_HealthRegen,15,7.5
+Item_Porridge,Porridge,Consumables/Foodstuffs,2,30,Stat_HealthRegen Flat total=15 over 4s,Stat_HealthRegen,15,7.5
+Item_Potato,Potato,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=5 over 3s,Stat_HealthRegen,5,5.0
+Item_PotatoSalad,Potato Salad,Consumables/Foodstuffs/Christmas,2,90,Stat_HealthRegen Flat total=15 over 0.1s,Stat_HealthRegen,15,7.5
+Item_Poutine,Poutine,Consumables/Foodstuffs,2,225,Stat_HealthRegen Flat total=35 over 5s,Stat_HealthRegen,35,17.5
+Item_PowerBar,Power Bar,Consumables/Foodstuffs,1,30,Stat_HealthRegen Flat total=10 over 2s; Stat_SprintBonus Flat total=60 over 60s; Stat_AimMovingBonus Flat total=60 over 60s,Stat_SprintBonus,60,60.0
+Item_PyttIPanna,Pyttipanna,Consumables/Foodstuffs,2,200,Stat_HealthRegen Flat total=25 over 5s,Stat_HealthRegen,25,12.5
+Item_Raclette,Raclette,Consumables/Foodstuffs,2,300,Stat_HealthRegen Flat total=50 over 4s,Stat_HealthRegen,50,25.0
+Item_Ramen,Ramen,Consumables/Foodstuffs,2,150,Stat_HealthRegen Flat total=40 over 4s; Resistance_Frost Flat total=30 over 60s,Stat_HealthRegen,40,20.0
+Item_RamenTori,Tori Ramen,Consumables/Foodstuffs,2,150,Stat_HealthRegen Flat total=40 over 4s; Resistance_Frost Flat total=30 over 60s,Stat_HealthRegen,40,20.0
+Item_Rhubarb,Rhubarb,Consumables/Foodstuffs,2,20,Stat_HealthRegen Flat total=6 over 10s,Stat_HealthRegen,6,3.0
+Item_RhubarbPie,Rhubarb Pie,Consumables/Foodstuffs,2,80,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_RhubarbPorridge,Rhubarb Porridge,Consumables/Foodstuffs,2,20,Stat_HealthRegen Flat total=25 over 4s,Stat_HealthRegen,25,12.5
+Item_RhubarbSauce,Rhubarb Sauce,Consumables/Foodstuffs,2,40,Stat_HealthRegen Flat total=20 over 10s,Stat_HealthRegen,20,10.0
+Item_Rice,Rice,Consumables/Foodstuffs,4,30,Stat_HealthRegen Flat total=5 over 5s; Stat_MovementSpeed Flat total=-2.5 over 5s,Stat_HealthRegen,5,1.25
+Item_RiceCake,Puffed Rice Cakes,Consumables/Foodstuffs,1,20,Stat_HealthRegen Flat total=15 over 2s,Stat_HealthRegen,15,15.0
+Item_Risalamalta,Ris à la Malta,Consumables/Foodstuffs/Christmas,1,90,Stat_HealthRegen Flat total=25 over 5s,Stat_HealthRegen,25,25.0
+Item_Risgrynsgrot,Risgrynsgröt,Consumables/Foodstuffs/Christmas,2,90,Stat_HealthRegen Flat total=18 over 5s,Stat_HealthRegen,18,9.0
+Item_Rodsopp,Rödsopp,Consumables/Foodstuffs,1,15,Stat_HealthRegen Flat total=5 over 3s,Stat_HealthRegen,5,5.0
+Item_RodsoppPaste,Rödsopp Paste,Consumables/Other,2,50,Stat_SlowMotion Flat total=8 over 4s,Stat_SlowMotion,8,4.0
+Item_Salt,Salt,Consumables/Foodstuffs,1,10,Stat_HealthRegen Flat total=1 over 2s,Stat_HealthRegen,1,1.0
+Item_SaltedSandfish,Salted Sandfish,Consumables/Foodstuffs,1,100,Stat_HealthRegen Flat total=25 over 4s,Stat_HealthRegen,25,25.0
+Item_SandFish,Flat Sandfish,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=10 over 2.5s,Stat_HealthRegen,10,10.0
+Item_SandwichBread,Bread Sandwich,Consumables/Foodstuffs,1,80,Stat_HealthRegen Flat total=15 over 5s,Stat_HealthRegen,15,15.0
+Item_SandwichBuddy,Buddy Sandwich,Consumables/Foodstuffs,2,1000,Stat_HealthRegen Flat total=15 over 5s,Stat_HealthRegen,15,7.5
+Item_SandwichButter,Butter Sandwich,Consumables/Foodstuffs,1,60,Stat_HealthRegen Flat total=15 over 5s,Stat_HealthRegen,15,15.0
+Item_SandwichCheese,Cheese Sandwich,Consumables/Foodstuffs,1,85,Stat_HealthRegen Flat total=20 over 5s,Stat_HealthRegen,20,20.0
+Item_SandwichLeverpastej,Liver Patty Sandwich,Consumables/Foodstuffs,1,110,Stat_HealthRegen Flat total=20 over 5s,Stat_HealthRegen,20,20.0
+Item_SandwichNutSpread,Nut Spread Sandwich,Consumables/Foodstuffs,1,80,Stat_HealthRegen Flat total=20 over 5s,Stat_HealthRegen,20,20.0
+Item_SandwichPeanutbutter,Peanutbutter Sandwich,Consumables/Foodstuffs,1,110,Stat_HealthRegen Flat total=25 over 5s,Stat_HealthRegen,25,25.0
+Item_SandwichPeanutbutterJelly,Peanutbutter Jelly Sandwich,Consumables/Foodstuffs,1,130,Stat_HealthRegen Flat total=35 over 5s,Stat_HealthRegen,35,35.0
+Item_Sashimi,Sashimi,Consumables/Foodstuffs,2,220,Stat_HealthRegen Flat total=40 over 4s,Stat_HealthRegen,40,20.0
+Item_Sausage,Spicy Sausage,Consumables/Foodstuffs,2,60,Stat_HealthRegen Flat total=30 over 5s,Stat_HealthRegen,30,15.0
+Item_SausageOmelette,Sausage Omelette,Consumables/Foodstuffs,2,110,Stat_HealthRegen Flat total=42 over 10s,Stat_HealthRegen,42,21.0
+Item_SausageOnStick,Sausage On Stick,Consumables/Foodstuffs,2,200,Stat_HealthRegen Flat total=40 over 2s,Stat_HealthRegen,40,20.0
+Item_SausageSoup,Sausage Soup,Consumables/Foodstuffs,2,135,Stat_HealthRegen Flat total=30 over 4s; Resistance_Frost Flat total=30 over 60s,Stat_HealthRegen,30,15.0
+Item_Seaweed,Seaweed,Consumables/Foodstuffs,1,30,Stat_HealthRegen Flat total=5 over 10s,Stat_HealthRegen,5,5.0
+Item_Silltalrik,Silltallrik,Consumables/Foodstuffs/Christmas,2,90,Stat_HealthRegen Flat total=20 over 0.1s,Stat_HealthRegen,20,10.0
+Item_Snus,Admiral White Extra Strong,Consumables/Other,1,180,Stat_SlowMotion Flat total=15 over 7s; Stat_MovementSpeed PercentAdd total=15 over 7s,Stat_SlowMotion,15,15.0
+Item_Soda,Slurf,Consumables/Drinks,1,30,Stat_AimMovingBonus PercentAdd total=20 over 40s,Stat_AimMovingBonus,20,20.0
+Item_Solution,Solution,Consumables/Other,1,40,Stat_HealthRegen Flat total=2.5 over 2.5s,Stat_HealthRegen,2.5,2.5
+Item_Spagetti,Spaghetti,Consumables/Foodstuffs,2,30,Stat_HealthRegen Flat total=5 over 5s,Stat_HealthRegen,5,2.5
+Item_SpanishOmelette,Spanish Omelette,Consumables/Foodstuffs,2,220,Stat_HealthRegen Flat total=30 over 10s,Stat_HealthRegen,30,15.0
+Item_SportsDrink,Sports Drink,Consumables/Drinks,2,120,Stat_AimMovingBonus PercentAdd total=125.99999999999999 over 180s; Stat_MovementSpeed PercentAdd total=15 over 30s; Stat_WeaponWeightPenalty PercentAdd total=-90 over 180s; Resistance_Fire PercentAdd total=-90 over 180s,Stat_AimMovingBonus,125.99999999999999,63.0
+Item_Stew,Stew,Consumables/Foodstuffs,2,65,Stat_HealthRegen Flat total=20 over 3s,Stat_HealthRegen,20,10.0
+Item_Stout,Stout,Consumables/Drinks,2,40,Stat_HealthRegen Flat total=15 over 10s; Stat_Charisma Flat total=1200 over 120s,Stat_Charisma,1200,600.0
+Item_Sugar,Sugar,Consumables/Foodstuffs,4,30,Stat_HealthRegen Flat total=10 over 10s,Stat_HealthRegen,10,2.5
+Item_SulfCola,SulfCola,Consumables/Drinks,2,300,Stat_HealthRegen Flat total=30 over 4s; Stat_ExtraJumps Flat total=20 over 20s,Stat_HealthRegen,30,15.0
+Item_Surstromming,Surstromming,Consumables/Foodstuffs,1,350,Stat_HealthRegen Flat total=50 over 50s; status:NegativeEffect_Poisoned=5,Stat_HealthRegen,50,50.0
+Item_SwedishPancakes,Swedish Pancakes,Consumables/Foodstuffs,2,220,Stat_HealthRegen Flat total=30 over 3s,Stat_HealthRegen,30,15.0
+Item_SwingDing,Swing-Ding,Consumables/Foodstuffs,1,10,Stat_HealthRegen Flat total=5 over 1s,Stat_HealthRegen,5,5.0
+Item_ToastSkagen,Toast Skagen,Consumables/Foodstuffs,1,150,Stat_HealthRegen Flat total=15 over 5s,Stat_HealthRegen,15,15.0
+Item_TongueOnStick,Tongue On Stick,Consumables/Foodstuffs,2,120,Stat_HealthRegen Flat total=20 over 2s,Stat_HealthRegen,20,10.0
+Item_Unagi,Unagi,Consumables/Foodstuffs,2,400,Stat_HealthRegen Flat total=60 over 10s; Resistance_Electric Flat total=100 over 60s,Resistance_Electric,100,50.0
+Item_UsedRubber,Used Rubber,Misc,1,150,status:NegativeEffect_Poisoned=5,NegativeEffect_Poisoned,5,5.0
+Item_VacuumCleaner,Vacuum Cleaner,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=15 over 3s,Stat_HealthRegen,15,15.0
+Item_VelvetBell,Velvet Bell,Consumables/Foodstuffs,1,10,Stat_HealthRegen Flat total=1 over 1s,Stat_HealthRegen,1,1.0
+Item_Walnut,Walnut,Consumables/Foodstuffs,1,40,Stat_HealthRegen Flat total=5 over 5s,Stat_HealthRegen,5,5.0
+Item_Wine,Red Wine,Consumables/Drinks,2,200,Stat_HealthRegen Flat total=30 over 10s; Stat_Charisma Flat total=2400 over 120s,Stat_Charisma,2400,1200.0
+Item_Worm,Earthworm,Consumables/Foodstuffs,1,10,Stat_HealthRegen Flat total=5 over 1s,Stat_HealthRegen,5,5.0

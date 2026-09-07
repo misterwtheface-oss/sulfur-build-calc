@@ -1,0 +1,257 @@
+name,display,category,slots,basePrice,sellable,direct_consume_primary,num_recipes_using,best_use_recipe,best_use_product,best_use_product_per_slot,verdict
+Item_VelvetBell,Velvet Bell,Consumables/Foodstuffs,1,10,1,1,235,Recipe_FullEnglishBreakfast_1 4,Full English Breakfast,17.5,KEEP
+Item_Sugar,Sugar,Consumables/Foodstuffs,4,30,1,10,225,Recipe_EggToddy_1 1,Egg Toddy,7200.0,KEEP
+Item_Rodsopp,Rödsopp,Consumables/Foodstuffs,1,15,1,5,210,Recipe_HealthPotion_3,Health Potion,80.0,KEEP
+Item_SwingDing,Swing-Ding,Consumables/Foodstuffs,1,10,1,5,206,Recipe_FullEnglishBreakfast_1 3,Full English Breakfast,17.5,KEEP
+Item_KarlOskar,Karl-Oskar,Consumables/Foodstuffs,1,10,1,5,203,Recipe_FullEnglishBreakfast_1 1,Full English Breakfast,17.5,KEEP
+Item_Egg,Egg,Consumables/Foodstuffs,1,30,1,5,198,Recipe_EggToddy_1 1,Egg Toddy,7200.0,KEEP
+Item_Broth,Broth,Consumables/Foodstuffs,2,40,1,10,185,Recipe_Fondue_4,Fondue,25.0,KEEP
+Item_BottledWater,Bottled Water,Consumables/Drinks,2,40,1,5,117,Recipe_Wine_1 1,Red Wine,1200.0,KEEP
+Item_Potato,Potato,Consumables/Foodstuffs,1,60,1,5,117,Recipe_FishnChips 1,Fish and chips,25.0,KEEP
+Item_Bread,Bread,Consumables/Foodstuffs,2,90,1,15,110,Recipe_Cheeseburger_1 19,Double Cheeseburger,200.0,KEEP
+Item_Cheese,Cheese,Consumables/Foodstuffs,1,100,1,15,105,Recipe_Cheeseburger_1 19,Double Cheeseburger,200.0,KEEP
+Item_Rice,Rice,Consumables/Foodstuffs,4,30,1,5,97,Recipe_Unagi 1,Unagi,50.0,KEEP
+Item_Bark,Bark,Misc,1,100,1,,92,Recipe_BarkBread 1,Bark bread,5.0,KEEP
+Item_Fish,Fish,Consumables/Foodstuffs,1,40,1,10,89,Recipe_Surstromming 2,Surstromming,50.0,KEEP
+Item_Solution,Solution,Consumables/Other,1,40,1,2.5,89,Recipe_HotSauce_1,Hot Sauce,12000.0,KEEP
+Item_Flour,Flour,Consumables/Foodstuffs,4,60,1,5,83,Recipe_Mudcake_1 1,Chocolate Mudcake,50.0,KEEP
+Item_ChristmasSpice,Christmas Spice,Consumables/Foodstuffs,1,10,1,1,80,Recipe_Glogg 1,Mulled Wine,1200.0,KEEP
+Item_MineralWater,Bottled Water,Consumables/Drinks,2,120,1,90,79,Recipe_MashedPotatoes_4 5,Mashed Potatoes,15.0,KEEP
+Item_SandFish,Flat Sandfish,Consumables/Foodstuffs,1,40,1,10,78,Recipe_Surstromming 4,Surstromming,50.0,KEEP
+Item_Sausage,Spicy Sausage,Consumables/Foodstuffs,2,60,1,30,78,Recipe_PizzaLarge 1,Pizza,37.5,KEEP
+Item_Butter,Butter,Consumables/Foodstuffs,2,60,1,15,76,Recipe_Mudcake_1,Chocolate Mudcake,50.0,KEEP
+Item_Stick,Stick,Misc,2,4,1,,73,Recipe_Fondue_2 1,Fondue,25.0,KEEP
+Item_Herb,Herbs,Consumables/Foodstuffs,1,20,1,3,69,Recipe_HealthPotion_2,Health Potion,80.0,KEEP
+Item_Beans,Beans,Consumables/Foodstuffs,1,120,1,25,58,Recipe_FullEnglishBreakfast_1 1,Full English Breakfast,17.5,KEEP
+Item_MilkRed,Whole Milk,Consumables/Drinks,2,40,1,45,57,Recipe_Pilk3,Pilk,90.0,KEEP
+Item_Hazelnut,Hazelnut,Consumables/Foodstuffs,1,60,1,2,55,Recipe_NutMix_1 1,Nut Mix,25.0,KEEP
+Item_PineNut,Pine nuts,Consumables/Foodstuffs,1,20,1,5,55,Recipe_NutMix_1 1,Nut Mix,25.0,KEEP
+Item_Walnut,Walnut,Consumables/Foodstuffs,1,40,1,5,55,Recipe_NutMix_1 3,Nut Mix,25.0,KEEP
+Item_Peanut,Peanut,Consumables/Foodstuffs,1,20,1,5,53,Recipe_NutMix_1 2,Nut Mix,25.0,KEEP
+Item_MilkBlue,Skimmed Milk,Consumables/Drinks,2,40,1,45,50,Recipe_Pilk,Pilk,90.0,KEEP
+Item_MilkGreen,Low Fat Milk,Consumables/Drinks,2,40,1,45,50,Recipe_Pilk2,Pilk,90.0,KEEP
+Item_Oats,Oats,Consumables/Foodstuffs,2,50,1,10,49,Recipe_PowerBar_1,Power Bar,60.0,KEEP
+Item_Rock,Rock,Misc,1,10,1,,49,Recipe_MashedPotatoes_1,Mashed Potatoes,15.0,KEEP
+Item_CrawFlesh,Craw flesh,Organs/Craw,1,40,1,,47,Recipe_Cheeseburger_1 24,Double Cheeseburger,200.0,KEEP
+Item_Lung,Lung,Organs/General,2,60,1,,46,Recipe_FrenchHotdog_4,French Hotdog,15.0,KEEP
+Item_DogFlesh,Dog flesh,Organs/Dog,1,45,1,,45,Recipe_Cheeseburger_1 22,Double Cheeseburger,200.0,KEEP
+Item_HumanFlesh,Human flesh,Organs/Human,1,60,1,,44,Recipe_Cheeseburger_1 20,Double Cheeseburger,200.0,KEEP
+Item_LizardFlesh,Shav'Wa flesh,Organs/Lizard,1,50,1,,44,Recipe_Cheeseburger_1 21,Double Cheeseburger,200.0,KEEP
+Item_ShrewFlesh,Hellshrew flesh,Organs/Shrew,1,70,1,,44,Recipe_Cheeseburger_1 23,Double Cheeseburger,200.0,KEEP
+Item_GoblinFlesh,Goblin flesh,Organs/Goblin,1,50,1,,43,Recipe_Cheeseburger_1 19,Double Cheeseburger,200.0,KEEP
+Item_Berries,Berries,Consumables/Foodstuffs,1,40,1,10,40,Recipe_Cocktail 4,Cocktail,900.0,KEEP
+Item_PotatoSalad,Potato Salad,Consumables/Foodstuffs/Christmas,2,90,1,15,40,Recipe_Jansson 8,Jansson's Temptation,15.0,KEEP
+Item_Salt,Salt,Consumables/Foodstuffs,1,10,1,1,40,Recipe_SaltedSandFish 0,Salted Sandfish,25.0,KEEP
+Item_FatbergChunk,Fatberg Chunk,Consumables/Foodstuffs,4,50,1,5,35,Recipe_Unagi 1,Unagi,50.0,KEEP
+Item_MysteryMeat,Mystery Meat,Consumables/Foodstuffs,1,60,1,15,33,Recipe_Bolognese_1,Spaghetti Bolognese,25.0,KEEP
+Item_Spagetti,Spaghetti,Consumables/Foodstuffs,2,30,1,5,33,Recipe_Bolognese_1,Spaghetti Bolognese,25.0,KEEP
+Item_SpiceMix,Spice Mix,Consumables/Foodstuffs,1,30,1,,32,Recipe_HotSauce_1,Hot Sauce,12000.0,KEEP
+Item_Cacao,Cacao,Consumables/Foodstuffs,1,40,1,5,31,Recipe_PowerBar_2,Power Bar,60.0,KEEP
+Item_FalseSulfcap,False Sulfcap,Consumables/Foodstuffs,2,30,1,5,30,Recipe_MushroomSoup_1 6,Mushroom Soup,10.0,KEEP
+Item_Liquor,Liquor,Consumables/Drinks,2,60,1,1800,29,Recipe_EggToddy_1 1,Egg Toddy,7200.0,KEEP
+Item_MilkButtermilk,Buttermilk,Consumables/Drinks,2,50,1,15,29,Recipe_ButterMilkPancakes 1,Buttermilk Pancakes,15.0,KEEP
+Item_ChickenLeg,Chicken Leg,Consumables/Foodstuffs,1,60,1,,27,Recipe_NashvilleHotChicken 1,Nashville Hot Chicken,6000.0,KEEP
+Item_Liver,Liver,Organs/General,2,80,1,,23,Recipe_Leverpastejsmacka 1,Liver Patty Sandwich,20.0,KEEP
+Item_Soda,Slurf,Consumables/Drinks,1,30,1,20,23,Recipe_Cocktail 8,Cocktail,900.0,KEEP
+Item_Banana,Banana,Consumables/Foodstuffs,2,30,1,10,22,Recipe_Cocktail 9,Cocktail,900.0,KEEP
+Item_Intestines,Intestines,Organs/General,1,40,1,,22,Recipe_FrenchHotdog_3,French Hotdog,15.0,KEEP
+Item_MetalScrap,Metal Scrap,Misc,1,100,1,,22,Recipe_CaviarTubed_3,Tube Caviar,15.0,KEEP
+Item_Seaweed,Seaweed,Consumables/Foodstuffs,1,30,1,5,22,Recipe_Maki_1 1,Maki,15.0,KEEP
+Item_Gravy,Gravy,Consumables/Foodstuffs,2,60,1,20,21,Recipe_Poutine 1,Poutine,17.5,KEEP
+Item_Jam,Berry Jam,Consumables/Foodstuffs,1,90,1,15,20,Recipe_Glogg 3,Mulled Wine,1200.0,KEEP
+Item_Sawdust,Sawdust,Misc,1,10,1,,19,Recipe_PowerBar_2,Power Bar,60.0,KEEP
+Item_ChocolateSyrup,Chocolate Syrup,Consumables/Foodstuffs,2,100,1,10,18,Recipe_Cocktail 6,Cocktail,900.0,KEEP
+Item_Heart,Heart,Organs/General,1,200,1,,18,Recipe_Omelette_organ 2,Omelette,11.0,KEEP
+Item_JamUnsweetened,Berry Jam (Unsweetened),Consumables/Foodstuffs,1,50,1,10,18,Recipe_PeanutButterJellySandwitch_2 1,Peanutbutter Jelly Sandwich,35.0,KEEP
+Item_MatchaTeaPowder,Matcha,Consumables/Foodstuffs,1,40,1,5,16,Recipe_MatchaGum_1 1,Green Tea Gum,144.0,KEEP
+Item_BlackPepper,Black Pepper,Consumables/Foodstuffs,1,30,1,1,15,Recipe_Omelette_1 2,Omelette,11.0,KEEP
+Item_BarkBread,Bark bread,Consumables/Foodstuffs,2,35,1,10,13,Recipe_PeanutButterJellySandwitch_1 1,Peanutbutter Jelly Sandwich,35.0,KEEP
+Item_Bladder,Bladder,Organs/General,1,100,1,,13,Recipe_FrenchHotdog_7,French Hotdog,15.0,KEEP
+Item_CaviarBottle,Bottled Caviar,Consumables/Foodstuffs,1,120,1,25,13,Recipe_OnigiriFisheggs_1 1,Onigiri,17.5,KEEP
+Item_Paper,Paper,Misc,1,4,1,,13,Recipe_Snus_1,Admiral White Extra Strong,15.0,KEEP
+Item_Wine,Red Wine,Consumables/Drinks,2,200,1,2400,12,Recipe_Glogg 1,Mulled Wine,1200.0,KEEP
+Item_Blood,Blood,Consumables/Other,1,60,1,5,11,Recipe_Wine_1,Red Wine,1200.0,KEEP
+Item_CactusDrink,Cactus Softdrink,Consumables/Drinks,2,60,1,15,11,Recipe_Cocktail 3,Cocktail,900.0,KEEP
+Item_Cloth,Cloth,Misc,1,20,1,,11,Recipe_FirstAidKit_1 1,First Aid Kit,25.0,KEEP
+Item_GreenGlob,Green Glob,Misc,1,100,1,,11,Recipe_PoisonGum_1,Anti-Poison Gum,9600.0,KEEP
+Item_Rhubarb,Rhubarb,Consumables/Foodstuffs,2,20,1,6,11,Recipe_RhubarbPie_1,Rhubarb Pie,15.0,KEEP
+Item_Snail,Snail,Consumables/Foodstuffs,1,20,1,,11,Recipe_Escargot_1,Escargot,15.0,KEEP
+Item_CrawSkin,Craw skin,Organs/Craw,1,30,1,,10,Recipe_HotSnacks_1,Hot Snacks,15.0,KEEP
+Item_Rubber,Rubber,Misc,1,10,1,,10,Recipe_PoisonGum_1,Anti-Poison Gum,9600.0,KEEP
+Item_SportsDrink,Sports Drink,Consumables/Drinks,2,120,1,125.99999999999999,10,Recipe_Gonster 1,Gonster,600.0,KEEP
+Item_UsedRubber,Used Rubber,Misc,1,150,1,5,10,Recipe_PoisonGum_2,Anti-Poison Gum,9600.0,KEEP
+Item_DogSkin,Dog Skin,Organs/Dog,1,40,1,,9,Recipe_HotSnacks_2,Hot Snacks,15.0,KEEP
+Item_GoblinSkin,Goblin skin,Organs/Goblin,1,30,1,,9,Recipe_HotSnacks_3,Hot Snacks,15.0,KEEP
+Item_HumanSkin,Human skin,Organs/Human,1,60,1,,9,Recipe_HotSnacks_4,Hot Snacks,15.0,KEEP
+Item_Kombucha,Kombucha,Consumables/Drinks,1,60,1,90,9,Recipe_BarkBread 10,Bark bread,5.0,KEEP
+Item_LizardSkin,Shav'Wa skin,Organs/Lizard,1,100,1,,9,Recipe_HotSnacks_5,Hot Snacks,15.0,KEEP
+Item_Pancreas,Pancreas,Organs/General,1,110,1,,9,Recipe_FrenchHotdog_5,French Hotdog,15.0,KEEP
+Item_ShrewSkin,Hellshrew skin,Organs/Shrew,1,20,1,,9,Recipe_HotSnacks_6,Hot Snacks,15.0,KEEP
+Item_Spleen,Spleen,Organs/General,1,40,1,,9,Recipe_FrenchHotdog_8,French Hotdog,15.0,KEEP
+Item_Thyroid,Thyroid,Organs/General,1,70,1,,9,Recipe_Omelette_organ 9,Omelette,11.0,KEEP
+Item_NutSpread,Nut Spread,Consumables/Foodstuffs,4,220,1,40,8,Recipe_NutSpreadSandwitch_1 4,Peanutbutter Sandwich,25.0,KEEP
+Item_PeanutButter,Peanut Butter,Consumables/Foodstuffs,4,250,1,45,8,Recipe_PeanutButterJellySandwitch_1 1,Peanutbutter Jelly Sandwich,35.0,KEEP
+Item_Bone,Bone,Organs/General,2,35,1,,7,Recipe_MeatSkewersBone 1,Meat Skewers,10.0,KEEP
+Item_Coffee,Coffee,Consumables/Drinks,1,35,1,20,7,Recipe_Cocktail 1,Cocktail,900.0,KEEP
+Item_Kidney,Kidney,Organs/General,1,100,1,,7,Recipe_KidneyPie_1 1,Kidney Pie,17.5,KEEP
+Item_MatchaTeaCup,Green Tea,Consumables/Drinks,1,80,1,90,7,Recipe_BobaTea 1,Boba Tea,7.5,KEEP
+Item_Cactus,Cactus,Consumables/Foodstuffs,2,40,1,3,6,Recipe_Cocktail 5,Cocktail,900.0,KEEP
+Item_LizardBladder,Shav'Wa bladder,Organs/Lizard,1,300,1,,6,Recipe_SulfCola_1,SulfCola,15.0,KEEP
+Item_FrogLeg,Frog Leg,Consumables/Foodstuffs,1,60,1,3,5,Recipe_CuissesDeGrenouille_1,Cuisses De Grenouille,17.5,KEEP
+Item_HotSnax,Hot Snacks,Consumables/Foodstuffs,1,60,1,15,5,Recipe_NashvilleHotChicken 9,Nashville Hot Chicken,6000.0,KEEP
+Item_Bleach,Bleach,ConsumablesItems,2,120,1,,4,Recipe_Lutfisk 1,Lutfisk,12.5,KEEP
+Item_CaviarTubed,Tube Caviar,Consumables/Foodstuffs,2,240,1,30,4,Recipe_OnigiriFisheggs_2 1,Onigiri,17.5,KEEP
+Item_ChocolateBar,Chocolate Bar,Consumables/Foodstuffs,2,180,1,25,4,Recipe_Mudcake_2,Chocolate Mudcake,50.0,KEEP
+Item_HotSauce,Hot Sauce,Consumables/Foodstuffs,1,180,1,12000,4,Recipe_NashvilleHotChicken 5,Nashville Hot Chicken,6000.0,KEEP
+Item_Brain,Brain,Organs/General,1,200,1,,3,Recipe_FrenchHotdog_6,French Hotdog,15.0,KEEP
+Item_HolyWater,Holy Water,Consumables/Drinks,1,500,1,90,3,Recipe_HolyToast_1,Holy Toast,90.0,KEEP
+Item_NutMix,Nut Mix,Consumables/Foodstuffs,1,200,1,25,3,Recipe_NutSpread_5 1,Nut Spread,10.0,KEEP
+Item_Porridge,Porridge,Consumables/Foodstuffs,2,30,1,15,3,Recipe_RhubarbPorridge_1 1,Rhubarb Porridge,12.5,KEEP
+Item_Risgrynsgrot,Risgrynsgröt,Consumables/Foodstuffs/Christmas,2,90,1,18,3,Recipe_Risalamalta 1,Ris à la Malta,25.0,KEEP
+Item_SandwichButter,Butter Sandwich,Consumables/Foodstuffs,1,60,1,15,3,Recipe_Sandwich_6 1,Cheese Sandwich,20.0,KEEP
+Item_Stout,Stout,Consumables/Drinks,2,40,1,1200,3,Recipe_Gonster 1,Gonster,600.0,KEEP
+Item_SulfCola,SulfCola,Consumables/Drinks,2,300,1,30,3,Recipe_Pilk,Pilk,90.0,KEEP
+Item_BeefJerky,Beef Jerky,Consumables/Foodstuffs,1,60,1,10,2,Recipe_Poutine 7,Poutine,17.5,KEEP
+Item_ChickenNashvilleHot,Nashville Hot Chicken,Consumables/Foodstuffs,1,220,1,6000,2,Recipe_Stew_1 9,Stew,10.0,KEEP
+Item_FishSalted,Salted Fish,Consumables/Foodstuffs,1,90,1,20,2,Recipe_Surstromming 1,Surstromming,50.0,KEEP
+Item_KidneyStone,Kidney Stone,Consumables/Foodstuffs,1,60,1,5,2,Recipe_Leverpastej_3,Leverpastej,10.0,KEEP
+Item_Nuggets,Nuggets,Consumables/Foodstuffs,2,80,1,25,2,Recipe_Stew_1 10,Stew,10.0,KEEP
+Item_PoisonGum,Anti-Poison Gum,Consumables/Foodstuffs,1,150,1,9600,2,Recipe_PoisonGrenade_4 1,Jar of Poison,0.0,KEEP
+Item_SaltedSandfish,Salted Sandfish,Consumables/Foodstuffs,1,100,1,25,2,Recipe_Surstromming 3,Surstromming,50.0,KEEP
+Item_Tongue,Tongue,Organs/General,1,100,1,,2,Recipe_Omelette_organ 10,Omelette,11.0,KEEP
+Item_BananaSulfs,Banana Sulfs,Consumables/Foodstuffs,1,20,1,20,1,Recipe_Cocktail 2,Cocktail,900.0,KEEP
+Item_DogEye,Dog eye,Organs/Dog,1,30,1,,1,Recipe_BuddySandwich,Buddy Sandwich,7.5,KEEP
+Item_HolyToast,Holy Toast,Consumables/Foodstuffs,1,250,1,90,1,Recipe_Wine_1 1,Red Wine,1200.0,KEEP
+Item_Jello,Jello,Consumables/Foodstuffs,2,90,1,15,1,Recipe_Aspic,Aspic,7.5,KEEP
+Item_Leverpastej,Leverpastej,Consumables/Foodstuffs,2,60,1,20,1,Recipe_Leverpastejsmacka 2,Liver Patty Sandwich,20.0,KEEP
+Item_PizzaLarge,Pizza,Consumables/Foodstuffs,4,400,1,150,1,Recipe_PizzaSlicedUp,Pizza Slice,100.0,KEEP
+Item_Polsa,Pölsa,Consumables/Foodstuffs,2,30,1,20,1,Recipe_Bolognese_2 7,Spaghetti Bolognese,25.0,KEEP
+Item_RhubarbSauce,Rhubarb Sauce,Consumables/Foodstuffs,2,40,1,20,1,Recipe_RhubarbPorridge_2,Rhubarb Porridge,12.5,KEEP
+Item_Sashimi,Sashimi,Consumables/Foodstuffs,2,220,1,40,1,Recipe_Nigiri_4,Nigiri,10.0,KEEP
+Weapon_StickGrenade,Stick Grenade,Weapons,2,200,1,,1,Recipe_MashedPotatoes,Mashed Potatoes,15.0,KEEP
+Item_Americano,Americano,Consumables/Drinks,1,35,1,15,0,,,,KEEP
+Item_Aspic,Aspic,Consumables/Foodstuffs,2,90,1,15,0,,,,KEEP
+Item_BananaBread,Banana Bread,Consumables/Foodstuffs,2,90,1,30,0,,,,KEEP
+Item_BiscuitsAndGravy,Biscuiits and Gravy,Consumables/Foodstuffs,2,130,1,25,0,,,,KEEP
+Item_BloodPudding,Blood Pudding,Consumables/Foodstuffs,2,90,1,30,0,,,,KEEP
+Item_BobaTea,Boba Tea,Consumables/Drinks,2,60,1,15,0,,,,KEEP
+Item_ButtermilkPancakes,Buttermilk Pancakes,Consumables/Foodstuffs,2,220,1,30,0,,,,KEEP
+Item_CactusGrilled,Grilled Cactus,Consumables/Foodstuffs,2,80,1,20,0,,,,KEEP
+Item_CandyCane,Candy Cane,Consumables/Foodstuffs/Christmas,1,90,1,20,0,,,,KEEP
+Item_Cappuccino,Cappuccino,Consumables/Drinks,1,35,1,35,0,,,,KEEP
+Item_Cereal,Cereal,Consumables/Foodstuffs,4,110,1,35,0,,,,KEEP
+Item_Cevapi,Cevapi,Consumables/Foodstuffs,2,220,1,25,0,,,,KEEP
+Item_CheeseTops,Cheese Tops,Consumables/Foodstuffs,1,60,1,25,0,,,,KEEP
+Item_Cheeseburger,Cheeseburger,Consumables/Foodstuffs,1,250,1,45,0,,,,KEEP
+Item_ChocolateBall,Chocolate Ball,Consumables/Foodstuffs,1,85,1,20,0,,,,KEEP
+Item_Cocktail,Cocktail,Consumables/Drinks,4,400,1,3600,0,,,,KEEP
+Item_CordonBleu,Cordon Bleu,Consumables/Foodstuffs,2,350,1,25,0,,,,KEEP
+Item_CottonCandy,Cotton Candy,Consumables/Foodstuffs,2,130,1,20,0,,,,KEEP
+Item_CuissesDeGrenouille,Cuisses De Grenouille,Consumables/Foodstuffs,2,240,1,35,0,,,,KEEP
+Item_Curry,Curry,Consumables/Foodstuffs,2,30,1,35,0,,,,KEEP
+Item_Currywurst,Currywurst,Consumables/Foodstuffs,2,225,1,45,0,,,,KEEP
+Item_Dimmie,Dimmie,Consumables/Foodstuffs,1,50,1,20,0,,,,KEEP
+Item_DoppIGrytan,Dopp I Grytan,Consumables/Foodstuffs,4,130,1,35,0,,,,KEEP
+Item_DoubleCheeseburger,Double Cheeseburger,Consumables/Foodstuffs,1,600,1,200,0,,,,KEEP
+Item_EggToddy,Egg Toddy,Consumables/Drinks,1,180,1,7200,0,,,,KEEP
+Item_EnergyGum,Energy Gum,Consumables/Foodstuffs,1,80,1,4500,0,,,,KEEP
+Item_Escargot,Escargot,Consumables/Foodstuffs,2,300,1,30,0,,,,KEEP
+Item_FirstAidKit,First Aid Kit,Consumables/Other,4,60,1,100,0,,,,KEEP
+Item_FishNChips,Fish and chips,Consumables/Foodstuffs,2,250,1,50,0,,,,KEEP
+Item_Fondue,Fondue,Consumables/Foodstuffs,2,300,1,50,0,,,,KEEP
+Item_FrenchHotdog,French Hotdog,Consumables/Foodstuffs,2,110,1,30,0,,,,KEEP
+Item_FrenchToast,French Toast,Consumables/Foodstuffs,1,150,1,15,0,,,,KEEP
+Item_FullEnglishBreakfast,Full English Breakfast,Consumables/Foodstuffs,2,550,1,35,0,,,,KEEP
+Item_Gonster,Gonster,Consumables/Drinks,2,40,1,1200,0,,,,KEEP
+Item_GravadLax,Gravad Lax,Consumables/Foodstuffs/Christmas,2,90,1,20,0,,,,KEEP
+Item_GrilledPoultry,Grilled Poultry,Consumables/Foodstuffs,2,400,1,100,0,,,,KEEP
+Item_Haggis,Haggis,Consumables/Foodstuffs,2,30,1,20,0,,,,KEEP
+Item_HardshellTaco,Hardshell Taco,Consumables/Foodstuffs,1,60,1,25,0,,,,KEEP
+Item_HealthPotion,Health Potion,Consumables/Drinks,1,60,1,80,0,,,,KEEP
+Item_HerbalTea,Herbal Tea,Consumables/Drinks,1,70,1,20,0,,,,KEEP
+Item_HotPot,Hot Pot,Consumables/Foodstuffs,6,300,1,50,0,,,,KEEP
+Item_JanssonsTemptation,Jansson's Temptation,Consumables/Foodstuffs/Christmas,3,200,1,45,0,,,,KEEP
+Item_Julmust,Julmust,Consumables/Foodstuffs/Christmas,2,90,1,18,0,,,,KEEP
+Item_KidneyPie,Kidney Pie,Consumables/Foodstuffs,2,90,1,35,0,,,,KEEP
+Item_Latte,Latte,Consumables/Drinks,1,35,1,30,0,,,,KEEP
+Item_Lemonade,Lemonade,Consumables/Drinks,1,60,1,30,0,,,,KEEP
+Item_LiverDumpling,Dumpling,Consumables/Foodstuffs,1,50,1,20,0,,,,KEEP
+Item_Lussekatt,Lussekatt,Consumables/Foodstuffs,2,160,1,30,0,,,,KEEP
+Item_Lutfisk,Lutfisk,Consumables/Foodstuffs/Christmas,2,90,1,25,0,,,,KEEP
+Item_MacNCheese,Mac'n'Cheese,Consumables/Foodstuffs,2,90,1,30,0,,,,KEEP
+Item_Maki,Maki,Consumables/Foodstuffs,2,150,1,30,0,,,,KEEP
+Item_Marshmallow,Marshmallows,Consumables/Foodstuffs,2,200,1,40,0,,,,KEEP
+Item_MashedPotatoes,Mashed Potatoes,Consumables/Foodstuffs,2,100,1,30,0,,,,KEEP
+Item_MatchaGum,Green Tea Gum,Consumables/Foodstuffs,1,80,1,144,0,,,,KEEP
+Item_MeatSkewers,Meat Skewers,Consumables/Foodstuffs,2,80,1,20,0,,,,KEEP
+Item_Meringue,Meringue,Consumables/Foodstuffs,1,40,1,15,0,,,,KEEP
+Item_MilkshakeBerries,Berry Milkshake,Consumables/Drinks,2,60,1,35,0,,,,KEEP
+Item_MilkshakeChocolate,Chocolate Milkshake,Consumables/Drinks,2,60,1,35,0,,,,KEEP
+Item_Mochi,Mochi,Consumables/Foodstuffs,1,65,1,25,0,,,,KEEP
+Item_Mudcake,Chocolate Mudcake,Consumables/Foodstuffs,1,280,1,50,0,,,,KEEP
+Item_MulledWine,Mulled Wine,Consumables/Drinks,1,200,1,1200,0,,,,KEEP
+Item_MushroomFried,'Fried Mushroom ',Consumables/Foodstuffs,2,130,1,15,0,,,,KEEP
+Item_MushroomOmelette,Mushroom Omelette,Consumables/Foodstuffs,2,70,1,20,0,,,,KEEP
+Item_MushroomSkewer,Mushroom Skewer,Consumables/Foodstuffs,2,100,1,15,0,,,,KEEP
+Item_MushroomSoup,Mushroom Soup,Consumables/Foodstuffs,2,70,1,20,0,,,,KEEP
+Item_Nigiri,Nigiri,Consumables/Foodstuffs,2,210,1,20,0,,,,KEEP
+Item_Omelette,Omelette,Consumables/Foodstuffs,2,50,1,22,0,,,,KEEP
+Item_Onigiri,Onigiri,Consumables/Foodstuffs,2,210,1,35,0,,,,KEEP
+Item_PastaBolognese,Spaghetti Bolognese,Consumables/Foodstuffs,2,250,1,50,0,,,,KEEP
+Item_Pilk,Pilk,Consumables/Drinks,2,400,1,180,0,,,,KEEP
+Item_PizzaSlice,Pizza Slice,Consumables/Foodstuffs,1,150,1,100,0,,,,KEEP
+Item_Polse,Pølse,Consumables/Foodstuffs,2,50,1,15,0,,,,KEEP
+Item_Poutine,Poutine,Consumables/Foodstuffs,2,225,1,35,0,,,,KEEP
+Item_PowerBar,Power Bar,Consumables/Foodstuffs,1,30,1,60,0,,,,KEEP
+Item_PyttIPanna,Pyttipanna,Consumables/Foodstuffs,2,200,1,25,0,,,,KEEP
+Item_Raclette,Raclette,Consumables/Foodstuffs,2,300,1,50,0,,,,KEEP
+Item_Ramen,Ramen,Consumables/Foodstuffs,2,150,1,40,0,,,,KEEP
+Item_RamenTori,Tori Ramen,Consumables/Foodstuffs,2,150,1,40,0,,,,KEEP
+Item_RhubarbPie,Rhubarb Pie,Consumables/Foodstuffs,2,80,1,30,0,,,,KEEP
+Item_RhubarbPorridge,Rhubarb Porridge,Consumables/Foodstuffs,2,20,1,25,0,,,,KEEP
+Item_RiceCake,Puffed Rice Cakes,Consumables/Foodstuffs,1,20,1,15,0,,,,KEEP
+Item_Risalamalta,Ris à la Malta,Consumables/Foodstuffs/Christmas,1,90,1,25,0,,,,KEEP
+Item_SandwichBread,Bread Sandwich,Consumables/Foodstuffs,1,80,1,15,0,,,,KEEP
+Item_SandwichBuddy,Buddy Sandwich,Consumables/Foodstuffs,2,1000,1,15,0,,,,KEEP
+Item_SandwichCheese,Cheese Sandwich,Consumables/Foodstuffs,1,85,1,20,0,,,,KEEP
+Item_SandwichLeverpastej,Liver Patty Sandwich,Consumables/Foodstuffs,1,110,1,20,0,,,,KEEP
+Item_SandwichNutSpread,Nut Spread Sandwich,Consumables/Foodstuffs,1,80,1,20,0,,,,KEEP
+Item_SandwichPeanutbutter,Peanutbutter Sandwich,Consumables/Foodstuffs,1,110,1,25,0,,,,KEEP
+Item_SandwichPeanutbutterJelly,Peanutbutter Jelly Sandwich,Consumables/Foodstuffs,1,130,1,35,0,,,,KEEP
+Item_SausageOmelette,Sausage Omelette,Consumables/Foodstuffs,2,110,1,42,0,,,,KEEP
+Item_SausageOnStick,Sausage On Stick,Consumables/Foodstuffs,2,200,1,40,0,,,,KEEP
+Item_SausageSoup,Sausage Soup,Consumables/Foodstuffs,2,135,1,30,0,,,,KEEP
+Item_Silltalrik,Silltallrik,Consumables/Foodstuffs/Christmas,2,90,1,20,0,,,,KEEP
+Item_Snus,Admiral White Extra Strong,Consumables/Other,1,180,1,15,0,,,,KEEP
+Item_SpanishOmelette,Spanish Omelette,Consumables/Foodstuffs,2,220,1,30,0,,,,KEEP
+Item_Stew,Stew,Consumables/Foodstuffs,2,65,1,20,0,,,,KEEP
+Item_Surstromming,Surstromming,Consumables/Foodstuffs,1,350,1,50,0,,,,KEEP
+Item_SwedishPancakes,Swedish Pancakes,Consumables/Foodstuffs,2,220,1,30,0,,,,KEEP
+Item_ToastSkagen,Toast Skagen,Consumables/Foodstuffs,1,150,1,15,0,,,,KEEP
+Item_TongueOnStick,Tongue On Stick,Consumables/Foodstuffs,2,120,1,20,0,,,,KEEP
+Item_Unagi,Unagi,Consumables/Foodstuffs,2,400,1,100,0,,,,KEEP
+Item_VacuumCleaner,Vacuum Cleaner,Consumables/Foodstuffs,1,40,1,15,0,,,,KEEP
+Enchantment_Dark,Scroll of Dark,Enchantments,2,1000,1,,9,Recipe_Enchantment_ChaosStrike,Scroll of Chaos Strike,0.0,SITUATIONAL
+Enchantment_Fire,Scroll of Embers,Enchantments,2,1000,1,,9,Recipe_Enchantment_FlameThrower,Scroll Of Flame Thrower,0.0,SITUATIONAL
+Enchantment_Light,Scroll of Light,Enchantments/GunsAndMagic_ItemDefinitions,2,1000,1,,9,Recipe_Enchantment_HolyFire,Scroll of Holy Fire,0.0,SITUATIONAL
+Enchantment_Nature,Scroll of Nature,Enchantments,2,1000,1,,9,Recipe_Enchantment_Charm,Scroll of Charm,0.0,SITUATIONAL
+Enchantment_Poison,Scroll of Plague,Enchantments,2,1000,1,,9,Recipe_Enchantment_Pesticide,Scroll of Pesticide,0.0,SITUATIONAL
+Enchantment_Earth,Scroll of Earth,Enchantments,2,1000,1,,8,Recipe_Enchantment_Sacrifice,Scroll of Sacrifice,0.0,SITUATIONAL
+Enchantment_Electricity,Scroll of Surge,Enchantments,2,1000,1,,8,Recipe_Enchantment_ChainLightning,Scroll of Chain Lightning,0.0,SITUATIONAL
+Enchantment_Frost,Scroll of Frostbite,Enchantments,2,1000,1,,8,Recipe_Enchantment_Prism,Scroll of Prism,0.0,SITUATIONAL
+Enchantment_Water,Scroll of Water,Enchantments,2,1000,1,,8,Recipe_Enchantment_Pesticide,Scroll of Pesticide,0.0,SITUATIONAL
+Item_RobotSeptacoil,Robot septacoil,Organs/Robot,2,100,1,,2,Recipe_MetalScrap_4,Metal Scrap,0.0,SITUATIONAL
+Item_ClergyCollar,Father's Shirt,Equipment/Torso,4,1,1,,1,Recipe_MolotovCocktail_3,Molotov Cocktail,0.0,SITUATIONAL
+Item_PlainWhiteTee,Plain White Tee,Equipment/Torso,6,150,1,,1,Recipe_MolotovCocktail_5,Molotov Cocktail,0.0,SITUATIONAL
+Item_RobotHydraul,Robot hydraul,Organs/Robot,1,240,1,,1,Recipe_MetalScrap_1,Metal Scrap,0.0,SITUATIONAL
+Item_RobotJoint,Robot joint pneumatic,Organs/Robot,1,230,1,,1,Recipe_MetalScrap_2,Metal Scrap,0.0,SITUATIONAL
+Item_RobotPlate,Robot plate,Organs/Robot,1,140,1,,1,Recipe_MetalScrap_3,Metal Scrap,0.0,SITUATIONAL
+Item_RobotSoulCapsule,Robot soul capsule,Organs/Robot,2,800,1,,1,Recipe_MetalScrap_5,Metal Scrap,0.0,SITUATIONAL
+Item_Shoe,Shoe,Equipment/Shoes,2,380,1,,1,Recipe_SpringCoilBoots_1,Springcoil Boot,0.0,SITUATIONAL
+Item_Tunic,Green Tunic,Equipment/Torso,6,500,1,,1,Recipe_MolotovCocktail_4,Molotov Cocktail,0.0,SITUATIONAL
+Item_CactusSweets,Lackerol Cactus,Consumables/Foodstuffs,1,30,1,10,0,,,,SITUATIONAL
+Item_GumHubba,Sweet Gum,Consumables/Foodstuffs,1,80,1,10,0,,,,SITUATIONAL
+Item_HardBread,Hard Bread,Consumables/Foodstuffs,1,60,1,8,0,,,,SITUATIONAL
+Item_MycotaSquamata,Mycota Squamata,Consumables/Foodstuffs,2,120,1,5,0,,,,SITUATIONAL
+Item_RodsoppPaste,Rödsopp Paste,Consumables/Other,2,50,1,8,0,,,,SITUATIONAL
+Item_Worm,Earthworm,Consumables/Foodstuffs,1,10,1,5,0,,,,SITUATIONAL

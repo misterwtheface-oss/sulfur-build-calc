@@ -1,0 +1,17 @@
+name,enum_name,id,description,chance,diceRollBonus,bonusXpModifier,damageTypeOverride,effect_applies,corpseExplosionOnDeath,bodyScale,speedScale,healthScale,damageScale,shouldTeleportOnHit,minionsOnDeath
+Mutation_Big,Mutation_Big,1,,1,5,0.3,,,0,1.4,0.8,3,1,0,0
+Mutation_Blink,Mutation_Blink,15,,1,0,0,,NegativeEffect_Electrocuted,0,1,1,3,1,1,0
+Mutation_Bomb,Mutation_Bomb,2,,1,0,0.3,,,1,1,1,1,1,0,0
+Mutation_Crypt,Mutation_Crypt,17,,1,0,0.3,,,1,2,1,7,3,0,0
+Mutation_Fire,Mutation_Fire,3,,1,2,0.3,Fire,,0,1,1,2,1,0,0
+Mutation_Frost,Mutation_Frost,4,,1,2,0.3,Frost,,0,1,1,2,1,0,0
+Mutation_FrostTrail,Mutation_FrostTrail,5,,1,2,0,,,0,1,1,2,1,0,0
+Mutation_Lava,Mutation_Lava,6,,1,2,0.3,,,0,1,1,2,1,0,0
+Mutation_Monstrosity,Mutation_Monstrosity,7,,1,5,0.3,,,0,2,0.8,5,2,0,3
+Mutation_NoxiosaCloud,Mutation_NoxiosaCloud,10,,1,0,0,Poison,,0,1,1,3,1,0,0
+Mutation_Poison,Mutation_Poison,8,,1,2,0.3,Poison,,0,1,1,2,1,0,0
+Mutation_PoisonTrail,Mutation_PoisonTrail,9,,1,2,0.3,,,0,1,1,2,1,0,0
+Mutation_Shapeshifter,Mutation_Shapeshifter,11,,1,2,0.3,,,1,1,1,2,1,0,0
+Mutation_Shock,Mutation_Shock,12,,1,2,0.3,,,0,1,1,1,1,0,0
+Mutation_Small,Mutation_Small,13,,1,0,0.3,,,0,0.6,1.6,1,1,0,0
+Mutation_Surge,Mutation_Surge,14,,1,2,0.3,Electric,,0,1,1,2,1,0,0
