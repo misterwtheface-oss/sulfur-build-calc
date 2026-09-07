@@ -18,11 +18,11 @@ tools/
 # source data — compiled into data.js; the CSVs themselves are never served
 references/
 
-# build inputs / assets the site does not (yet) load
-assets/icon_manifest.csv
-assets/oils/
-assets/scrolls/
-assets/consumables/
+# assets: keep ONLY the weapon icons the site loads today. Everything else under
+# assets/ (all other item categories, the ui/ sets, the manifests) stays LOCAL until
+# it is actually wired into the site — then un-ignore that specific dir here.
+assets/*
+!assets/weapons/
 
 # internal dev docs — kept local, never on the public site
 SPEC_PLAN.md
