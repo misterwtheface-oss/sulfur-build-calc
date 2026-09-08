@@ -31,7 +31,10 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.4;
   min-height: 100vh;
+  overflow-x: hidden;            /* safety net against any 1-off horizontal overflow */
+  -webkit-text-size-adjust: 100%;
 }
+img { max-width: 100%; }
 
 /* ---------- header ---------- */
 .app-header {
@@ -66,10 +69,10 @@ body {
   display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
   padding: 0.5rem 0;
 }
-.pd-row { display: flex; align-items: center; justify-content: center; gap: 1rem; }
-.pd-mid { gap: 1.2rem; }
-.pd-side { width: 84px; }         /* balances the gadget slot opposite the torso */
-.pd-feet { gap: 0.8rem; }
+.pd-row { display: flex; align-items: center; justify-content: center; gap: clamp(0.4rem, 2.5vw, 1rem); }
+.pd-mid { gap: clamp(0.4rem, 2.5vw, 1.2rem); }
+.pd-side { width: clamp(56px, 18vw, 80px); flex: none; }   /* balances the gadget opposite torso */
+.pd-feet { gap: clamp(0.4rem, 2vw, 0.8rem); }
 
 /* a slot = a masked amber shape + (optional) item icon + label */
 .slot {
@@ -92,19 +95,22 @@ body {
   width: 58%; height: 58%; object-fit: contain; pointer-events: none;
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
 }
+/* label sits centered INSIDE the empty slot shape (no collision with the row below);
+   once a slot is filled the icon carries it and the label is hidden. */
 .slot .slot-label {
-  position: absolute; left: 50%; bottom: -0.9rem; transform: translateX(-50%);
-  font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
-  white-space: nowrap; pointer-events: none;
+  position: absolute; inset: 0; margin: auto; padding: 0 0.25rem;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: 0.56rem; line-height: 1.1; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.05em; pointer-events: none;
 }
-.slot.filled .slot-label { color: var(--amber); }
+.slot.filled .slot-label { display: none; }
 
-/* per-slot shapes (aspect ratios match the source sprites) */
-.slot-head   { width: 122px; aspect-ratio: 164 / 136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
-.slot-torso  { width: 168px; aspect-ratio: 192 / 184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
-.slot-foot   { width:  92px; aspect-ratio: 100 /  76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
+/* per-slot shapes (aspect ratios match the source sprites; widths fluid for mobile) */
+.slot-head   { width: clamp(84px, 28vw, 122px); aspect-ratio: 164 / 136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
+.slot-torso  { width: clamp(116px, 40vw, 168px); aspect-ratio: 192 / 184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
+.slot-foot   { width: clamp(64px, 23vw, 92px);  aspect-ratio: 100 /  76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
 .slot-foot-r::before { transform: scaleX(-1); }          /* mirror shape only, not the icon */
-.slot-gadget { width:  80px; aspect-ratio: 1;           --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
+.slot-gadget { width: clamp(56px, 18vw, 80px);  aspect-ratio: 1;         --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
 
 /* ---------- arsenal (weapon slots + per-weapon mods) ---------- */
 .weapon-slots { display: flex; flex-direction: column; gap: 0.8rem; }
@@ -115,7 +121,7 @@ body {
 .ws-main { display: flex; align-items: center; gap: 0.7rem; }
 /* the weapon slot uses the wide WeaponSlot paperdoll shape */
 .ws-weapon {
-  position: relative; width: 120px; aspect-ratio: 156 / 76; flex: none; cursor: pointer;
+  position: relative; width: clamp(96px, 30vw, 120px); aspect-ratio: 156 / 76; flex: none; cursor: pointer;
   border: none; background: none; padding: 0;
   --shape: url("assets/ui/paperdoll/WeaponSlot_outline.png");
 }
@@ -137,7 +143,7 @@ body {
 
 /* small square container cell (attachments) — built from the grid-cell sprite look */
 .cell {
-  width: 40px; height: 40px; flex: none; cursor: pointer;
+  width: clamp(40px, 12vw, 46px); height: clamp(40px, 12vw, 46px); flex: none; cursor: pointer;
   border: 1px solid var(--grid-line); border-radius: 4px;
   background: var(--panel-2);
   display: flex; align-items: center; justify-content: center;
@@ -202,11 +208,12 @@ body {
   box-shadow: 0 -6px 24px rgba(0,0,0,0.6);
 }
 .overlay-head {
-  display: flex; align-items: center; gap: 0.6rem;
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
   padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--edge);
 }
 .overlay-head h3 { margin: 0; font-size: 0.9rem; color: var(--amber); flex: none; }
-.overlay-head .search { flex: 1; margin: 0; }
+.overlay-head .search { flex: 1 1 140px; margin: 0; min-width: 0; }
+.overlay-head .btn-ghost { flex: none; }
 .overlay-list {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 0.4rem; padding: 0.7rem; overflow-y: auto;
@@ -247,5 +254,8 @@ body {
   .app-header h1 { font-size: 1.35rem; }
 }
 @media (max-width: 779px) {
-  .readout { position: sticky; bottom: 0; }
+  /* single-column stack; readout flows after the arsenal (no sticky overlap) */
+  .planner { gap: 0.6rem; }
+  .overlay-box { max-height: 88vh; }
+  .overlay-list { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 }
