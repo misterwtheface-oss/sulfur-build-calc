@@ -347,7 +347,11 @@
   // opt builders (each opt keeps its index within the current ctx.opts)
   const indexed = (opts) => { opts.forEach((o, i) => (o._i = i)); return opts; };
   const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon }));
-  const attachOpts = (keys) => keys.map((k) => itemByKey.get(k)).filter(Boolean).map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.quality, icon: i.icon }));
+  const attachOpts = (keys) => keys.map((k) => itemByKey.get(k)).filter(Boolean)
+    .map((i) => ({ ref: i, key: i.key, name: i.name,
+      sub: i.subtype ? i.subtype + (i.mag ? " · " + i.mag + "x" : "") : (i.quality || ""),
+      icon: i.icon, filter: i.subtype || null }))
+    .sort((a, b) => (a.filter || "").localeCompare(b.filter || "") || (a.ref.mag || 0) - (b.ref.mag || 0) || a.name.localeCompare(b.name));
   const weaponOpts = () => WEAPONS.map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, filter: w.weaponType }));
   const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: null, filter: e.group }));
 
@@ -380,7 +384,10 @@
       if (itemByKey.has(state.weapons[wi].attachments[s])) { state.weapons[wi].attachments[s] = null; renderAll(); return; }
       const w = state.weapons[wi].weapon && weaponByKey.get(state.weapons[wi].weapon);
       const keys = w ? (w.attachSlots[s] || []) : [];
-      openSelector({ title: ATTACH_LABEL[s] + " attachment", allowClear: false, opts: indexed(attachOpts(keys)),
+      const opts = indexed(attachOpts(keys));
+      const subs = [...new Set(opts.map((o) => o.filter).filter(Boolean))];
+      openSelector({ title: ATTACH_LABEL[s] + " attachment", allowClear: false, opts,
+        filters: subs.length > 1 ? subs : null,
         statLines: (o) => modLines(o.ref.attachMods),
         onPick: (o) => { state.weapons[wi].attachments[s] = o.key; } });
     } else if (act === "ench") {
