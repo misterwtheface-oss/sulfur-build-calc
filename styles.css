@@ -63,7 +63,8 @@ img { max-width: 100%; }
 .ws-weapon { position: relative; width: 100%; aspect-ratio: 156/60; cursor: pointer; border: none; background: none; padding: 0;
   --shape: url("assets/ui/paperdoll/WeaponSlot_outline.png"); }
 .ws-weapon::before { content: ""; position: absolute; inset: 0; background-color: var(--slot-line);
-  -webkit-mask: var(--shape) center/contain no-repeat; mask: var(--shape) center/contain no-repeat; transition: background-color 0.15s; }
+  -webkit-mask: var(--shape) center/contain no-repeat; mask: var(--shape) center/contain no-repeat; transition: background-color 0.15s;
+  image-rendering: pixelated; image-rendering: crisp-edges; }   /* nearest-neighbour: the sprite is upscaled ~5x */
 .ws-weapon:hover::before, .ws-weapon.filled::before { background-color: var(--amber); }
 .ws-weapon .slot-icon { position: absolute; inset: 0; margin: auto; width: 70%; height: 74%; object-fit: contain; }
 .ws-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--slot-line); font-size: 0.8rem; }
