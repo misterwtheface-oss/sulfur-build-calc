@@ -1,163 +1,251 @@
 /*
-  SULFUR Build Calculator — mobile-first styles.
-  Brimstone palette (grimy dark-fantasy extraction shooter): ash-black base,
-  sulfur-amber accents, rust-blood alerts, bone text. Swap :root to retheme.
-  Base styles target a ~360px phone; scale up in the min-width blocks.
+  SULFUR Loadout Planner — game-parity UI.
+  Identity comes from the extracted game sprites (paperdoll slot shapes, grid cells,
+  9-slice borders, toggles) over a flat warm-black background with amber chrome.
+  Paperdoll slot shapes are white-on-transparent sprites used as CSS masks, tinted amber.
+  Mobile-first; scales up in the min-width blocks.
 */
 :root {
-  --bg:      #16130d;  /* ash black        */
-  --panel:   #221d13;  /* dark brown       */
-  --panel-2: #2c2416;  /* raised surface   */
-  --border:  #4a3a1e;  /* dry earth        */
-  --accent:  #e0a91b;  /* sulfur amber     */
-  --accent-2:#c98a12;  /* amber pressed    */
-  --alert:   #a33b28;  /* rust blood       */
-  --good:    #7fa63b;  /* toxic green (positive deltas) */
-  --text:    #d8cfbd;  /* bone             */
-  --muted:   #8c8069;  /* faded bone       */
+  --bg:       #14100a;  /* warm near-black            */
+  --bg2:      #0f0c07;  /* deepest (overlay backdrop) */
+  --panel:    #1c160d;  /* panel fill                 */
+  --panel-2:  #241d10;  /* raised cell fill           */
+  --edge:     #3a2f1c;  /* panel border               */
+  --amber:    #e0a91b;  /* primary amber              */
+  --amber-2:  #b9861a;  /* pressed amber              */
+  --slot-line:#6b5526;  /* empty slot outline         */
+  --grid-line:#40331c;  /* inventory grid lines       */
+  --text:     #e8dcc4;  /* bone                       */
+  --muted:    #9a8a6a;  /* faded bone                 */
+  --good:     #8bbf3a;  /* positive delta             */
+  --bad:      #c0532f;  /* negative delta / remove    */
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(120% 80% at 50% -10%, #221a0f 0%, var(--bg) 55%, var(--bg2) 100%);
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.4;
+  min-height: 100vh;
 }
 
+/* ---------- header ---------- */
 .app-header {
-  padding: 0.75rem 1rem;
-  border-bottom: 2px solid var(--border);
-  background: linear-gradient(180deg, #1c1810, var(--bg));
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--edge);
+  background: linear-gradient(180deg, #1c160d, rgba(28,22,13,0));
 }
-.app-header h1 { font-size: 1.25rem; margin: 0; letter-spacing: 0.02em; }
-.app-header .accent { color: var(--accent); }
-.tagline { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.8rem; }
+.app-header h1 { font-size: 1.1rem; margin: 0; letter-spacing: 0.04em; font-weight: 700; }
+.app-header .accent { color: var(--amber); }
 
-.app-main {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 0.75rem;
+/* ---------- panels ---------- */
+.planner {
+  display: flex; flex-direction: column; gap: 0.7rem;
+  padding: 0.7rem;
+  max-width: 1400px; margin: 0 auto;
 }
-
 .panel {
   background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.75rem;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 0.8rem;
+  box-shadow: inset 0 0 0 1px rgba(224,169,27,0.04), 0 2px 8px rgba(0,0,0,0.4);
 }
-.panel h2 {
-  font-size: 0.8rem; margin: 0 0 0.5rem; color: var(--accent);
-  text-transform: uppercase; letter-spacing: 0.08em;
+.panel > h2 {
+  font-size: 0.7rem; margin: 0 0 0.7rem; color: var(--amber);
+  text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
 }
 
-.row { display: flex; gap: 0.4rem; margin-bottom: 0.5rem; }
-.row > * { flex: 1; min-width: 0; }
-
-.search, select.search {
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 0.45rem 0.6rem;
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 0.9rem;
+/* ---------- character paperdoll ---------- */
+.paperdoll {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0;
 }
-.search:focus { outline: none; border-color: var(--accent); }
+.pd-row { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.pd-mid { gap: 1.2rem; }
+.pd-side { width: 84px; }         /* balances the gadget slot opposite the torso */
+.pd-feet { gap: 0.8rem; }
 
-/* selectors */
-.selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; max-height: 42vh; overflow-y: auto; }
-.selector.tall { grid-template-columns: 1fr; max-height: 44vh; }
+/* a slot = a masked amber shape + (optional) item icon + label */
+.slot {
+  position: relative; padding: 0; border: none; background: none; cursor: pointer;
+  display: block; flex: none;
+}
+.slot::before {
+  content: ""; position: absolute; inset: 0;
+  background-color: var(--slot-line);
+  -webkit-mask: var(--shape) center / contain no-repeat;
+  mask: var(--shape) center / contain no-repeat;
+  transition: background-color 0.15s;
+}
+.slot:hover::before { background-color: var(--amber); }
+.slot.filled::before { background-color: var(--amber); }
+.slot:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
 
-.item {
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0.4rem 0.5rem;
+.slot .slot-icon {
+  position: absolute; inset: 0; margin: auto;
+  width: 58%; height: 58%; object-fit: contain; pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+}
+.slot .slot-label {
+  position: absolute; left: 50%; bottom: -0.9rem; transform: translateX(-50%);
+  font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
+  white-space: nowrap; pointer-events: none;
+}
+.slot.filled .slot-label { color: var(--amber); }
+
+/* per-slot shapes (aspect ratios match the source sprites) */
+.slot-head   { width: 122px; aspect-ratio: 164 / 136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
+.slot-torso  { width: 168px; aspect-ratio: 192 / 184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
+.slot-foot   { width:  92px; aspect-ratio: 100 /  76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
+.slot-foot-r::before { transform: scaleX(-1); }          /* mirror shape only, not the icon */
+.slot-gadget { width:  80px; aspect-ratio: 1;           --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
+
+/* ---------- arsenal (weapon slots + per-weapon mods) ---------- */
+.weapon-slots { display: flex; flex-direction: column; gap: 0.8rem; }
+.weapon-slot {
+  border: 1px solid var(--edge); border-radius: 6px; padding: 0.6rem;
+  background: rgba(0,0,0,0.18);
+}
+.ws-main { display: flex; align-items: center; gap: 0.7rem; }
+/* the weapon slot uses the wide WeaponSlot paperdoll shape */
+.ws-weapon {
+  position: relative; width: 120px; aspect-ratio: 156 / 76; flex: none; cursor: pointer;
+  border: none; background: none; padding: 0;
+  --shape: url("assets/ui/paperdoll/WeaponSlot_outline.png");
+}
+.ws-weapon::before {
+  content: ""; position: absolute; inset: 0; background-color: var(--slot-line);
+  -webkit-mask: var(--shape) center / contain no-repeat; mask: var(--shape) center / contain no-repeat;
+  transition: background-color 0.15s;
+}
+.ws-weapon:hover::before, .ws-weapon.filled::before { background-color: var(--amber); }
+.ws-weapon .slot-icon { position: absolute; inset: 0; margin: auto; width: 78%; height: 66%; object-fit: contain; }
+.ws-info { flex: 1; min-width: 0; }
+.ws-name { font-weight: 600; font-size: 0.9rem; }
+.ws-meta { color: var(--muted); font-size: 0.72rem; }
+
+.ws-mods { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.6rem; }
+.mod-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.mod-group > .mg-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.mg-cells { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+
+/* small square container cell (attachments) — built from the grid-cell sprite look */
+.cell {
+  width: 40px; height: 40px; flex: none; cursor: pointer;
+  border: 1px solid var(--grid-line); border-radius: 4px;
   background: var(--panel-2);
-  border: 1px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; transition: border-color 0.15s;
 }
-.item:hover { border-color: var(--accent); }
-.item.selected { border-color: var(--accent); background: #3a2f18; }
-.item img { width: 32px; height: 32px; object-fit: contain; flex: none; }
-.item .meta { color: var(--muted); font-size: 0.72rem; }
-.item .name { display: block; }
+.cell:hover { border-color: var(--amber); }
+.cell img { width: 82%; height: 82%; object-fit: contain; }
+.cell.add::after { content: "+"; color: var(--slot-line); font-size: 1.1rem; }
+.cell.add:hover::after { color: var(--amber); }
 
-/* build summary */
-.build-weapon { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; min-height: 2.5rem; }
-.build-weapon img { width: 48px; height: 48px; object-fit: contain; }
-.build-weapon .wname { font-weight: 600; }
-.build-weapon .wmeta { color: var(--muted); font-size: 0.75rem; }
-
-.build-enchants { display: flex; flex-wrap: wrap; gap: 0.35rem; min-height: 1.5rem; }
+/* enchantment chips near the weapon (oils / scrolls applied) */
+.chips { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
 .chip {
   display: inline-flex; align-items: center; gap: 0.3rem;
-  padding: 0.2rem 0.5rem;
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 0.78rem;
-  cursor: pointer;
+  padding: 0.18rem 0.5rem; border: 1px solid var(--edge); border-radius: 999px;
+  background: var(--panel-2); font-size: 0.72rem; cursor: pointer;
 }
-.chip:hover { border-color: var(--alert); }
-.chip .x { color: var(--alert); font-weight: 700; }
-.chip.elemental { border-color: var(--accent); }
+.chip.elemental { border-color: var(--amber); }
+.chip .x { color: var(--bad); font-weight: 700; }
+.chip.add { color: var(--muted); border-style: dashed; }
+.chip.add:hover { color: var(--amber); border-color: var(--amber); }
 
-/* totals */
-.totals { display: flex; flex-direction: column; gap: 0.2rem; }
-.totals .stat { display: flex; justify-content: space-between; gap: 1rem; padding: 0.15rem 0; }
-.totals .stat.head { border-top: 1px solid var(--border); margin-top: 0.3rem; padding-top: 0.4rem; }
-.totals .stat .label { color: var(--muted); }
-.totals .stat .val { font-variant-numeric: tabular-nums; font-weight: 600; }
-.totals .stat.big .val { color: var(--accent); font-size: 1.15rem; }
-.totals .stat.ttk .val { color: var(--good); }
-
-.ledger { display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.4rem; font-size: 0.8rem; }
-.ledger .lrow { display: flex; justify-content: space-between; gap: 1rem; }
-.ledger .lrow .lattr { color: var(--muted); }
-.ledger .lrow .lval { font-variant-numeric: tabular-nums; }
-
-button {
-  margin-top: 0.6rem;
-  padding: 0.4rem 0.9rem;
-  background: var(--accent);
-  color: #17130a;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
+/* ---------- readout ---------- */
+.target-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.7rem; }
+.target-label { font-size: 0.72rem; color: var(--muted); flex: none; }
+.select {
+  width: 100%; padding: 0.4rem 0.55rem; font-size: 0.85rem;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--edge); border-radius: 5px;
 }
-button:hover { background: var(--accent-2); }
+.select:focus { outline: none; border-color: var(--amber); }
+
+.dps { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0.7rem; }
+.dps .dps-w { font-size: 0.66rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; }
+.row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.12rem 0; }
+.row .k { color: var(--muted); }
+.row .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+.row.big .v { color: var(--amber); font-size: 1.05rem; }
+.row.ttk .v { color: var(--good); }
+
+.stat-list { display: flex; flex-direction: column; gap: 0.12rem; border-top: 1px solid var(--edge); padding-top: 0.6rem; }
+.stat-list .sl-head { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+.stat { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.82rem; padding: 0.08rem 0; }
+.stat .sk { color: var(--text); }
+.stat .sv { font-variant-numeric: tabular-nums; }
+.stat .sv.pos { color: var(--good); }
+.stat .sv.neg { color: var(--bad); }
+
+/* ---------- selector overlay ---------- */
+.overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(6,5,3,0.82);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 0;
+}
+.overlay[hidden] { display: none; }
+.overlay-box {
+  width: 100%; max-width: 760px; max-height: 82vh;
+  background: var(--panel); border: 1px solid var(--amber);
+  border-radius: 10px 10px 0 0;
+  display: flex; flex-direction: column;
+  box-shadow: 0 -6px 24px rgba(0,0,0,0.6);
+}
+.overlay-head {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--edge);
+}
+.overlay-head h3 { margin: 0; font-size: 0.9rem; color: var(--amber); flex: none; }
+.overlay-head .search { flex: 1; margin: 0; }
+.overlay-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.4rem; padding: 0.7rem; overflow-y: auto;
+}
+.opt {
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem;
+  background: var(--panel-2); border: 1px solid var(--grid-line); border-radius: 5px;
+  cursor: pointer; text-align: left; color: var(--text);
+}
+.opt:hover { border-color: var(--amber); }
+.opt img { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.opt .opt-name { font-size: 0.78rem; line-height: 1.15; }
+.opt .opt-sub { font-size: 0.64rem; color: var(--muted); }
+.opt.clear-opt { justify-content: center; color: var(--bad); border-style: dashed; }
+
+/* ---------- buttons / misc ---------- */
+.btn-ghost {
+  background: none; color: var(--muted); border: 1px solid var(--edge);
+  border-radius: 5px; padding: 0.3rem 0.7rem; font-size: 0.8rem; cursor: pointer;
+}
+.btn-ghost:hover { color: var(--amber); border-color: var(--amber); }
 
 .muted { color: var(--muted); }
-.small { font-size: 0.75rem; }
+.small { font-size: 0.72rem; }
 
 .app-footer {
   display: flex; flex-direction: column; gap: 0.2rem;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid var(--border);
+  padding: 0.7rem 1rem; margin-top: 0.5rem; border-top: 1px solid var(--edge);
 }
-.app-footer code { color: var(--accent); background: var(--panel-2); padding: 0 0.2rem; border-radius: 3px; }
 
-/* scale up for tablet/desktop */
-@media (min-width: 760px) {
-  .app-main {
+/* ---------- responsive ---------- */
+@media (min-width: 780px) {
+  .planner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.3fr) minmax(260px, 1fr);
     align-items: start;
   }
-  .panel.wide { grid-column: 1 / -1; }
-  .app-header h1 { font-size: 1.6rem; }
-  .selector { grid-template-columns: 1fr 1fr; }
+  .app-header h1 { font-size: 1.35rem; }
 }
-@media (min-width: 1100px) {
-  .app-main { grid-template-columns: 1.1fr 1.1fr 0.9fr; }
-  #build-panel, #totals-panel { grid-column: auto; }
-  .panel.wide { grid-column: auto; }
-  #totals-panel { grid-column: span 1; }
+@media (max-width: 779px) {
+  .readout { position: sticky; bottom: 0; }
 }

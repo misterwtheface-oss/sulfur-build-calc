@@ -18,11 +18,20 @@ tools/
 # source data — compiled into data.js; the CSVs themselves are never served
 references/
 
-# assets: keep ONLY the weapon icons the site loads today. Everything else under
-# assets/ (all other item categories, the ui/ sets, the manifests) stays LOCAL until
-# it is actually wired into the site — then un-ignore that specific dir here.
+# assets: ship ONLY what the site loads at runtime. Ignore everything under assets/
+# then re-include the dirs the UI actually references. Un-ignore more as features land.
 assets/*
 !assets/weapons/
+!assets/equipment/
+!assets/attachments/
+!assets/gadgets/
+# ui sprites: re-include the ui/ dir, ignore its subsets, keep only paperdoll (used by CSS)
+!assets/ui/
+assets/ui/*
+!assets/ui/paperdoll/
+# still local-only: oils, scrolls, consumables, manuals, organs, valuables, currencies,
+# ammo, keys, misc, abstract, specials, passives, storage; ui/{chrome,damage_types,
+# portraits,status}; icon_manifest.csv, ui_manifest.csv
 
 # internal dev docs — kept local, never on the public site
 SPEC_PLAN.md
