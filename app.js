@@ -198,11 +198,16 @@
       const wIcon = w && w.icon ? `<img class="slot-icon" src="${w.icon}" alt="">` : "";
       const meta = w ? `${w.weaponType} · ${w.damageType} · ${w.caliber}` : "Tap to choose a weapon";
 
-      const attachCells = ATTACH_SLOTS.map((s) => {
+      // only the attachment slots THIS weapon actually supports (from prefab compatibility)
+      const supported = w ? ATTACH_SLOTS.filter((s) => (w.attachSlots[s] || []).length) : [];
+      const attachCells = supported.map((s) => {
         const it = slot.attachments[s] && itemByKey.get(slot.attachments[s]);
         const inner = it && it.icon ? `<img src="${it.icon}" alt="">` : "";
         return `<button class="acell ${it ? "filled" : "add"}" data-act="attach" data-wi="${wi}" data-slot="${s}" type="button" title="${it ? it.name : "Add " + ATTACH_LABEL[s]}">${inner}<span class="acell-label">${ATTACH_LABEL[s]}</span></button>`;
       }).join("");
+      const attachHtml = supported.length
+        ? `<div class="acells">${attachCells}</div>`
+        : `<div class="muted small">No attachment slots on this weapon.</div>`;
 
       const scrolls = slot.enchants.filter((id) => (enchById.get(id) || {}).isElemental).length;
       const enchChips = slot.enchants.map((id, ei) => {
@@ -228,12 +233,12 @@
             <div class="ws-meta">${meta}</div>
           </div>
         </div>
-        <div class="ws-cols">
-          <div class="mod-group"><span class="mg-label">Attachments</span><div class="acells">${attachCells}</div></div>
+        ${w ? `<div class="ws-cols">
+          <div class="mod-group"><span class="mg-label">Attachments</span>${attachHtml}</div>
           <div class="mod-group"><span class="mg-label">Enchantments <span class="mg-note">${slot.enchants.length}/${MAX_ENCH}${scrolls ? " · 1 scroll" : ""}</span></span>
             <div class="chips">${enchChips}${addOil}${addScroll}</div></div>
         </div>
-        ${w ? `<div class="ws-live">${liveHtml}${otherHtml}</div>` : ""}`;
+        <div class="ws-live">${liveHtml}${otherHtml}</div>` : ""}`;
       els.weaponSlots.appendChild(box);
     });
   }
@@ -342,7 +347,7 @@
   // opt builders (each opt keeps its index within the current ctx.opts)
   const indexed = (opts) => { opts.forEach((o, i) => (o._i = i)); return opts; };
   const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon }));
-  const attachOpts = (a) => ITEMS.filter((i) => i.kind === "attachment" && i.attachSlot === a).map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.quality, icon: i.icon }));
+  const attachOpts = (keys) => keys.map((k) => itemByKey.get(k)).filter(Boolean).map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.quality, icon: i.icon }));
   const weaponOpts = () => WEAPONS.map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, filter: w.weaponType }));
   const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: null, filter: e.group }));
 
@@ -368,11 +373,14 @@
       openSelector({ title: "Select weapon", allowClear: true, opts: indexed(weaponOpts()),
         filters: [...new Set(WEAPONS.map((w) => w.weaponType))].sort(),
         statLines: (o) => weaponLines(o.ref),
-        onPick: (o) => { state.weapons[wi].weapon = o.key; }, onClear: () => { state.weapons[wi].weapon = null; } });
+        onPick: (o) => { state.weapons[wi].weapon = o.key; state.weapons[wi].attachments = { muzzle: null, sight: null, action: null }; },
+        onClear: () => { state.weapons[wi].weapon = null; state.weapons[wi].attachments = { muzzle: null, sight: null, action: null }; } });
     } else if (act === "attach") {
       const s = t.dataset.slot;
       if (itemByKey.has(state.weapons[wi].attachments[s])) { state.weapons[wi].attachments[s] = null; renderAll(); return; }
-      openSelector({ title: ATTACH_LABEL[s] + " attachment", allowClear: false, opts: indexed(attachOpts(s)),
+      const w = state.weapons[wi].weapon && weaponByKey.get(state.weapons[wi].weapon);
+      const keys = w ? (w.attachSlots[s] || []) : [];
+      openSelector({ title: ATTACH_LABEL[s] + " attachment", allowClear: false, opts: indexed(attachOpts(keys)),
         statLines: (o) => modLines(o.ref.attachMods),
         onPick: (o) => { state.weapons[wi].attachments[s] = o.key; } });
     } else if (act === "ench") {
