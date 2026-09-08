@@ -326,8 +326,10 @@
     els.overlayDetail._item = o;
     const lines = ctx.statLines ? ctx.statLines(o) : [];
     els.overlayDetail.innerHTML =
+      `<div class="od-scroll">` +
       `<div class="od-head">${o.icon ? `<img src="${o.icon}" alt="">` : ""}<div><div class="od-name">${o.name}</div>${o.sub ? `<div class="od-sub">${o.sub}</div>` : ""}</div></div>` +
       (lines.length ? `<div class="od-stats">${lines.map((l) => `<div class="od-stat"><span>${l.k}</span><span class="${l.cls || ""}">${l.v}</span></div>`).join("")}</div>` : `<div class="muted small">No stat effects.</div>`) +
+      `</div>` +
       `<button class="od-equip" data-equip="1" type="button" ${o.disabled ? "disabled" : ""}>${o.disabled ? "Unavailable" : "Equip"}</button>`;
   }
   const modLines = (mods) => (mods || []).map((m) => {
@@ -400,8 +402,7 @@
       if (lpFired) { lpFired = false; return; }                 // long-press already opened the selector
       cancelLp();
       if (!slot.weapon) { openWeaponSelector(wi); return; }      // empty -> pick a weapon
-      focusedWeapon = focusedWeapon === wi ? null : wi; renderWeapons();  // filled -> toggle info panel
-      if (focusedWeapon === wi) els.weaponDetail.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      focusedWeapon = focusedWeapon === wi ? null : wi; renderWeapons();  // filled -> toggle info panel (no scroll-jump)
     } else if (act === "attach") {
       const s = t.dataset.slot; const w = weaponByKey.get(slot.weapon); if (!w || !(w.attachSlots[s] || []).length) return;
       if (itemByKey.has(slot.attachments[s])) { slot.attachments[s] = null; renderAll(); return; }
