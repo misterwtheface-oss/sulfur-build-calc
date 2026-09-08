@@ -25,6 +25,8 @@ assets/*
 !assets/equipment/
 !assets/attachments/
 !assets/gadgets/
+!assets/oils/
+!assets/scrolls/
 # ui sprites: re-include the ui/ dir, ignore its subsets, keep only paperdoll (used by CSS)
 !assets/ui/
 assets/ui/*
