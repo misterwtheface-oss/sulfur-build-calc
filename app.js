@@ -100,8 +100,12 @@
     const w = slot.weapon && weaponByKey.get(slot.weapon); if (!w) return null;
     const by = weaponMods(slot), get = (a) => by.get(a) || [];
     const cal = effCaliber(w, slot);
+    const calId = cal ? cal.id : w.caliberId;
     const perPelletBase = (cal && w.damageMult) ? round(cal.baseDamage * w.weaponTypeMult * w.damageMult, 4) : w.baseDamage;
     const pellets = (cal && w.damageMult) ? cal.pellets : w.pellets;
+    // per-caliber recoil (kick) + spread bases, falling back to the weapon's defaults
+    const baseSpread = (w.spreadByCaliber && w.spreadByCaliber[calId] != null) ? w.spreadByCaliber[calId] : (w.baseSpread || 0);
+    const baseKick = (w.kickByCaliber && w.kickByCaliber[calId] != null) ? w.kickByCaliber[calId] : (w.baseKickComp || 0);
 
     let perPellet = calcStat(perPelletBase, get("Damage"));
     const gBonus = get("Stat_GlobalDamageMultiplier").length ? calcStat(0, get("Stat_GlobalDamageMultiplier")) : 0;
@@ -126,8 +130,8 @@
       stat("Magazine", w.ammoMax, w.ammoMax, { better: "up" }),
       stat("Reload", w.reloadTime, w.reloadTime, { unit: "s", better: "down" }),
       stat("Bullet speed", w.bulletSpeed, w.bulletSpeed, { better: "up" }),
-      stat("Spread", w.baseSpread || 0, calcStat(w.baseSpread || 0, get("Spread")), { better: "down" }),
-      stat("Recoil", 1, calcStat(1, get("KickMultiplier")), { better: "down" }),
+      stat("Spread", baseSpread, calcStat(baseSpread, get("Spread")), { better: "down" }),
+      stat("Recoil", baseKick, round(baseKick * calcStat(1, get("KickMultiplier")), 3), { better: "down" }),
       stat("Durability", w.maxDurability, calcStat(w.maxDurability, get("MaxDurability")), { better: "up", show: w.maxDurability > 0 }),
       stat("Crit (ADS)", 0, calcStat(0, get("CritChanceADS")), { better: "up", pct: true, show: by.has("CritChanceADS") }),
       stat("Full-auto", w.baseFullAuto ? 1 : 0, (w.baseFullAuto ? 1 : 0) + calcStat(0, get("FullAuto")), { better: "up", flag: true }),
