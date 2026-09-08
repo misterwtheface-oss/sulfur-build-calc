@@ -39,6 +39,18 @@
   const enchById = new Map(ENCH.map((e) => [e.id, e]));
   const enemyById = new Map(ENEMIES.map((e) => [e.id, e]));
 
+  // --- label standardization: backend attribute tag -> display text (see labels.js) ---
+  const LABELS = (window.SULFUR_LABELS && window.SULFUR_LABELS.attr) || {};
+  const attrMeta = (tag) => LABELS[tag] || {};
+  function label(tag) {
+    const e = LABELS[tag];
+    if (e && e.name) return e.name;
+    return String(tag).replace(/^ItemStat_/, "").replace(/^Stat_/, "")
+      .replace(/^ProjectileApply/, "Applies ").replace(/^ProjectileOnHit/, "On Hit: ")
+      .replace(/^Projectile/, "Projectile ")
+      .replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/_/g, " ").trim();
+  }
+
   const el = (id) => document.getElementById(id);
   const els = {
     weaponSlots: el("weapon-slots"), stats: el("stats"), dps: el("dps"),
@@ -133,19 +145,21 @@
     const dpsEff = expected * mitig * sps;
     const hp = enemy ? enemy.hp : 0;
 
-    // curated live stats (base -> final) for the weapon card
+    // curated live stats for the weapon card: always-on base stats + modded stats
     const live = [
       { k: "Damage / shot", base: perPellet0 * w.pellets, val: perShot, better: "up" },
       { k: "Fire rate", base: w.rpm / 60, val: sps, unit: "/s", better: "up" },
-      { k: "Recoil (kick)", base: attrBase("KickMultiplier", w), val: calcStat(1, get("KickMultiplier")), better: "down", show: byAttr.has("KickMultiplier") },
+      { k: "Magazine", base: w.ammoMax, val: w.ammoMax, better: "up" },
+      { k: "Reload", base: w.reloadTime, val: w.reloadTime, unit: "s", better: "down" },
+      { k: "Bullet speed", base: w.bulletSpeed, val: w.bulletSpeed, better: "up" },
+      { k: "Recoil", base: 1, val: calcStat(1, get("KickMultiplier")), better: "down", show: byAttr.has("KickMultiplier") },
       { k: "Spread", base: 0, val: calcStat(0, get("Spread")), better: "down", show: byAttr.has("Spread") },
       { k: "Crit (ADS)", base: 0, val: calcStat(0, get("CritChanceADS")), better: "up", pct: true, show: byAttr.has("CritChanceADS") },
-      { k: "Reload speed", base: 1, val: calcStat(1, get("ReloadSpeed")), better: "down", show: byAttr.has("ReloadSpeed") },
       { k: "Full-auto", base: 0, val: calcStat(0, get("FullAuto")), better: "up", flag: true, show: byAttr.has("FullAuto") },
     ].filter((r) => r.show !== false);
 
-    // everything else the mods touch, for completeness
-    const shown = new Set(["Damage", "RPM", "Stat_GlobalDamageMultiplier", "Stat_CritChance", "KickMultiplier", "Spread", "CritChanceADS", "ReloadSpeed", "FullAuto"]);
+    // everything else the mods touch, for completeness (labelled via label())
+    const shown = new Set(["Damage", "RPM", "Stat_GlobalDamageMultiplier", "Stat_CritChance", "KickMultiplier", "Spread", "CritChanceADS", "FullAuto"]);
     const other = [];
     for (const [attr, mods] of byAttr) {
       if (shown.has(attr)) continue;
@@ -222,7 +236,7 @@
       const liveHtml = comp ? comp.live.map(statDelta).join("") : "";
       const otherHtml = comp && comp.other.length
         ? `<details class="wother"><summary>+${comp.other.length} more affected</summary>` +
-          comp.other.map((o) => `<div class="lv"><span class="lk">${o.attr}</span><span class="lvv">${fmt(o.val)}</span></div>`).join("") + `</details>`
+          comp.other.map((o) => `<div class="lv"><span class="lk">${label(o.attr)}</span><span class="lvv">${attrMeta(o.attr).flag ? (o.val > 0 ? "ON" : "—") : fmt(o.val)}</span></div>`).join("") + `</details>`
         : "";
 
       box.innerHTML = `
@@ -276,11 +290,13 @@
       if (pa) parts.push(`${pa > 0 ? "+" : ""}${round(pa * 100, 1)}%`);
       for (const m of pm) parts.push(`×${round(1 + m.value, 3)}`);
       const net = f + pa + pm.reduce((s, m) => s + m.value, 0);
-      const cls = net > 0 ? "pos" : net < 0 ? "neg" : "";
-      rows.push(`<div class="stat"><span class="sk">${attr}</span><span class="sv ${cls}">${parts.join("  ")}</span></div>`);
+      const good = attrMeta(attr).lowerBetter ? net < 0 : net > 0;
+      const cls = net === 0 ? "" : (good ? "pos" : "neg");
+      rows.push({ cat: attrMeta(attr).cat || "Other", html: `<div class="stat"><span class="sk">${label(attr)}</span><span class="sv ${cls}">${parts.join("  ")}</span></div>` });
     }
+    rows.sort((a, b) => a.cat.localeCompare(b.cat));
     els.stats.innerHTML = `<div class="sl-head">Equipment effects (${rows.length})</div>` +
-      (rows.length ? rows.join("") : `<div class="muted small">Equip armour to see stat changes.</div>`);
+      (rows.length ? rows.map((r) => r.html).join("") : `<div class="muted small">Equip armour to see stat changes.</div>`);
   }
 
   function renderAll() { renderPaperdoll(); renderWeapons(); renderReadout(); persist(); }
@@ -331,17 +347,25 @@
   }
 
   // stat-line builders
-  const modLines = (mods) => (mods || []).map((m) => ({
-    k: m.attr,
-    v: m.type === "Flat" ? (m.value > 0 ? "+" : "") + round(m.value, 3)
-      : m.type === "PercentAdd" ? (m.value > 0 ? "+" : "") + round(m.value * 100, 1) + "%" : "×" + round(1 + m.value, 3),
-    cls: m.value > 0 ? "pos" : m.value < 0 ? "neg" : "",
-  }));
+  const modLines = (mods) => (mods || []).map((m) => {
+    const good = attrMeta(m.attr).lowerBetter ? m.value < 0 : m.value > 0;
+    return {
+      k: label(m.attr),
+      v: m.type === "Flat" ? (m.value > 0 ? "+" : "") + round(m.value, 3)
+        : m.type === "PercentAdd" ? (m.value > 0 ? "+" : "") + round(m.value * 100, 1) + "%" : "×" + round(1 + m.value, 3),
+      cls: m.value === 0 ? "" : (good ? "pos" : "neg"),
+    };
+  });
   const weaponLines = (w) => [
-    { k: "Damage", v: fmt(w.baseDamage) + (w.pellets > 1 ? " ×" + w.pellets : "") },
+    { k: "Damage", v: fmt(w.baseDamage) + (w.pellets > 1 ? " ×" + w.pellets + " pellets" : "") },
     { k: "Fire rate", v: fmt(w.rpm / 60) + "/s (" + fmt(w.rpm) + " rpm)" },
+    { k: "Reload", v: fmt(w.reloadTime) + "s" },
+    { k: "Magazine", v: w.ammoMax + (w.ammoPerShot > 1 ? " (" + w.ammoPerShot + "/shot)" : "") },
+    { k: "Bullet speed", v: fmt(w.bulletSpeed) },
+    { k: "Shots to full spread", v: w.shotsToFullSpread || "—" },
+    { k: "Weight class", v: w.weight }, { k: "ADS", v: w.ads ? "Yes" : "No" },
     { k: "Type", v: w.weaponType + " · " + w.caliber }, { k: "Damage type", v: w.damageType },
-    { k: "Mag", v: w.ammoMax }, { k: "Quality", v: w.quality },
+    { k: "Quality", v: w.quality },
   ];
 
   // opt builders (each opt keeps its index within the current ctx.opts)
