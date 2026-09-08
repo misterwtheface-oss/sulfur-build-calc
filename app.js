@@ -2,15 +2,16 @@
   SULFUR Loadout Planner — app logic.
   Reads window.SULFUR_DATA (generated into data.js by build-data.mjs).
 
-  Sandbox loop: click a slot -> category-limited selector overlay -> equip -> stats
-  recompute live. Character paperdoll (Head/Torso/2×Foot/Gadget) + weapon slots, each
-  with attachment containers and enchantment (oil/scroll) chips shown beside the weapon.
+  Weapons are the focus: each weapon has 3 typed attachment slots (Muzzle / Sight /
+  Action), and up to 5 enchantments (oils + scrolls) with at most ONE scroll (elemental).
+  Attachments and enchants modify the weapon's live stats as they are applied. A character
+  paperdoll (Head/Torso/2×Foot/Gadget) aggregates gear stats. Selectors are category-limited
+  and show an info panel with the item's stats before you commit.
 
-  Stat math mirrors the game's engine: per attribute, Flat (sum) -> pooled PercentAdd
-  (× clamp(1+Σ, 0.01, 10)) -> each PercentMult (×(1+v)). Weapon DPS applies the enchant
-  Damage mods + crit (flat ×2) + resistance ((100-r)/100) vs the chosen target.
-  NOTE: attachment stat effects are a known extract gap (their modifiers aren't captured
-  in items.csv) — attachment containers store/visualise items but don't yet feed the math.
+  Math mirrors the game's engine per attribute: Flat (sum) -> pooled PercentAdd
+  (× clamp(1+Σ, 0.01, 10)) -> each PercentMult (×(1+v)). Attachment effects come from
+  ItemDefinition.modifiersOnAttachToItem; enchant effects from modifiersApplied; crit is a
+  flat ×2 rolled at CritChance; resistance is ((100-r)/100) vs the chosen target.
 */
 (function () {
   "use strict";
@@ -23,8 +24,11 @@
   const PBASE = DATA.playerBase || {};
   const ENGINE = Object.assign({ critMult: 2, clampMin: 0.01, clampMax: 10 }, DATA.engine);
   const STORAGE_KEY = "sulfurbc.loadout";
+  const SCHEMA = 2;
   const WEAPON_SLOTS = 2;
-  const ATTACH_PER_WEAPON = 4;
+  const MAX_ENCH = 5;                 // rank-based cap; 5 is the practical planning max
+  const ATTACH_SLOTS = ["muzzle", "sight", "action"];
+  const ATTACH_LABEL = { muzzle: "Muzzle", sight: "Sight", action: "Action" };
 
   const DMG_TO_RESIST = { Fire:"Fire",Frost:"Frost",Electric:"Electric",Poison:"Poison",
     Explosive:"Explosive",Holy:"Holy",Shadow:"Shadow",Earth:"Earth",Punish:"Punish",
@@ -41,14 +45,16 @@
     enemy: el("enemy-select"), counts: el("counts"), clear: el("clear-loadout"),
     overlay: el("overlay"), overlayList: el("overlay-list"), overlayTitle: el("overlay-title"),
     overlaySearch: el("overlay-search"), overlayClose: el("overlay-close"),
+    overlayFilters: el("overlay-filters"), overlayDetail: el("overlay-detail"),
   };
 
   // ---- state ----
   function freshState() {
     return {
+      schema: SCHEMA,
       equipment: { head: null, torso: null, footL: null, footR: null, gadget: null },
       weapons: Array.from({ length: WEAPON_SLOTS }, () => ({
-        weapon: null, attachments: Array(ATTACH_PER_WEAPON).fill(null), enchants: [],
+        weapon: null, attachments: { muzzle: null, sight: null, action: null }, enchants: [],
       })),
       enemy: null,
     };
@@ -57,9 +63,9 @@
   function load() {
     try {
       const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (s && s.equipment && Array.isArray(s.weapons)) return s;
+      if (s && s.schema === SCHEMA && s.equipment && Array.isArray(s.weapons)) return s;
     } catch { /* ignore */ }
-    return freshState();
+    return freshState();               // old/absent schema -> fresh (no silent breakage)
   }
   const persist = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 
@@ -76,58 +82,83 @@
     for (const m of mods) if (m.type === "PercentMult") n *= (1 + m.value);
     return round(n, 4);
   }
+  const fmt = (n) => (Number.isFinite(n) ? (Math.abs(n) >= 100 ? Math.round(n) : round(n, 2)) : "—");
 
-  function equippedItems() {
-    return Object.values(state.equipment).map((k) => k && itemByKey.get(k)).filter(Boolean);
+  // attribute base defaults: multipliers default to 1.0, additive stats to 0
+  function attrBase(attr, w) {
+    if (attr === "Damage") return w ? w.baseDamage : 0;
+    if (attr === "RPM") return w ? w.rpm : 0;
+    if (/Multiplier$/.test(attr) || attr === "ReloadSpeed") return 1;
+    return 0;
   }
-  // aggregate every equipped item's modifiersOnEquip, grouped by attribute
-  function aggregateEquipMods() {
+
+  // =====================================================================
+  //  Weapon: gather mods (attachments + enchants) and derive live stats
+  // =====================================================================
+  function weaponMods(slot) {
     const byAttr = new Map();
-    for (const it of equippedItems())
-      for (const m of it.mods || []) {
-        if (!byAttr.has(m.attr)) byAttr.set(m.attr, []);
-        byAttr.get(m.attr).push(m);
-      }
+    const add = (m) => { if (!byAttr.has(m.attr)) byAttr.set(m.attr, []); byAttr.get(m.attr).push(m); };
+    for (const s of ATTACH_SLOTS) {
+      const a = slot.attachments[s] && itemByKey.get(slot.attachments[s]);
+      if (a) for (const m of a.attachMods || []) add(m);
+    }
+    for (const id of slot.enchants) {
+      const e = enchById.get(id);
+      if (e) for (const m of e.mods) add(m);
+    }
     return byAttr;
   }
 
-  // per-weapon damage (enchant Damage mods + crit + resistance vs target)
-  function weaponDPS(slot) {
+  function computeWeapon(slot) {
     const w = slot.weapon && weaponByKey.get(slot.weapon);
     if (!w) return null;
-    const mods = { Damage: [], Global: [], Crit: [] };
-    for (const id of slot.enchants) {
-      const e = enchById.get(id); if (!e) continue;
-      for (const m of e.mods) {
-        if (m.attr === "Damage") mods.Damage.push(m);
-        else if (m.attr === "Stat_GlobalDamageMultiplier") mods.Global.push(m);
-        else if (m.attr === "Stat_CritChance") mods.Crit.push(m);
-      }
-    }
-    let perPellet = calcStat(w.baseDamage, mods.Damage);
-    perPellet *= (1 + (mods.Global.length ? calcStat(0, mods.Global) : 0));
+    const byAttr = weaponMods(slot);
+    const get = (a) => byAttr.get(a) || [];
+
+    const perPellet0 = w.baseDamage;
+    let perPellet = calcStat(w.baseDamage, get("Damage"));
+    const gBonus = get("Stat_GlobalDamageMultiplier").length ? calcStat(0, get("Stat_GlobalDamageMultiplier")) : 0;
+    perPellet *= (1 + gBonus);
     const perShot = perPellet * w.pellets;
-    const critChance = clamp(calcStat(Number(PBASE.Stat_CritChance || 0), mods.Crit), 0, 1);
+
+    const rpm = calcStat(w.rpm, get("RPM"));
+    const sps = rpm > 0 ? rpm / 60 : 0;
+    const critChance = clamp(calcStat(Number(PBASE.Stat_CritChance || 0), get("Stat_CritChance")), 0, 1);
     const expected = perShot * (1 + critChance * (ENGINE.critMult - 1));
+
     const enemy = state.enemy && enemyById.get(state.enemy);
     const channel = DMG_TO_RESIST[w.damageType] || null;
     const resist = enemy && channel ? Number(enemy.resist[channel] || 0) : 0;
     const mitig = Math.max(0, (100 - resist) / 100);
-    const sps = w.rpm > 0 ? w.rpm / 60 : 0;
     const dpsEff = expected * mitig * sps;
     const hp = enemy ? enemy.hp : 0;
-    return {
-      w, enemy, resist, channel, perShot, critChance,
-      dpsRaw: perShot * sps, dpsEff,
-      ttk: dpsEff > 0 && hp > 0 ? hp / dpsEff : null,
-    };
+
+    // curated live stats (base -> final) for the weapon card
+    const live = [
+      { k: "Damage / shot", base: perPellet0 * w.pellets, val: perShot, better: "up" },
+      { k: "Fire rate", base: w.rpm / 60, val: sps, unit: "/s", better: "up" },
+      { k: "Recoil (kick)", base: attrBase("KickMultiplier", w), val: calcStat(1, get("KickMultiplier")), better: "down", show: byAttr.has("KickMultiplier") },
+      { k: "Spread", base: 0, val: calcStat(0, get("Spread")), better: "down", show: byAttr.has("Spread") },
+      { k: "Crit (ADS)", base: 0, val: calcStat(0, get("CritChanceADS")), better: "up", pct: true, show: byAttr.has("CritChanceADS") },
+      { k: "Reload speed", base: 1, val: calcStat(1, get("ReloadSpeed")), better: "down", show: byAttr.has("ReloadSpeed") },
+      { k: "Full-auto", base: 0, val: calcStat(0, get("FullAuto")), better: "up", flag: true, show: byAttr.has("FullAuto") },
+    ].filter((r) => r.show !== false);
+
+    // everything else the mods touch, for completeness
+    const shown = new Set(["Damage", "RPM", "Stat_GlobalDamageMultiplier", "Stat_CritChance", "KickMultiplier", "Spread", "CritChanceADS", "ReloadSpeed", "FullAuto"]);
+    const other = [];
+    for (const [attr, mods] of byAttr) {
+      if (shown.has(attr)) continue;
+      other.push({ attr, base: attrBase(attr, w), val: calcStat(attrBase(attr, w), mods) });
+    }
+
+    return { w, enemy, resist, channel, mitig, perShot, rpm, sps, critChance, dpsRaw: perShot * sps, dpsEff,
+      ttk: dpsEff > 0 && hp > 0 ? hp / dpsEff : null, live, other };
   }
 
   // =====================================================================
-  //  Rendering
+  //  Rendering — paperdoll
   // =====================================================================
-  const fmt = (n) => (Number.isFinite(n) ? (Math.abs(n) >= 100 ? Math.round(n) : round(n, 1)) : "—");
-
   function paintSlot(node, item, label) {
     node.classList.toggle("filled", !!item);
     node.innerHTML =
@@ -135,13 +166,27 @@
       `<span class="slot-label">${item ? item.name : label}</span>`;
     node.title = item ? item.name + " — click to change" : "Select " + label;
   }
-
+  const SLOT_LABELS = { head: "Head", torso: "Torso", footL: "Left Foot", footR: "Right Foot", gadget: "Gadget" };
   function renderPaperdoll() {
-    const map = { head: "Head", torso: "Torso", footL: "Left Foot", footR: "Right Foot", gadget: "Gadget" };
-    for (const [slot, label] of Object.entries(map)) {
+    for (const [slot, label] of Object.entries(SLOT_LABELS)) {
       const node = document.querySelector(`.slot[data-slot="${slot}"]`);
       if (node) paintSlot(node, state.equipment[slot] && itemByKey.get(state.equipment[slot]), label);
     }
+  }
+
+  // =====================================================================
+  //  Rendering — weapon cards
+  // =====================================================================
+  function statDelta(r) {
+    const changed = Math.abs(r.val - r.base) > 1e-6;
+    let disp;
+    if (r.flag) disp = r.val > 0 ? "ON" : "—";
+    else if (r.pct) disp = (r.val > 0 ? "+" : "") + round(r.val * 100, 1) + "%";
+    else disp = fmt(r.val) + (r.unit || "");
+    let cls = "";
+    if (changed && !r.flag) cls = ((r.val > r.base) === (r.better === "up")) ? "pos" : "neg";
+    else if (r.flag && r.val > 0) cls = "pos";
+    return `<div class="lv"><span class="lk">${r.k}</span><span class="lvv ${cls}">${disp}</span></div>`;
   }
 
   function renderWeapons() {
@@ -150,21 +195,30 @@
       const w = slot.weapon && weaponByKey.get(slot.weapon);
       const box = document.createElement("div");
       box.className = "weapon-slot";
-
       const wIcon = w && w.icon ? `<img class="slot-icon" src="${w.icon}" alt="">` : "";
-      const meta = w ? `${w.weaponType} · ${fmt(w.baseDamage)} dmg${w.pellets > 1 ? " ×" + w.pellets : ""} · ${fmt(w.rpm)} rpm` : "Tap to choose a weapon";
+      const meta = w ? `${w.weaponType} · ${w.damageType} · ${w.caliber}` : "Tap to choose a weapon";
 
-      const attachCells = slot.attachments.map((ak, ci) => {
-        const it = ak && itemByKey.get(ak);
-        return it
-          ? `<div class="cell" data-act="attach" data-wi="${wi}" data-ci="${ci}" title="${it.name} — remove">${it.icon ? `<img src="${it.icon}" alt="">` : ""}</div>`
-          : `<div class="cell add" data-act="attach" data-wi="${wi}" data-ci="${ci}" title="Add attachment"></div>`;
+      const attachCells = ATTACH_SLOTS.map((s) => {
+        const it = slot.attachments[s] && itemByKey.get(slot.attachments[s]);
+        const inner = it && it.icon ? `<img src="${it.icon}" alt="">` : "";
+        return `<button class="acell ${it ? "filled" : "add"}" data-act="attach" data-wi="${wi}" data-slot="${s}" type="button" title="${it ? it.name : "Add " + ATTACH_LABEL[s]}">${inner}<span class="acell-label">${ATTACH_LABEL[s]}</span></button>`;
       }).join("");
 
+      const scrolls = slot.enchants.filter((id) => (enchById.get(id) || {}).isElemental).length;
       const enchChips = slot.enchants.map((id, ei) => {
         const e = enchById.get(id); if (!e) return "";
-        return `<span class="chip${e.isElemental ? " elemental" : ""}" data-act="unench" data-wi="${wi}" data-ei="${ei}" title="Remove">${e.name} <span class="x">✕</span></span>`;
-      }).join("") + `<span class="chip add" data-act="ench" data-wi="${wi}">+ oil / scroll</span>`;
+        return `<span class="chip${e.isElemental ? " scroll" : " oil"}" data-act="unench" data-wi="${wi}" data-ei="${ei}" title="Remove">${e.name} <span class="x">✕</span></span>`;
+      }).join("");
+      const full = slot.enchants.length >= MAX_ENCH;
+      const addOil = full ? "" : `<button class="chip add" data-act="ench" data-kind="oil" data-wi="${wi}" type="button">+ oil</button>`;
+      const addScroll = (full || scrolls >= 1) ? "" : `<button class="chip add scroll" data-act="ench" data-kind="scroll" data-wi="${wi}" type="button">+ scroll</button>`;
+
+      const comp = w ? computeWeapon(slot) : null;
+      const liveHtml = comp ? comp.live.map(statDelta).join("") : "";
+      const otherHtml = comp && comp.other.length
+        ? `<details class="wother"><summary>+${comp.other.length} more affected</summary>` +
+          comp.other.map((o) => `<div class="lv"><span class="lk">${o.attr}</span><span class="lvv">${fmt(o.val)}</span></div>`).join("") + `</details>`
+        : "";
 
       box.innerHTML = `
         <div class="ws-main">
@@ -174,32 +228,39 @@
             <div class="ws-meta">${meta}</div>
           </div>
         </div>
-        <div class="ws-mods">
-          <div class="mod-group"><span class="mg-label">Attachments</span><div class="mg-cells">${attachCells}</div></div>
-          <div class="mod-group"><span class="mg-label">Enchantments</span><div class="chips">${enchChips}</div></div>
-        </div>`;
+        <div class="ws-cols">
+          <div class="mod-group"><span class="mg-label">Attachments</span><div class="acells">${attachCells}</div></div>
+          <div class="mod-group"><span class="mg-label">Enchantments <span class="mg-note">${slot.enchants.length}/${MAX_ENCH}${scrolls ? " · 1 scroll" : ""}</span></span>
+            <div class="chips">${enchChips}${addOil}${addScroll}</div></div>
+        </div>
+        ${w ? `<div class="ws-live">${liveHtml}${otherHtml}</div>` : ""}`;
       els.weaponSlots.appendChild(box);
     });
   }
 
+  // =====================================================================
+  //  Rendering — readout (per-weapon DPS vs target + gear stats)
+  // =====================================================================
   function renderReadout() {
-    // DPS per weapon
     let dhtml = "";
-    state.weapons.forEach((slot, wi) => {
-      const r = weaponDPS(slot);
+    state.weapons.forEach((slot) => {
+      const r = computeWeapon(slot);
       if (!r) return;
       dhtml += `<div class="dps-w">${r.w.name}</div>`;
       dhtml += `<div class="row big"><span class="k">DPS${r.enemy ? " vs " + r.enemy.name : ""}</span><span class="v">${fmt(r.enemy ? r.dpsEff : r.dpsRaw)}</span></div>`;
-      dhtml += `<div class="row"><span class="k">Per shot${r.critChance > 0 ? ` · crit ${Math.round(r.critChance * 100)}%` : ""}</span><span class="v">${fmt(r.perShot)}</span></div>`;
       if (r.enemy) {
-        dhtml += `<div class="row"><span class="k">${r.channel ? r.channel + " resist " + r.resist + "%" : "unresisted"}</span><span class="v">×${round(Math.max(0,(100-r.resist)/100),2)}</span></div>`;
+        dhtml += `<div class="row"><span class="k">${r.channel ? r.channel + " " + r.resist + "%" : "unresisted"}</span><span class="v">×${round(r.mitig, 2)}</span></div>`;
         dhtml += `<div class="row ttk"><span class="k">Time to kill</span><span class="v">${r.ttk != null ? round(r.ttk, 2) + " s" : "—"}</span></div>`;
       }
     });
     els.dps.innerHTML = dhtml || `<div class="muted small">Equip a weapon to see damage.</div>`;
 
     // aggregated equipment stats
-    const byAttr = aggregateEquipMods();
+    const byAttr = new Map();
+    for (const k of Object.values(state.equipment)) {
+      const it = k && itemByKey.get(k); if (!it) continue;
+      for (const m of it.mods || []) { if (!byAttr.has(m.attr)) byAttr.set(m.attr, []); byAttr.get(m.attr).push(m); }
+    }
     const rows = [];
     for (const [attr, mods] of [...byAttr.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
       const f = mods.filter((m) => m.type === "Flat").reduce((s, m) => s + m.value, 0);
@@ -211,24 +272,29 @@
       for (const m of pm) parts.push(`×${round(1 + m.value, 3)}`);
       const net = f + pa + pm.reduce((s, m) => s + m.value, 0);
       const cls = net > 0 ? "pos" : net < 0 ? "neg" : "";
-      const label = attr in PBASE ? `${attr} → ${fmt(calcStat(PBASE[attr], mods))}` : attr;
-      rows.push(`<div class="stat"><span class="sk">${label}</span><span class="sv ${cls}">${parts.join("  ")}</span></div>`);
+      rows.push(`<div class="stat"><span class="sk">${attr}</span><span class="sv ${cls}">${parts.join("  ")}</span></div>`);
     }
-    els.stats.innerHTML =
-      `<div class="sl-head">Equipment effects (${rows.length} attributes)</div>` +
+    els.stats.innerHTML = `<div class="sl-head">Equipment effects (${rows.length})</div>` +
       (rows.length ? rows.join("") : `<div class="muted small">Equip armour to see stat changes.</div>`);
   }
 
   function renderAll() { renderPaperdoll(); renderWeapons(); renderReadout(); persist(); }
 
   // =====================================================================
-  //  Selector overlay (category-limited)
+  //  Selector overlay (category-limited, with info panel + optional filters)
   // =====================================================================
-  let ctx = null; // { title, opts:[{key,name,sub,icon}], onPick, allowClear }
+  let ctx = null;   // { title, opts, onPick, onClear?, allowClear?, filters?, filterKey?, statLines? }
+  let activeFilter = null;
   function openSelector(next) {
-    ctx = next;
+    ctx = next; activeFilter = null;
     els.overlayTitle.textContent = next.title;
     els.overlaySearch.value = "";
+    els.overlayDetail.hidden = true; els.overlayDetail.innerHTML = "";
+    if (next.filters && next.filters.length) {
+      els.overlayFilters.hidden = false;
+      els.overlayFilters.innerHTML = [`<button class="fchip on" data-f="">All</button>`]
+        .concat(next.filters.map((f) => `<button class="fchip" data-f="${f}">${f}</button>`)).join("");
+    } else { els.overlayFilters.hidden = true; els.overlayFilters.innerHTML = ""; }
     renderOptions();
     els.overlay.hidden = false;
     els.overlaySearch.focus();
@@ -238,75 +304,118 @@
   function renderOptions() {
     if (!ctx) return;
     const q = (els.overlaySearch.value || "").toLowerCase();
-    const list = ctx.opts.filter((o) => !q || o.name.toLowerCase().includes(q));
+    let list = ctx.opts.filter((o) => !q || o.name.toLowerCase().includes(q));
+    if (activeFilter) list = list.filter((o) => o.filter === activeFilter);
     let html = ctx.allowClear ? `<button class="opt clear-opt" data-clear="1">✕ Clear slot</button>` : "";
-    html += list.map((o, i) =>
-      `<button class="opt" data-i="${o._i}">${o.icon ? `<img src="${o.icon}" alt="">` : ""}<span><span class="opt-name">${o.name}</span>${o.sub ? `<span class="opt-sub"> ${o.sub}</span>` : ""}</span></button>`
+    html += list.map((o) =>
+      `<button class="opt" data-i="${o._i}">${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span><span class="opt-name">${o.name}</span>${o.sub ? `<span class="opt-sub"> ${o.sub}</span>` : ""}</span></button>`
     ).join("");
     els.overlayList.innerHTML = html || `<div class="muted small">No matches.</div>`;
   }
 
-  const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot)
-    .map((i, _n) => ({ key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon }));
-  const weaponOpts = () => WEAPONS.map((w) => ({ key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon }));
-  const enchOpts = () => ENCH.map((e) => ({ key: e.id, name: e.name, sub: e.group, icon: null }));
+  // info panel: show the focused item's stats before committing (VS-style)
+  function showDetail(o) {
+    els.overlayDetail._item = o;      // Equip button reads this to know what to commit
+    const lines = (ctx.statLines ? ctx.statLines(o) : []);
+    els.overlayDetail.hidden = false;
+    els.overlayDetail.innerHTML =
+      `<div class="od-head">${o.icon ? `<img src="${o.icon}" alt="">` : ""}<div><div class="od-name">${o.name}</div>${o.sub ? `<div class="od-sub">${o.sub}</div>` : ""}</div></div>` +
+      (lines.length ? `<div class="od-stats">${lines.map((l) => `<div class="od-stat"><span>${l.k}</span><span class="${l.cls || ""}">${l.v}</span></div>`).join("")}</div>` : `<div class="muted small">No stat effects.</div>`) +
+      `<button class="od-equip" data-equip="1" type="button">Equip</button>`;
+    els.overlayDetail.scrollIntoView({ block: "nearest" });
+  }
 
-  // index opts for stable click lookup
-  function indexed(opts) { opts.forEach((o, i) => (o._i = i)); return opts; }
+  // stat-line builders
+  const modLines = (mods) => (mods || []).map((m) => ({
+    k: m.attr,
+    v: m.type === "Flat" ? (m.value > 0 ? "+" : "") + round(m.value, 3)
+      : m.type === "PercentAdd" ? (m.value > 0 ? "+" : "") + round(m.value * 100, 1) + "%" : "×" + round(1 + m.value, 3),
+    cls: m.value > 0 ? "pos" : m.value < 0 ? "neg" : "",
+  }));
+  const weaponLines = (w) => [
+    { k: "Damage", v: fmt(w.baseDamage) + (w.pellets > 1 ? " ×" + w.pellets : "") },
+    { k: "Fire rate", v: fmt(w.rpm / 60) + "/s (" + fmt(w.rpm) + " rpm)" },
+    { k: "Type", v: w.weaponType + " · " + w.caliber }, { k: "Damage type", v: w.damageType },
+    { k: "Mag", v: w.ammoMax }, { k: "Quality", v: w.quality },
+  ];
 
+  // opt builders (each opt keeps its index within the current ctx.opts)
+  const indexed = (opts) => { opts.forEach((o, i) => (o._i = i)); return opts; };
+  const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon }));
+  const attachOpts = (a) => ITEMS.filter((i) => i.kind === "attachment" && i.attachSlot === a).map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.quality, icon: i.icon }));
+  const weaponOpts = () => WEAPONS.map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, filter: w.weaponType }));
+  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: null, filter: e.group }));
+
+  // =====================================================================
+  //  Slot -> selector wiring
+  // =====================================================================
   function selectEquip(slot, label) {
     openSelector({
       title: "Select " + label, allowClear: true, opts: indexed(itemOpts(slot === "footL" || slot === "footR" ? "feet" : slot)),
-      onPick: (o) => { state.equipment[slot] = o.key; },
-      onClear: () => { state.equipment[slot] = null; },
+      statLines: (o) => modLines(o.ref.mods),
+      onPick: (o) => { state.equipment[slot] = o.key; }, onClear: () => { state.equipment[slot] = null; },
     });
   }
 
-  // =====================================================================
-  //  Events
-  // =====================================================================
   document.querySelectorAll(".slot[data-slot]").forEach((node) => {
-    node.addEventListener("click", () => {
-      const slot = node.dataset.slot;
-      const label = { head: "Head", torso: "Torso", footL: "Left Foot", footR: "Right Foot", gadget: "Gadget" }[slot];
-      selectEquip(slot, label);
-    });
+    node.addEventListener("click", () => selectEquip(node.dataset.slot, SLOT_LABELS[node.dataset.slot]));
   });
 
   els.weaponSlots.addEventListener("click", (ev) => {
-    const t = ev.target.closest("[data-act]");
-    if (!t) return;
-    const wi = Number(t.dataset.wi);
-    const act = t.dataset.act;
+    const t = ev.target.closest("[data-act]"); if (!t) return;
+    const wi = Number(t.dataset.wi); const act = t.dataset.act;
     if (act === "weapon") {
       openSelector({ title: "Select weapon", allowClear: true, opts: indexed(weaponOpts()),
+        filters: [...new Set(WEAPONS.map((w) => w.weaponType))].sort(),
+        statLines: (o) => weaponLines(o.ref),
         onPick: (o) => { state.weapons[wi].weapon = o.key; }, onClear: () => { state.weapons[wi].weapon = null; } });
     } else if (act === "attach") {
-      const ci = Number(t.dataset.ci);
-      if (itemByKey.has(state.weapons[wi].attachments[ci])) { state.weapons[wi].attachments[ci] = null; renderAll(); return; }
-      openSelector({ title: "Select attachment", allowClear: false, opts: indexed(itemOpts("attachment")),
-        onPick: (o) => { state.weapons[wi].attachments[ci] = o.key; } });
+      const s = t.dataset.slot;
+      if (itemByKey.has(state.weapons[wi].attachments[s])) { state.weapons[wi].attachments[s] = null; renderAll(); return; }
+      openSelector({ title: ATTACH_LABEL[s] + " attachment", allowClear: false, opts: indexed(attachOpts(s)),
+        statLines: (o) => modLines(o.ref.attachMods),
+        onPick: (o) => { state.weapons[wi].attachments[s] = o.key; } });
     } else if (act === "ench") {
-      openSelector({ title: "Select oil / scroll", allowClear: false, opts: indexed(enchOpts()),
-        onPick: (o) => { state.weapons[wi].enchants.push(o.key); } });
+      const elemental = t.dataset.kind === "scroll";
+      openSelector({ title: elemental ? "Select scroll (elemental)" : "Select oil", allowClear: false, opts: indexed(enchOpts(elemental)),
+        filters: [...new Set(ENCH.filter((e) => !!e.isElemental === elemental).map((e) => e.group))].sort(),
+        statLines: (o) => modLines(o.ref.mods),
+        onPick: (o) => {
+          const sl = state.weapons[wi];
+          if (sl.enchants.length >= MAX_ENCH) return;
+          if (elemental && sl.enchants.some((id) => (enchById.get(id) || {}).isElemental)) return;
+          sl.enchants.push(o.key);
+        } });
     } else if (act === "unench") {
       state.weapons[wi].enchants.splice(Number(t.dataset.ei), 1); renderAll();
     }
   });
 
+  // overlay interactions
+  els.overlayFilters.addEventListener("click", (ev) => {
+    const t = ev.target.closest("[data-f]"); if (!t) return;
+    activeFilter = t.dataset.f || null;
+    els.overlayFilters.querySelectorAll(".fchip").forEach((c) => c.classList.toggle("on", c === t));
+    renderOptions();
+  });
   els.overlayList.addEventListener("click", (ev) => {
     const t = ev.target.closest("button"); if (!t || !ctx) return;
     if (t.dataset.clear) { ctx.onClear && ctx.onClear(); closeSelector(); renderAll(); return; }
     if (t.dataset.i == null) return;
-    const o = ctx.opts[Number(t.dataset.i)];
+    showDetail(ctx.opts[Number(t.dataset.i)]);   // info panel first
+  });
+  els.overlayDetail.addEventListener("click", (ev) => {
+    const t = ev.target.closest("[data-equip]"); if (!t || !ctx) return;
+    const o = els.overlayDetail._item; if (!o) return;
     ctx.onPick(o); closeSelector(); renderAll();
   });
+
   els.overlaySearch.addEventListener("input", renderOptions);
   els.overlayClose.addEventListener("click", closeSelector);
   els.overlay.addEventListener("click", (ev) => { if (ev.target === els.overlay) closeSelector(); });
   document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !els.overlay.hidden) closeSelector(); });
 
-  els.enemy.addEventListener("change", () => { state.enemy = els.enemy.value || null; persist(); renderReadout(); });
+  els.enemy.addEventListener("change", () => { state.enemy = els.enemy.value || null; persist(); renderWeapons(); renderReadout(); });
   els.clear.addEventListener("click", () => { state = freshState(); els.enemy.value = ""; renderAll(); });
 
   // ---- init ----

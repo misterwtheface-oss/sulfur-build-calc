@@ -109,7 +109,7 @@ img { max-width: 100%; }
 .slot-head   { width: clamp(84px, 28vw, 122px); aspect-ratio: 164 / 136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
 .slot-torso  { width: clamp(116px, 40vw, 168px); aspect-ratio: 192 / 184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
 .slot-foot   { width: clamp(64px, 23vw, 92px);  aspect-ratio: 100 /  76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
-.slot-foot-r::before { transform: scaleX(-1); }          /* mirror shape only, not the icon */
+.slot[data-slot="footL"]::before { transform: scaleX(-1); }   /* mirror the LEFT foot (shape only, not the icon) */
 .slot-gadget { width: clamp(56px, 18vw, 80px);  aspect-ratio: 1;         --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
 
 /* ---------- arsenal (weapon slots + per-weapon mods) ---------- */
@@ -136,23 +136,27 @@ img { max-width: 100%; }
 .ws-name { font-weight: 600; font-size: 0.9rem; }
 .ws-meta { color: var(--muted); font-size: 0.72rem; }
 
-.ws-mods { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.6rem; }
-.mod-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.ws-cols { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 0.6rem; }
+.mod-group { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
 .mod-group > .mg-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-.mg-cells { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.mg-note { color: var(--slot-line); letter-spacing: 0; text-transform: none; }
 
-/* small square container cell (attachments) — built from the grid-cell sprite look */
-.cell {
-  width: clamp(40px, 12vw, 46px); height: clamp(40px, 12vw, 46px); flex: none; cursor: pointer;
-  border: 1px solid var(--grid-line); border-radius: 4px;
-  background: var(--panel-2);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; transition: border-color 0.15s;
+/* typed attachment slots (Muzzle / Sight / Action) */
+.acells { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.acell {
+  width: clamp(52px, 15vw, 60px); flex: none; cursor: pointer; padding: 0.25rem 0.15rem 0.15rem;
+  border: 1px solid var(--grid-line); border-radius: 5px; background: var(--panel-2);
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  transition: border-color 0.15s; color: var(--text);
 }
-.cell:hover { border-color: var(--amber); }
-.cell img { width: 82%; height: 82%; object-fit: contain; }
-.cell.add::after { content: "+"; color: var(--slot-line); font-size: 1.1rem; }
-.cell.add:hover::after { color: var(--amber); }
+.acell:hover { border-color: var(--amber); }
+.acell.filled { border-color: var(--amber); }
+.acell img { width: clamp(28px, 9vw, 36px); height: clamp(28px, 9vw, 36px); object-fit: contain; }
+.acell.add { border-style: dashed; }
+.acell.add::before { content: "+"; color: var(--slot-line); font-size: 1.1rem; line-height: 1; height: clamp(28px,9vw,36px); display: flex; align-items: center; }
+.acell.add:hover::before { color: var(--amber); }
+.acell-label { font-size: 0.56rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.acell.filled .acell-label { color: var(--amber); }
 
 /* enchantment chips near the weapon (oils / scrolls applied) */
 .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
@@ -161,10 +165,25 @@ img { max-width: 100%; }
   padding: 0.18rem 0.5rem; border: 1px solid var(--edge); border-radius: 999px;
   background: var(--panel-2); font-size: 0.72rem; cursor: pointer;
 }
-.chip.elemental { border-color: var(--amber); }
+.chip.oil { border-color: #6b5526; }
+.chip.scroll { border-color: #7a5cc0; }        /* scrolls (elemental) read as arcane */
 .chip .x { color: var(--bad); font-weight: 700; }
 .chip.add { color: var(--muted); border-style: dashed; }
 .chip.add:hover { color: var(--amber); border-color: var(--amber); }
+.chip.add.scroll { color: #b9a3e6; }
+
+/* live weapon stats (recomputed as mods apply) */
+.ws-live {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.1rem 0.9rem;
+  margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px solid var(--edge);
+}
+.lv { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.76rem; padding: 0.08rem 0; }
+.lv .lk { color: var(--muted); }
+.lv .lvv { font-variant-numeric: tabular-nums; font-weight: 600; }
+.lv .lvv.pos { color: var(--good); }
+.lv .lvv.neg { color: var(--bad); }
+.wother { grid-column: 1 / -1; margin-top: 0.2rem; }
+.wother summary { font-size: 0.7rem; color: var(--muted); cursor: pointer; }
 
 /* ---------- readout ---------- */
 .target-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.7rem; }
@@ -224,10 +243,43 @@ img { max-width: 100%; }
   cursor: pointer; text-align: left; color: var(--text);
 }
 .opt:hover { border-color: var(--amber); }
-.opt img { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.opt img, .opt .opt-noimg { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.opt .opt-noimg { border: 1px dashed var(--grid-line); border-radius: 4px; }
 .opt .opt-name { font-size: 0.78rem; line-height: 1.15; }
 .opt .opt-sub { font-size: 0.64rem; color: var(--muted); }
 .opt.clear-opt { justify-content: center; color: var(--bad); border-style: dashed; }
+
+/* category toggle filters (weapon type / enchant group) */
+.overlay-filters {
+  display: flex; flex-wrap: wrap; gap: 0.3rem; padding: 0.5rem 0.8rem 0;
+}
+.overlay-filters[hidden] { display: none; }
+.fchip {
+  padding: 0.2rem 0.55rem; font-size: 0.7rem; cursor: pointer;
+  background: var(--panel-2); color: var(--muted);
+  border: 1px solid var(--grid-line); border-radius: 999px;
+}
+.fchip.on { color: #17130a; background: var(--amber); border-color: var(--amber); font-weight: 600; }
+
+/* info panel (VS-style detail on select, with Equip) */
+.overlay-detail {
+  margin: 0.6rem 0.8rem 0; padding: 0.6rem; border: 1px solid var(--amber); border-radius: 6px;
+  background: rgba(224,169,27,0.05);
+}
+.overlay-detail[hidden] { display: none; }
+.od-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+.od-head img { width: 40px; height: 40px; object-fit: contain; }
+.od-name { font-weight: 600; }
+.od-sub { font-size: 0.7rem; color: var(--muted); }
+.od-stats { display: flex; flex-direction: column; gap: 0.1rem; margin-bottom: 0.5rem; }
+.od-stat { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.78rem; }
+.od-stat .pos { color: var(--good); } .od-stat .neg { color: var(--bad); }
+.od-stat span:first-child { color: var(--muted); }
+.od-equip {
+  width: 100%; margin: 0; padding: 0.5rem; background: var(--amber); color: #17130a;
+  border: none; border-radius: 5px; font-weight: 700; cursor: pointer; font-size: 0.85rem;
+}
+.od-equip:hover { background: var(--amber-2); }
 
 /* ---------- buttons / misc ---------- */
 .btn-ghost {
@@ -248,9 +300,10 @@ img { max-width: 100%; }
 @media (min-width: 780px) {
   .planner {
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.3fr) minmax(260px, 1fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr);
     align-items: start;
   }
+  .arsenal { grid-column: 1 / -1; }   /* weapons = full-width focus band above the rest */
   .app-header h1 { font-size: 1.35rem; }
 }
 @media (max-width: 779px) {
