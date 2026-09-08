@@ -71,7 +71,14 @@
   }
   let state = load();
   function load() {
-    try { const s = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (s && s.schema === SCHEMA) return s; } catch { /**/ }
+    try {
+      const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (s && s.schema === SCHEMA) {
+        if (!s.melee) s.melee = freshWeapon();                  // backfill melee slot for pre-melee saves
+        if (!Array.isArray(s.weapons)) s.weapons = Array.from({ length: WEAPON_SLOTS }, freshWeapon);
+        return s;
+      }
+    } catch { /**/ }
     return freshState();
   }
   const persist = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));

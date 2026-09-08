@@ -48,8 +48,8 @@ img { max-width: 100%; }
 .slot-foot { width: clamp(64px, 23vw, 92px); aspect-ratio: 100/76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
 .slot-foot-l::before { transform: scaleX(-1); }
 /* offset each foot's label INTO its shoe body (opposite sides) */
-.slot-foot-l .slot-label { justify-content: flex-end; padding-right: 20%; }
-.slot-foot-r .slot-label { justify-content: flex-start; padding-left: 20%; }
+.slot-foot-l .slot-label { justify-content: flex-end; padding-right: 36%; }
+.slot-foot-r .slot-label { justify-content: flex-start; padding-left: 36%; }
 .slot-gadget { width: clamp(56px, 18vw, 80px); aspect-ratio: 1; --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
 
 /* ---------- weapon cards ---------- */
@@ -137,7 +137,7 @@ img { max-width: 100%; }
 .fchip { padding: 0.2rem 0.55rem; font-size: 0.7rem; cursor: pointer; background: var(--panel-2); color: var(--muted); border: 1px solid var(--grid-line); border-radius: 999px; }
 .fchip.on { color: #17130a; background: var(--amber); border-color: var(--amber); font-weight: 600; }
 .overlay-body { flex: 1; min-height: 0; display: flex; gap: 0.6rem; padding: 0.6rem; }
-.overlay-list { flex: 1 1 60%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.4rem; align-content: start; }
+.overlay-list { flex: 1 1 60%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; align-content: start; }
 /* detail = scrolling head+stats with a PINNED Equip footer (never scrolled out of reach) */
 .overlay-detail { flex: 1 1 40%; min-height: 0; display: flex; flex-direction: column; border-left: 1px solid var(--edge); padding-left: 0.6rem; }
 .od-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
