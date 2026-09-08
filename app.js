@@ -42,13 +42,21 @@
   // --- label standardization: backend attribute tag -> display text (see labels.js) ---
   const LABELS = (window.SULFUR_LABELS && window.SULFUR_LABELS.attr) || {};
   const attrMeta = (tag) => LABELS[tag] || {};
+  const spaced = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/_/g, " ").trim();
   function label(tag) {
     const e = LABELS[tag];
     if (e && e.name) return e.name;
-    return String(tag).replace(/^ItemStat_/, "").replace(/^Stat_/, "")
+    let m;
+    // EntityAttribute families (equipment / player stats)
+    if ((m = /^Resistance_(.+)$/.exec(tag))) return m[1] === "Armor" ? "Armor" : spaced(m[1]) + " Resistance";
+    if ((m = /^ExtraDamage_(.+)$/.exec(tag))) return spaced(m[1]) + " Damage";
+    if ((m = /^NegativeEffect_(.+)$/.exec(tag))) return spaced(m[1]);
+    if ((m = /^(?:Stat|Status)_Wearing(.+)$/.exec(tag))) return "Wearing " + spaced(m[1]);
+    // ItemAttribute families (weapon / projectile)
+    const t = String(tag).replace(/^ItemStat_/, "").replace(/^Stat_/, "")
       .replace(/^ProjectileApply/, "Applies ").replace(/^ProjectileOnHit/, "On Hit: ")
-      .replace(/^Projectile/, "Projectile ")
-      .replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/_/g, " ").trim();
+      .replace(/^Projectile/, "Projectile ");
+    return spaced(t);
   }
 
   const el = (id) => document.getElementById(id);
