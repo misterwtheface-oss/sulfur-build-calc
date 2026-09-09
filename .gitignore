@@ -24,7 +24,7 @@ assets/*
 !assets/weapons/
 !assets/equipment/
 !assets/attachments/
-!assets/gadgets/
+!assets/passives/
 !assets/oils/
 !assets/scrolls/
 # ui sprites: re-include the ui/ dir, ignore its subsets, keep only what the UI loads
@@ -32,9 +32,9 @@ assets/*
 assets/ui/*
 !assets/ui/paperdoll/
 !assets/ui/calibers/
-# still local-only: oils, scrolls, consumables, manuals, organs, valuables, currencies,
-# ammo, keys, misc, abstract, specials, passives, storage; ui/{chrome,damage_types,
-# portraits,status}; icon_manifest.csv, ui_manifest.csv
+# still local-only: gadgets (Unfinished, not in-game), consumables, manuals, organs,
+# valuables, currencies, ammo, keys, misc, abstract, specials, storage;
+# ui/{chrome,damage_types,portraits,status}; icon_manifest.csv, ui_manifest.csv
 
 # internal dev docs — kept local, never on the public site
 SPEC_PLAN.md

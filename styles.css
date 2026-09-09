@@ -32,8 +32,9 @@ img { max-width: 100%; }
 .paperdoll { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.5rem 0 1.7rem; }
 .pd-row { display: flex; align-items: center; justify-content: center; gap: clamp(0.4rem, 2.5vw, 1rem); }
 .pd-mid { gap: clamp(0.4rem, 2.5vw, 1.2rem); }
-.pd-side { width: clamp(56px, 18vw, 80px); flex: none; }
 .pd-feet { gap: clamp(0.4rem, 2vw, 0.8rem); }
+/* passive row sits below the feet; extra top gap clears the foot labels (rendered below the shoes) */
+.pd-passives { gap: clamp(0.35rem, 2vw, 0.7rem); margin-top: clamp(0.7rem, 3vw, 1.1rem); }
 .slot { position: relative; padding: 0; border: none; background: none; cursor: pointer; display: block; flex: none; }
 .slot::before { content: ""; position: absolute; inset: 0; background-color: var(--slot-line);
   -webkit-mask: var(--shape) center/contain no-repeat; mask: var(--shape) center/contain no-repeat; transition: background-color 0.15s; }
@@ -43,6 +44,12 @@ img { max-width: 100%; }
 .slot .slot-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
   font-size: 0.56rem; line-height: 1.1; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; pointer-events: none; padding: 0 0.25rem; }
 .slot.filled .slot-label { display: none; }
+/* naming-convention set tag on a filled set piece (display only — no combined bonus in-game) */
+.slot .slot-set { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); z-index: 2;
+  font-size: 0.44rem; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
+  padding: 2px 4px; border-radius: 3px; background: rgba(0,0,0,0.72); color: var(--amber);
+  white-space: nowrap; pointer-events: none; }
+.slot-foot .slot-set { bottom: auto; top: 2px; }
 .slot-head { width: clamp(84px, 28vw, 122px); aspect-ratio: 164/136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
 .slot-torso { width: clamp(116px, 40vw, 168px); aspect-ratio: 192/184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
 .slot-foot { width: clamp(64px, 23vw, 92px); aspect-ratio: 100/76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
@@ -52,7 +59,9 @@ img { max-width: 100%; }
    cleanly or matches side-to-side. Place both foot labels centred BELOW the shape instead:
    identical centring, no clipping with the odd silhouette. */
 .slot-foot .slot-label { inset: 100% 0 auto 0; align-items: flex-start; padding-top: 0.2rem; transform: none; white-space: nowrap; }
-.slot-gadget { width: clamp(56px, 18vw, 80px); aspect-ratio: 1; --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
+/* passive-item slots: reuse the square slot silhouette; four across, smaller than the gear slots */
+.slot-passive { width: clamp(50px, 16vw, 68px); aspect-ratio: 1; --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
+.slot-passive .slot-label { font-size: 0.48rem; }
 
 /* ---------- weapon cards ---------- */
 .weapon-slots { display: flex; flex-direction: column; gap: 0.8rem; }

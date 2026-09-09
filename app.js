@@ -18,7 +18,7 @@
   const ITEMS = DATA.items || [], WEAPONS = DATA.weapons || [], ENCH = DATA.enchantments || [];
   const ENEMIES = DATA.enemies || [], CALIBERS = DATA.calibers || [], PBASE = DATA.playerBase || {};
   const ENGINE = Object.assign({ critMult: 2, clampMin: 0.01, clampMax: 10 }, DATA.engine);
-  const STORAGE_KEY = "sulfurbc.loadout", SCHEMA = 3;
+  const STORAGE_KEY = "sulfurbc.loadout", SCHEMA = 4;
   const WEAPON_SLOTS = 2, MAX_ENCH = 5;
   const ATTACH_SLOTS = ["muzzle", "sight", "action"];
   const ATTACH_LABEL = { muzzle: "Muzzle", sight: "Sight", action: "Action", caliber: "Caliber" };
@@ -35,8 +35,10 @@
     CritChance: "Crit", Durability: "Utility", Knockback: "Utility", Weight: "Utility",
   };
   const OIL_BUCKET_ORDER = ["Damage", "Fire Rate", "Accuracy", "Projectile", "Crit", "Utility", "Other", "Scroll"];
-  const EQUIP_ORDER = ["head", "torso", "footL", "footR", "gadget"];
-  const SLOT_LABELS = { head: "Head", torso: "Torso", footL: "Left Foot", footR: "Right Foot", gadget: "Gadget" };
+  const PASSIVE_SLOTS = ["passive0", "passive1", "passive2", "passive3"];
+  const EQUIP_ORDER = ["head", "torso", "footL", "footR", ...PASSIVE_SLOTS];
+  const SLOT_LABELS = { head: "Head", torso: "Torso", footL: "Left Foot", footR: "Right Foot",
+    passive0: "Passive 1", passive1: "Passive 2", passive2: "Passive 3", passive3: "Passive 4" };
   const DMG_TO_RESIST = { Fire:"Fire",Frost:"Frost",Electric:"Electric",Poison:"Poison",Explosive:"Explosive",
     Holy:"Holy",Shadow:"Shadow",Earth:"Earth",Punish:"Punish",Bleed:"Bleed",Petrified:"Petrified",Charm:"Charm" };
 
@@ -84,7 +86,8 @@
   // --- state ---
   function freshWeapon() { return { weapon: null, caliber: null, attachments: { muzzle: null, sight: null, action: null }, enchants: [] }; }
   function freshState() {
-    return { schema: SCHEMA, equipment: { head: null, torso: null, footL: null, footR: null, gadget: null },
+    return { schema: SCHEMA, equipment: { head: null, torso: null, footL: null, footR: null,
+        passive0: null, passive1: null, passive2: null, passive3: null },
       weapons: Array.from({ length: WEAPON_SLOTS }, freshWeapon), melee: freshWeapon(), enemy: null, aimPart: null };
   }
   let state = load();
@@ -212,8 +215,9 @@
   function paintSlot(node, item, lbl) {
     node.classList.toggle("filled", !!item);
     node.innerHTML = (item && item.icon ? `<img class="slot-icon" src="${item.icon}" alt="">` : "") +
-      `<span class="slot-label">${item ? item.name : lbl}</span>`;
-    node.title = item ? item.name + " — click to change" : "Select " + lbl;
+      `<span class="slot-label">${item ? item.name : lbl}</span>` +
+      (item && item.set ? `<span class="slot-set">${item.set}</span>` : "");
+    node.title = item ? `${item.name}${item.set ? ` · ${item.set} set` : ""} — click to change` : "Select " + lbl;
   }
   function renderPaperdoll() {
     for (const [slot, lbl] of Object.entries(SLOT_LABELS)) {
@@ -533,7 +537,7 @@
   // keyword blob for search: the stat labels an item touches, so e.g. "recoil"/"armor" find items
   const kw = (...parts) => parts.filter(Boolean).join(" ").toLowerCase();
   const modKw = (mods) => (mods || []).map((m) => label(m.attr)).join(" ");
-  const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon, keywords: kw(i.name, modKw(i.mods), i.tags) }));
+  const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.set ? " · " + i.set + " set" : ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon, keywords: kw(i.name, i.set, modKw(i.mods), i.tags) }));
   const attachOpts = (keys) => keys.map((k) => itemByKey.get(k)).filter(Boolean)
     .map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.subtype ? i.subtype + (i.mag ? " · " + i.mag + "x" : "") : (i.quality || ""), icon: i.icon, filter: i.subtype || null, keywords: kw(i.name, i.subtype, modKw(i.attachMods)) }))
     .sort((a, b) => (a.filter || "").localeCompare(b.filter || "") || (a.ref.mag || 0) - (b.ref.mag || 0) || a.name.localeCompare(b.name));
@@ -545,9 +549,13 @@
   // =====================================================================
   //  Slot -> selector wiring
   // =====================================================================
+  // paperdoll slot -> the item pool it draws from (feet slots share one pool; the 4 passive
+  // slots all draw from the single "passive" pool)
+  const poolForSlot = (slot) => (slot === "footL" || slot === "footR") ? "feet"
+    : slot.startsWith("passive") ? "passive" : slot;
   function selectEquip(slot, lbl) {
     openSelector({ title: "Select " + lbl, allowClear: true, current: state.equipment[slot],
-      opts: indexed(itemOpts(slot === "footL" || slot === "footR" ? "feet" : slot)),
+      opts: indexed(itemOpts(poolForSlot(slot))),
       statLines: (o) => modLines(o.ref.mods),
       onPick: (o) => { state.equipment[slot] = o.key; }, onClear: () => { state.equipment[slot] = null; } });
   }
