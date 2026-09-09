@@ -119,7 +119,8 @@ img { max-width: 100%; }
 .lv .lvv.pos { color: var(--good); } .lv .lvv.neg { color: var(--bad); }
 
 /* ---------- weapon info: docked drawer over the bottom half of the planner ---------- */
-.overlay.wd-overlay { inset: auto 0 0 0; height: 50dvh; z-index: 40; background: none; align-items: stretch; padding: 0; }
+/* svh (not dvh) so the drawer doesn't resize as the mobile toolbar shows/hides */
+.overlay.wd-overlay { inset: auto 0 0 0; height: 50vh; height: 50svh; z-index: 40; background: none; align-items: stretch; padding: 0; }
 .overlay-box.wd-box { height: 100%; max-height: 100%; max-width: 900px; margin: 0 auto; border-radius: 12px 12px 0 0; box-shadow: 0 -8px 28px rgba(0,0,0,0.55); }
 .wd-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 0.7rem 0.9rem; }
 .wd-sub-h { font-size: 0.64rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
@@ -164,6 +165,7 @@ img { max-width: 100%; }
 .opt:hover:not(.disabled) { border-color: var(--amber); }
 .opt.disabled { opacity: 0.4; cursor: not-allowed; }
 .opt.dupe { opacity: 1; border-color: var(--amber); background: rgba(224,169,27,0.14); cursor: not-allowed; }   /* already on this weapon */
+.opt.selected { border-color: var(--amber); box-shadow: inset 0 0 0 2px var(--amber); background: rgba(224,169,27,0.12); }  /* currently equipped — re-pick to remove */
 .opt img, .opt .opt-noimg { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
 .opt .opt-noimg { border: 1px dashed var(--grid-line); border-radius: 4px; }
 .opt .opt-name { font-size: 0.74rem; line-height: 1.15; }

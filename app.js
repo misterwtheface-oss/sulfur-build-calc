@@ -365,19 +365,21 @@
       els.overlayFilters.innerHTML = [`<button class="fchip on" data-f="">All</button>`]
         .concat(next.filters.map((f) => `<button class="fchip" data-f="${f}">${f}</button>`)).join("");
     } else { els.overlayFilters.hidden = true; els.overlayFilters.innerHTML = ""; }
+    els.overlayList.style.gridTemplateColumns = "repeat(" + (next.cols || 4) + ", 1fr)";
     renderOptions();
     els.overlay.hidden = false;
-    els.overlaySearch.focus({ preventScroll: true });
+    // no auto-focus: focusing the search field pops the mobile keyboard and obscures the list
   }
   const closeSelector = () => { els.overlay.hidden = true; ctx = null; };
 
   // image-forward tile: icon on top, name below, no superfluous sub-text
-  const optHTML = (o) => `<button class="opt${o.disabled ? " disabled" : ""}${o.dupe ? " dupe" : ""}" data-i="${o._i}" ${o.disabled ? "disabled" : ""} ${o.dupe ? 'title="Already applied to this weapon"' : ""}>${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span class="opt-name">${o.name}</span></button>`;
+  const optHTML = (o) => `<button class="opt${o.disabled ? " disabled" : ""}${o.dupe ? " dupe" : ""}${ctx && o.key === ctx.current ? " selected" : ""}" data-i="${o._i}" ${o.disabled ? "disabled" : ""} ${o.dupe ? 'title="Already applied to this weapon"' : ""}>${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span class="opt-name">${o.name}</span></button>`;
   function renderOptions() {
     if (!ctx) return;
     const q = (els.overlaySearch.value || "").toLowerCase();
     const keyOf = ctx.filterKey || ((o) => o.filter);
-    const list = ctx.opts.filter((o) => (!q || o.name.toLowerCase().includes(q)) && (!activeFilter || keyOf(o) === activeFilter));
+    // search matches the name OR the item's stat keywords (e.g. "recoil", "armor")
+    const list = ctx.opts.filter((o) => (!q || o.name.toLowerCase().includes(q) || (o.keywords || "").includes(q)) && (!activeFilter || keyOf(o) === activeFilter));
     let html = ctx.allowClear ? `<button class="opt clear-opt" data-clear="1">✕ Clear slot</button>` : "";
     if (ctx.groupBy && !activeFilter) {
       const order = ctx.groupOrder || [...new Set(list.map(ctx.groupBy))];
@@ -399,7 +401,7 @@
       `<div class="od-head">${o.icon ? `<img src="${o.icon}" alt="">` : ""}<div><div class="od-name">${o.name}</div>${o.sub ? `<div class="od-sub">${o.sub}</div>` : ""}</div></div>` +
       (lines.length ? `<div class="od-stats">${lines.map((l) => `<div class="od-stat"><span class="${tipCls(l.tipKey || l.k).trim()}"${tipAttr(l.tipKey || l.k)}>${l.k}</span><span class="${l.cls || ""}">${l.v}</span></div>`).join("")}</div>` : `<div class="muted small">No stat effects.</div>`) +
       `</div>` +
-      `<button class="od-equip" data-equip="1" type="button" ${o.disabled ? "disabled" : ""}>${o.disabled ? "Unavailable" : "Equip"}</button>`;
+      `<button class="od-equip" data-equip="1" type="button" ${o.disabled ? "disabled" : ""}>${o.disabled ? "Unavailable" : (ctx && o.key === ctx.current ? "Remove" : "Equip")}</button>`;
   }
   const modLines = (mods) => (mods || []).map((m) => {
     const good = attrMeta(m.attr).lowerBetter ? m.value < 0 : m.value > 0;
@@ -421,20 +423,23 @@
   };
 
   const indexed = (opts) => { opts.forEach((o, i) => (o._i = i)); return opts; };
-  const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon }));
+  // keyword blob for search: the stat labels an item touches, so e.g. "recoil"/"armor" find items
+  const kw = (...parts) => parts.filter(Boolean).join(" ").toLowerCase();
+  const modKw = (mods) => (mods || []).map((m) => label(m.attr)).join(" ");
+  const itemOpts = (slot) => ITEMS.filter((i) => i.slot === slot).map((i) => ({ ref: i, key: i.key, name: i.name, sub: `${i.quality || ""}${i.size ? " · " + i.size.w + "×" + i.size.h : ""}`, icon: i.icon, keywords: kw(i.name, modKw(i.mods), i.tags) }));
   const attachOpts = (keys) => keys.map((k) => itemByKey.get(k)).filter(Boolean)
-    .map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.subtype ? i.subtype + (i.mag ? " · " + i.mag + "x" : "") : (i.quality || ""), icon: i.icon, filter: i.subtype || null }))
+    .map((i) => ({ ref: i, key: i.key, name: i.name, sub: i.subtype ? i.subtype + (i.mag ? " · " + i.mag + "x" : "") : (i.quality || ""), icon: i.icon, filter: i.subtype || null, keywords: kw(i.name, i.subtype, modKw(i.attachMods)) }))
     .sort((a, b) => (a.filter || "").localeCompare(b.filter || "") || (a.ref.mag || 0) - (b.ref.mag || 0) || a.name.localeCompare(b.name));
-  const weaponOpts = () => WEAPONS.filter((w) => RANGED_TYPES.has(w.weaponType)).map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon }));
-  const meleeOpts = () => WEAPONS.filter((w) => w.weaponType === "Melee").map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon }));
-  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: e.icon, filter: e.group }));
-  const caliberOpts = () => CALIBERS.filter((c) => c.hasChisel).map((c) => ({ ref: c, calId: c.id, name: c.label, sub: `${c.baseDamage} base dmg${c.pellets > 1 ? " · " + c.pellets + " pellets" : ""}`, icon: c.icon }));
+  const weaponOpts = () => WEAPONS.filter((w) => RANGED_TYPES.has(w.weaponType)).map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, keywords: kw(w.name, w.weaponType, w.damageType, w.caliber) }));
+  const meleeOpts = () => WEAPONS.filter((w) => w.weaponType === "Melee").map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, keywords: kw(w.name, w.weaponType, w.damageType) }));
+  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: e.icon, filter: e.group, keywords: kw(e.name, e.group, modKw(e.mods)) }));
+  const caliberOpts = () => CALIBERS.filter((c) => c.hasChisel).map((c) => ({ ref: c, key: "cal" + c.id, calId: c.id, name: c.label, sub: `${c.baseDamage} base dmg${c.pellets > 1 ? " · " + c.pellets + " pellets" : ""}`, icon: c.icon, keywords: kw(c.label, "ammo caliber chisel") }));
 
   // =====================================================================
   //  Slot -> selector wiring
   // =====================================================================
   function selectEquip(slot, lbl) {
-    openSelector({ title: "Select " + lbl, allowClear: true,
+    openSelector({ title: "Select " + lbl, allowClear: true, current: state.equipment[slot],
       opts: indexed(itemOpts(slot === "footL" || slot === "footR" ? "feet" : slot)),
       statLines: (o) => modLines(o.ref.mods),
       onPick: (o) => { state.equipment[slot] = o.key; }, onClear: () => { state.equipment[slot] = null; } });
@@ -445,7 +450,7 @@
   const assignSlot = (loc, obj) => { if (loc === "melee") state.melee = obj; else state.weapons[Number(loc)] = obj; };
   function openWeaponSelector(loc) {
     const isMelee = loc === "melee";
-    openSelector({ title: isMelee ? "Select melee" : "Select weapon", allowClear: true,
+    openSelector({ title: isMelee ? "Select melee" : "Select weapon", allowClear: true, current: slotFromLoc(loc).weapon,
       opts: indexed(isMelee ? meleeOpts() : weaponOpts()),
       groupBy: isMelee ? null : (o) => o.ref.weaponType, groupOrder: isMelee ? null : WEAPON_GROUP_ORDER,
       groupLabel: (t) => WEAPON_TYPE_LABEL[t] || t,
@@ -492,12 +497,13 @@
       if (keys.length === 1) { slot.attachments[s] = slot.attachments[s] ? null : keys[0]; renderAll(); return; }  // one option -> no overlay
       const opts = indexed(attachOpts(keys));
       const subs = [...new Set(opts.map((o) => o.filter).filter(Boolean))];
-      openSelector({ title: ATTACH_LABEL[s] + " attachment", opts, filters: subs.length > 1 ? subs : null,
-        statLines: (o) => modLines(o.ref.attachMods), onPick: (o) => { slot.attachments[s] = o.key; } });
+      openSelector({ title: ATTACH_LABEL[s] + " attachment", opts, filters: subs.length > 1 ? subs : null, current: slot.attachments[s],
+        statLines: (o) => modLines(o.ref.attachMods), onPick: (o) => { slot.attachments[s] = o.key; }, onClear: () => { slot.attachments[s] = null; } });
     } else if (act === "caliber") {
       const w = weaponByKey.get(slot.weapon); if (!w || !w.canModCaliber) return;
-      openSelector({ title: "Chamber Chisel — caliber", allowClear: slot.caliber != null,
-        opts: indexed(caliberOpts()),
+      const curCal = slot.caliber != null ? slot.caliber : w.caliberId;   // can't pick the round it already chambers
+      const opts = indexed(caliberOpts()).map((o) => o.calId === curCal ? Object.assign(o, { disabled: true, dupe: true, sub: o.sub + " · current" }) : o);
+      openSelector({ title: "Chamber Chisel — caliber", allowClear: slot.caliber != null, opts,
         statLines: (o) => { const c = o.ref; return [{ k: "Base damage", v: fmt(c.baseDamage) }, { k: "Pellets", v: c.pellets }, { k: "Knockback", v: fmt(c.knockback) }]; },
         onPick: (o) => { slot.caliber = o.calId; }, onClear: () => { slot.caliber = null; } });
     } else if (act === "ench") {
@@ -507,7 +513,7 @@
       const dupe = (o) => applied.has(o.key) ? Object.assign(o, { disabled: true, dupe: true }) : o;
       const oils = enchOpts(false).map(dupe);
       const scrolls = enchOpts(true).map((o) => applied.has(o.key) ? dupe(o) : (hasScroll ? Object.assign(o, { disabled: true, sub: o.sub + " · 1 scroll max" }) : o));
-      openSelector({ title: "Add oil / scroll", opts: indexed([...oils, ...scrolls]),
+      openSelector({ title: "Add oil / scroll", opts: indexed([...oils, ...scrolls]), cols: 6,
         filters: ["Oils", "Scrolls"], filterKey: (o) => (o.ref.isElemental ? "Scrolls" : "Oils"),
         groupBy: (o) => (o.ref.isElemental ? "Scroll" : (OIL_BUCKET[o.ref.group] || "Other")),
         groupOrder: OIL_BUCKET_ORDER, statLines: (o) => modLines(o.ref.mods),
@@ -531,7 +537,9 @@
   els.overlayDetail.addEventListener("click", (ev) => {
     if (!ev.target.closest("[data-equip]") || !ctx) return;
     const o = els.overlayDetail._item; if (!o || o.disabled) return;
-    ctx.onPick(o); closeSelector(); renderAll();
+    if (o.key === ctx.current && ctx.onClear) ctx.onClear();   // re-picking the equipped item deselects it
+    else ctx.onPick(o);
+    closeSelector(); renderAll();
   });
   els.overlaySearch.addEventListener("input", renderOptions);
   els.overlayClose.addEventListener("click", closeSelector);
