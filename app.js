@@ -61,6 +61,13 @@
       .replace(/^ProjectileApply/, "Applies ").replace(/^ProjectileOnHit/, "On Hit: ").replace(/^Projectile/, "Projectile "));
   }
 
+  // --- plain-language tooltips (glossary.js), keyed by derived display label or attribute tag ---
+  const GLOSS = window.SULFUR_GLOSSARY || { attr: {}, derived: {} };
+  const tip = (key) => GLOSS.derived[key] || GLOSS.attr[key] || "";
+  const escAttr = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const tipAttr = (key) => { const d = tip(key); return d ? ` title="${escAttr(d)}" data-tip="${escAttr(d)}"` : ""; };
+  const tipCls = (key) => (tip(key) ? " tip-label" : "");
+
   const el = (id) => document.getElementById(id);
   const els = {
     weaponSlots: el("weapon-slots"), meleeSlot: el("melee-slot"), arsenal: document.querySelector(".arsenal"),
@@ -262,7 +269,7 @@
     }
 
     const comp = w ? computeWeapon(slot) : null;
-    const liveHtml = comp ? comp.stats.map((r) => `<div class="lv"><span class="lk">${r.k}</span><span class="lvv ${statCls(r)}">${statVal(r)}</span></div>`).join("") : "";
+    const liveHtml = comp ? comp.stats.map((r) => `<div class="lv"><span class="lk${tipCls(r.k)}"${tipAttr(r.k)}>${r.k}</span><span class="lvv ${statCls(r)}">${statVal(r)}</span></div>`).join("") : "";
     const emptyLbl = isMelee ? "Melee slot" : "Weapon slot " + (Number(loc) + 1);
     box.innerHTML = `
       <div class="ws-head" data-act="weapon-info" data-loc="${loc}">
@@ -289,7 +296,7 @@
     if (!comp) { els.wdOverlay.hidden = true; return; }
     const rows = comp.stats.map((r) => {
       const delta = changed(r) && !r.flag ? `<span class="wd-delta ${statCls(r)}">${r.val > r.base ? "▲" : "▼"}</span>` : "";
-      return `<tr><td>${r.k}</td><td class="wd-base">${r.flag ? (r.base > 0 ? "ON" : "—") : fmt(r.base) + (r.unit || "")}</td><td class="wd-mod ${statCls(r)}">${statVal(r)} ${delta}</td></tr>`;
+      return `<tr><td class="${tipCls(r.k).trim()}"${tipAttr(r.k)}>${r.k}</td><td class="wd-base">${r.flag ? (r.base > 0 ? "ON" : "—") : fmt(r.base) + (r.unit || "")}</td><td class="wd-mod ${statCls(r)}">${statVal(r)} ${delta}</td></tr>`;
     }).join("");
     const others = comp.other.length ? `<div class="wd-other">${comp.other.map((o) => `${label(o.attr)}: ${fmt(o.val)}`).join(" · ")}</div>` : "";
     els.wdTitle.textContent = comp.w.name + (comp.cal ? " · " + comp.cal.label : "");
@@ -317,7 +324,7 @@
         : m.type === "PercentAdd" ? (m.value > 0 ? "+" : "") + round(m.value * 100, 1) + "%" : "×" + round(1 + m.value, 3)).join(" ");
     };
     const head = `<tr><th>Stat</th>${cols.map((c) => `<th class="em-col ${c.item ? "on" : ""}">${SLOT_LABELS[c.slot].replace(" ", "<br>")}</th>`).join("")}</tr>`;
-    const body = attrs.length ? attrs.map((a) => `<tr><td class="em-attr">${label(a)}</td>${cols.map((c) => {
+    const body = attrs.length ? attrs.map((a) => `<tr><td class="em-attr${tipCls(a)}"${tipAttr(a)}>${label(a)}</td>${cols.map((c) => {
       const v = modOf(c.item, a); const good = attrMeta(a).lowerBetter ? /-/.test(v) : /\+|×[1-9]/.test(v) && !/×0/.test(v);
       return `<td class="${v ? (good ? "pos" : /-/.test(v) ? "neg" : "") : "em-empty"}">${v || "·"}</td>`;
     }).join("")}</tr>`).join("") : `<tr><td colspan="${cols.length + 1}" class="muted small">Equip armour to compare stat contributions.</td></tr>`;
@@ -390,13 +397,13 @@
     els.overlayDetail.innerHTML =
       `<div class="od-scroll">` +
       `<div class="od-head">${o.icon ? `<img src="${o.icon}" alt="">` : ""}<div><div class="od-name">${o.name}</div>${o.sub ? `<div class="od-sub">${o.sub}</div>` : ""}</div></div>` +
-      (lines.length ? `<div class="od-stats">${lines.map((l) => `<div class="od-stat"><span>${l.k}</span><span class="${l.cls || ""}">${l.v}</span></div>`).join("")}</div>` : `<div class="muted small">No stat effects.</div>`) +
+      (lines.length ? `<div class="od-stats">${lines.map((l) => `<div class="od-stat"><span class="${tipCls(l.tipKey || l.k).trim()}"${tipAttr(l.tipKey || l.k)}>${l.k}</span><span class="${l.cls || ""}">${l.v}</span></div>`).join("")}</div>` : `<div class="muted small">No stat effects.</div>`) +
       `</div>` +
       `<button class="od-equip" data-equip="1" type="button" ${o.disabled ? "disabled" : ""}>${o.disabled ? "Unavailable" : "Equip"}</button>`;
   }
   const modLines = (mods) => (mods || []).map((m) => {
     const good = attrMeta(m.attr).lowerBetter ? m.value < 0 : m.value > 0;
-    return { k: label(m.attr),
+    return { k: label(m.attr), tipKey: m.attr,
       v: m.type === "Flat" ? (m.value > 0 ? "+" : "") + round(m.value, 3) : m.type === "PercentAdd" ? (m.value > 0 ? "+" : "") + round(m.value * 100, 1) + "%" : "×" + round(1 + m.value, 3),
       cls: m.value === 0 ? "" : (good ? "pos" : "neg") };
   });
@@ -546,6 +553,20 @@
     else if (!els.wdOverlay.hidden) closeWeaponDetail();
     else if (!els.dpsOverlay.hidden) els.dpsOverlay.hidden = true;
   });
+
+  // tap-tooltip: any element with data-tip shows a floating glossary note (mobile); desktop also gets native title
+  const tipEl = el("tooltip");
+  document.addEventListener("click", (ev) => {
+    const t = ev.target.closest("[data-tip]");
+    if (!t) { tipEl.hidden = true; return; }
+    tipEl.textContent = t.getAttribute("data-tip");
+    tipEl.hidden = false;
+    const r = t.getBoundingClientRect(), w = Math.min(260, window.innerWidth - 16);
+    tipEl.style.maxWidth = w + "px";
+    tipEl.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left)) + "px";
+    tipEl.style.top = Math.min(window.innerHeight - 90, r.bottom + 6) + "px";
+  });
+  document.addEventListener("scroll", () => { tipEl.hidden = true; }, true);
   els.clear.addEventListener("click", () => { state = freshState(); focusedWeapon = null; els.enemy.value = ""; renderAll(); });
 
   // --- init ---

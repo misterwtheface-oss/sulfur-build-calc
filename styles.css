@@ -203,6 +203,13 @@ img { max-width: 100%; }
 .select:focus, .search:focus { outline: none; border-color: var(--amber); }
 .btn-ghost { background: none; color: var(--muted); border: 1px solid var(--edge); border-radius: 5px; padding: 0.3rem 0.7rem; font-size: 0.8rem; cursor: pointer; }
 .btn-ghost:hover { color: var(--amber); border-color: var(--amber); }
+/* glossary tooltips: dotted-underline cue on labels + a floating note (tap on mobile / hover on desktop) */
+.tip-label { cursor: help; text-decoration: underline dotted rgba(154,138,106,0.55); text-underline-offset: 2px; }
+.tooltip { position: fixed; z-index: 120; max-width: 260px; background: var(--panel-2); border: 1px solid var(--amber);
+  border-radius: 6px; padding: 0.45rem 0.6rem; font-size: 0.72rem; line-height: 1.35; color: var(--text);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.55); pointer-events: none; }
+.tooltip[hidden] { display: none; }
+
 .muted { color: var(--muted); } .small { font-size: 0.72rem; }
 .app-footer { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.7rem 1rem; margin-top: 0.5rem; border-top: 1px solid var(--edge); }
 
