@@ -33,7 +33,7 @@ img { max-width: 100%; }
 .pd-row { display: flex; align-items: center; justify-content: center; gap: clamp(0.4rem, 2.5vw, 1rem); }
 .pd-mid { gap: clamp(0.4rem, 2.5vw, 1.2rem); }
 .pd-feet { gap: clamp(0.4rem, 2vw, 0.8rem); }
-/* passive row sits below the feet; extra top gap clears the foot labels (rendered below the shoes) */
+/* passive row sits below the feet with a little breathing room */
 .pd-passives { gap: clamp(0.35rem, 2vw, 0.7rem); margin-top: clamp(0.7rem, 3vw, 1.1rem); }
 .slot { position: relative; padding: 0; border: none; background: none; cursor: pointer; display: block; flex: none; }
 .slot::before { content: ""; position: absolute; inset: 0; background-color: var(--slot-line);
@@ -54,11 +54,12 @@ img { max-width: 100%; }
 .slot-torso { width: clamp(116px, 40vw, 168px); aspect-ratio: 192/184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
 .slot-foot { width: clamp(64px, 23vw, 92px); aspect-ratio: 100/76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
 .slot-foot-l::before { transform: scaleX(-1); }
-/* offset each foot's label INTO its shoe body (opposite sides) */
-/* the shoe shape is asymmetric (and mirrored L/R), so an overlaid label never centres
-   cleanly or matches side-to-side. Place both foot labels centred BELOW the shape instead:
-   identical centring, no clipping with the odd silhouette. */
-.slot-foot .slot-label { inset: 100% 0 auto 0; align-items: flex-start; padding-top: 0.2rem; transform: none; white-space: nowrap; }
+/* Foot labels live INSIDE each slot's invisible square container, anchored to the
+   bottom (small offset off the border) and pushed to the inner edge: left foot's label
+   right-aligned, right foot's label left-aligned, each 10px off that edge. */
+.slot-foot .slot-label { inset: 0; align-items: flex-end; padding: 0 10px 6px; transform: none; white-space: nowrap; }
+.slot-foot-l .slot-label { justify-content: flex-end; text-align: right; }
+.slot-foot-r .slot-label { justify-content: flex-start; text-align: left; }
 /* passive-item slots: reuse the square slot silhouette; four across, smaller than the gear slots */
 .slot-passive { width: clamp(50px, 16vw, 68px); aspect-ratio: 1; --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
 .slot-passive .slot-label { font-size: 0.48rem; }
