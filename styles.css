@@ -29,7 +29,7 @@ img { max-width: 100%; }
 .panel > h2 { font-size: 0.7rem; margin: 0 0 0.7rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.12em; }
 
 /* ---------- paperdoll ---------- */
-.paperdoll { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.5rem 0 1rem; }
+.paperdoll { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.5rem 0 1.7rem; }
 .pd-row { display: flex; align-items: center; justify-content: center; gap: clamp(0.4rem, 2.5vw, 1rem); }
 .pd-mid { gap: clamp(0.4rem, 2.5vw, 1.2rem); }
 .pd-side { width: clamp(56px, 18vw, 80px); flex: none; }
@@ -48,9 +48,10 @@ img { max-width: 100%; }
 .slot-foot { width: clamp(64px, 23vw, 92px); aspect-ratio: 100/76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
 .slot-foot-l::before { transform: scaleX(-1); }
 /* offset each foot's label INTO its shoe body (opposite sides) */
-/* nudge each foot label toward the centre (into the shoe body): left→right, right→left */
-.slot-foot-l .slot-label { transform: translateX(12%); }
-.slot-foot-r .slot-label { transform: translateX(-12%); }
+/* the shoe shape is asymmetric (and mirrored L/R), so an overlaid label never centres
+   cleanly or matches side-to-side. Place both foot labels centred BELOW the shape instead:
+   identical centring, no clipping with the odd silhouette. */
+.slot-foot .slot-label { inset: 100% 0 auto 0; align-items: flex-start; padding-top: 0.2rem; transform: none; white-space: nowrap; }
 .slot-gadget { width: clamp(56px, 18vw, 80px); aspect-ratio: 1; --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
 
 /* ---------- weapon cards ---------- */
