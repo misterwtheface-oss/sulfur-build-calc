@@ -41,6 +41,7 @@ SPEC_PLAN.md
 WIKI_CONTEXT.md
 Progress.md
 README.md
+HITMAP_FEATURE.md
 
 # the datamine workspace lives as a SIBLING and is never committed here
 _*_extract/

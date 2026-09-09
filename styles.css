@@ -155,20 +155,20 @@ img { max-width: 100%; }
 .fchip { padding: 0.2rem 0.55rem; font-size: 0.7rem; cursor: pointer; background: var(--panel-2); color: var(--muted); border: 1px solid var(--grid-line); border-radius: 999px; }
 .fchip.on { color: #17130a; background: var(--amber); border-color: var(--amber); font-weight: 600; }
 .overlay-body { flex: 1; min-height: 0; display: flex; gap: 0.6rem; padding: 0.6rem; }
-.overlay-list { flex: 1 1 60%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; align-content: start; }
+.overlay-list { flex: 1 1 60%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem; align-content: start; }
 /* detail = scrolling head+stats with a PINNED Equip footer (never scrolled out of reach) */
 .overlay-detail { flex: 1 1 40%; min-height: 0; display: flex; flex-direction: column; border-left: 1px solid var(--edge); padding-left: 0.6rem; }
 .od-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 .od-empty { padding: 1rem 0; }
 /* image-forward tile: big image on top, name below, no superfluous sub-text */
-.opt { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.5rem 0.3rem; background: var(--panel-2); border: 1px solid var(--grid-line); border-radius: 5px; cursor: pointer; text-align: center; color: var(--text); }
+.opt { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.5rem 0.3rem; background: var(--panel-2); border: 1px solid var(--grid-line); border-radius: 5px; cursor: pointer; text-align: center; color: var(--text); }
 .opt:hover:not(.disabled) { border-color: var(--amber); }
 .opt.disabled { opacity: 0.4; cursor: not-allowed; }
 .opt.dupe { opacity: 1; border-color: var(--amber); background: rgba(224,169,27,0.14); cursor: not-allowed; }   /* already on this weapon */
 .opt.selected { border-color: var(--amber); box-shadow: inset 0 0 0 2px var(--amber); background: rgba(224,169,27,0.12); }  /* currently equipped — re-pick to remove */
 .opt img, .opt .opt-noimg { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
 .opt .opt-noimg { border: 1px dashed var(--grid-line); border-radius: 4px; }
-.opt .opt-name { font-size: 0.74rem; line-height: 1.15; }
+.opt .opt-name { font-size: 0.74rem; line-height: 1.15; overflow-wrap: anywhere; max-width: 100%; }
 .opt.clear-opt { flex-direction: row; justify-content: center; color: var(--bad); border-style: dashed; grid-column: 1 / -1; }
 /* group header spanning the grid (weapon type sections) */
 .opt-group { grid-column: 1 / -1; font-size: 0.64rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.09em; padding: 0.5rem 0.1rem 0.15rem; border-bottom: 1px solid var(--edge); }
@@ -201,6 +201,31 @@ img { max-width: 100%; }
 .row .k { color: var(--muted); } .row .v { font-variant-numeric: tabular-nums; font-weight: 600; }
 .row.big .v { color: var(--amber); font-size: 1.1rem; } .row.ttk .v { color: var(--good); }
 
+/* ---------- DPS target panel: hitmap + stats + aim-point selector ---------- */
+.target-panel { margin-bottom: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--edge); }
+.target-panel[hidden] { display: none; }
+.tp-grid { display: flex; gap: 0.9rem; align-items: stretch; }
+.tp-map { flex: none; width: clamp(120px, 34vw, 176px); background: radial-gradient(90% 90% at 50% 40%, rgba(224,169,27,0.06), rgba(0,0,0,0.25));
+  border: 1px solid var(--edge); border-radius: 8px; padding: 0.4rem; display: flex; align-items: center; justify-content: center; }
+.hitmap-svg { width: 100%; height: auto; max-height: 220px; display: block; }
+.hitmap-svg polygon { transition: fill-opacity 0.1s; }
+.tp-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.tp-name { font-weight: 700; font-size: 1rem; color: var(--text); }
+.tp-sub { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.tp-stat { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.8rem; padding: 0.06rem 0; }
+.tp-stat .k { color: var(--muted); } .tp-stat .v { font-variant-numeric: tabular-nums; text-align: right; }
+.tp-note { font-size: 0.7rem; margin-top: 0.2rem; }
+.tp-note.bad { color: var(--bad); } .tp-note.muted { color: var(--muted); }
+.aim-row { display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap; }
+.aim-label { font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; flex: none; }
+.aim-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.aim-chip { padding: 0.2rem 0.55rem; font-size: 0.72rem; cursor: pointer; background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--grid-line); border-radius: 999px; }
+.aim-chip:hover { border-color: var(--amber); }
+.aim-chip.on { color: #17130a; background: var(--amber); border-color: var(--amber); font-weight: 600; }
+.aim-chip .am-mult { opacity: 0.75; font-variant-numeric: tabular-nums; }
+.aim-chip.on .am-mult { opacity: 0.9; }
+
 .select, .search { width: 100%; padding: 0.4rem 0.55rem; font-size: 0.85rem; background: var(--bg); color: var(--text); border: 1px solid var(--edge); border-radius: 5px; }
 .select:focus, .search:focus { outline: none; border-color: var(--amber); }
 .btn-ghost { background: none; color: var(--muted); border: 1px solid var(--edge); border-radius: 5px; padding: 0.3rem 0.7rem; font-size: 0.8rem; cursor: pointer; }
@@ -216,6 +241,47 @@ img { max-width: 100%; }
 .app-footer { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.7rem 1rem; margin-top: 0.5rem; border-top: 1px solid var(--edge); }
 
 @media (min-width: 780px) { .app-header h1 { font-size: 1.35rem; } }
+
+/* ---------- desktop: fill the viewport height, no page scroll ----------
+   Not a scaled-up phone: the planner becomes a grid that occupies exactly the space between
+   the pinned header and footer. Weapons sit side-by-side on the left; the paperdoll and the
+   equipment matrix stack on the right. Panels only scroll INTERNALLY if a dense build overflows,
+   so the page itself never scrolls. */
+@media (min-width: 900px) {
+  html { height: 100%; }
+  body { height: 100dvh; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .app-header, .app-footer { flex: none; }
+  .app-footer { margin-top: 0; padding: 0.4rem 1rem; }
+
+  .planner {
+    flex: 1; min-height: 0; max-width: none; width: 100%; margin: 0;
+    display: grid; gap: 0.7rem; overflow: hidden;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "arsenal character" "arsenal equip";
+  }
+  .arsenal { grid-area: arsenal; }
+  .character { grid-area: character; }
+  .equip-detail { grid-area: equip; }
+
+  /* every panel: header pinned, body free to scroll only if it must */
+  .planner .panel { min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .planner .panel > h2 { flex: none; }
+
+  /* arsenal scrolls as one region; keep its heading in view while scrolling */
+  .arsenal { overflow-y: auto; overscroll-behavior: contain; }
+  .arsenal > h2 { position: sticky; top: 0; z-index: 1; background: var(--panel); padding-bottom: 0.4rem; }
+  #weapon-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; align-items: start; }
+  #melee-slot { margin-top: 0.8rem; }
+  .ws-live { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+
+  /* paperdoll centred in its cell, no oversized dead space */
+  .paperdoll { flex: 1; justify-content: center; padding: 0.3rem 0 1.2rem; }
+
+  /* equipment matrix scrolls inside its panel (both axes) */
+  .equip-matrix { flex: 1; min-height: 0; overflow: auto; }
+}
+
 @media (max-width: 779px) {
   .overlay { padding: 0; align-items: stretch; }
   .overlay-box { height: 100dvh; max-height: 100dvh; border-radius: 0; border-left: none; border-right: none; }

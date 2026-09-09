@@ -78,13 +78,14 @@
     overlaySearch: el("overlay-search"), overlayClose: el("overlay-close"),
     overlayFilters: el("overlay-filters"), overlayDetail: el("overlay-detail"),
     dpsOverlay: el("dps-overlay"), dps: el("dps"), openDps: el("open-dps"), dpsClose: el("dps-close"),
+    targetPanel: el("target-panel"),
   };
 
   // --- state ---
   function freshWeapon() { return { weapon: null, caliber: null, attachments: { muzzle: null, sight: null, action: null }, enchants: [] }; }
   function freshState() {
     return { schema: SCHEMA, equipment: { head: null, torso: null, footL: null, footR: null, gadget: null },
-      weapons: Array.from({ length: WEAPON_SLOTS }, freshWeapon), melee: freshWeapon(), enemy: null };
+      weapons: Array.from({ length: WEAPON_SLOTS }, freshWeapon), melee: freshWeapon(), enemy: null, aimPart: null };
   }
   let state = load();
   function load() {
@@ -332,18 +333,122 @@
   }
 
   // =====================================================================
-  //  DPS overlay
+  //  DPS simulator — hitmap target picker + sustained-fire model
+  //  (geometry: references/hitboxes.json served at site root; see HITMAP_FEATURE.md)
   // =====================================================================
+  let HITBOXES = null, hbPromise = null;
+  function loadHitboxes() {
+    if (HITBOXES) return Promise.resolve();
+    if (hbPromise) return hbPromise;
+    hbPromise = fetch("hitboxes.json").then((r) => (r.ok ? r.json() : null)).then((j) => { HITBOXES = j; }).catch(() => { HITBOXES = null; });
+    return hbPromise;
+  }
+  const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const unitFor = (enemyId) => (HITBOXES && HITBOXES.units[norm(enemyId)]) || null;
+  const partMultMeta = (p) => { const m = HITBOXES && HITBOXES._meta.parts[p]; return m && m.mult != null ? m.mult : 1; };
+  function resolvedAim(model) {                                  // selected part, validated against this body
+    const present = (model.summary && model.summary.partsPresent) || [];
+    let p = state.aimPart;
+    if (!p || !present.includes(p)) p = model.summary ? model.summary.bestPart : null;
+    return p;
+  }
+  // Toxic Lobotomy (EnchantmentIncreaseHeadshotDamage=3): a Head hit ×3 for RANGED weapons only
+  function headshotBonus(slot) {
+    let b = 1;
+    for (const id of slot.enchants) { const e = enchById.get(id); if (!e) continue;
+      for (const m of e.mods) if (m.attr === "EnchantmentIncreaseHeadshotDamage") b *= (m.value || 1); }
+    return b;
+  }
+  // sustained damage over a 5s window: fire a full mag at RPM, reload, repeat (partial mag at the edge counts)
+  function sustained5s(perShot, rpm, mag, reload) {
+    const T = 5, sps = rpm / 60;
+    if (sps <= 0) return null;
+    const gap = 1 / sps, m = mag > 0 ? mag : Infinity;
+    let t = 0, dmg = 0, shots = 0, guard = 0;
+    while (t < T && guard++ < 100000) {
+      let fired = 0;
+      while (fired < m && t < T) { dmg += perShot; shots++; t += gap; fired++; }
+      if (t >= T) break;
+      t += reload;                                              // reload only between mags, not after the last shot
+    }
+    return { dps: dmg / T, shots };
+  }
+  // wall-clock to land n shots incl. reloads: (n-1) gaps + one reload per exhausted mag
+  function timeForShots(n, rpm, mag, reload) {
+    const sps = rpm / 60;
+    if (sps <= 0 || n <= 0) return null;
+    const reloads = mag > 0 ? Math.floor((n - 1) / mag) : 0;
+    return (n - 1) / sps + reloads * reload;
+  }
+
+  // SVG hitmap: triangles painted body-first so weak-points sit on top and stay clickable
+  function renderHitmap(model, sel) {
+    const [x, y, w, h] = model.viewBox;
+    const paint = { Block: 0, Body: 1, Thorax: 2, Groin: 2, Arm: 3, Leg: 3, Head: 4, Eye: 5, Custom: 1, None: 0 };
+    const sw = Math.max(w, h) * 0.004;
+    const polys = model.parts.slice().sort((a, b) => (paint[a.part] ?? 1) - (paint[b.part] ?? 1))
+      .flatMap((p) => p.triangles.map((t) => {
+        const on = p.part === sel;
+        return `<polygon points="${t[0]},${t[1]} ${t[2]},${t[3]} ${t[4]},${t[5]}" fill="${p.color}" fill-opacity="${on ? 0.95 : 0.7}" stroke="${on ? "#fff" : "#0008"}" stroke-width="${on ? sw * 2.4 : sw}" data-aim="${p.part}" style="cursor:pointer"><title>${p.part} — ×${p.mult}</title></polygon>`;
+      })).join("");
+    return `<svg class="hitmap-svg" viewBox="${x} ${y} ${w} ${h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${model.enemyClean || "enemy"} hitmap">${polys}</svg>`;
+  }
+
+  function renderTargetPanel() {
+    const host = els.targetPanel;
+    if (!state.enemy) { host.hidden = true; host.innerHTML = ""; return; }
+    host.hidden = false;
+    const enemy = enemyById.get(state.enemy);
+    if (!HITBOXES) { host.innerHTML = `<div class="muted small">Loading hitmap…</div>`; return; }
+    const unit = unitFor(state.enemy), model = unit && HITBOXES.models[unit.model];
+    if (!model) { host.innerHTML = `<div class="muted small">No hitmap for ${enemy ? enemy.name : "this target"}.</div>`; return; }
+    const aim = resolvedAim(model);
+    const resists = Object.entries(enemy.resist).filter(([, v]) => v).map(([k, v]) => `${k} ${v}%`);
+    const present = (model.summary.partsPresent || []).slice()
+      .sort((a, b) => partMultMeta(b) - partMultMeta(a));       // strongest multiplier first
+    const chips = present.map((p) => `<button class="aim-chip${p === aim ? " on" : ""}" data-aim="${p}" type="button">${p} <span class="am-mult">×${round(partMultMeta(p), 2)}</span></button>`).join("");
+    const utype = unit.unitType && unit.unitType !== "None" ? unit.unitType : "";
+    host.innerHTML = `
+      <div class="tp-grid">
+        <div class="tp-map" id="tp-map">${renderHitmap(model, aim)}</div>
+        <div class="tp-info">
+          <div class="tp-name">${enemy.name}</div>
+          <div class="tp-sub">${[utype, unit.faction].filter(Boolean).join(" · ")}</div>
+          <div class="tp-stat"><span class="k">HP</span><span class="v">${fmt(enemy.hp)}${unit.randomizeHealth && unit.randomizeHealth !== "0" ? " ±" + unit.randomizeHealth : ""}</span></div>
+          ${resists.length ? `<div class="tp-stat"><span class="k">Resist</span><span class="v">${resists.join(", ")}</span></div>` : `<div class="tp-stat muted"><span class="k">Resist</span><span class="v">none</span></div>`}
+          ${model.summary.hasBlock ? `<div class="tp-note bad">⛊ armor plates — ×0 zones</div>` : ""}
+          ${unit.modelShared ? `<div class="tp-note muted">shared body model (stats are exact)</div>` : ""}
+        </div>
+      </div>
+      <div class="aim-row"><span class="aim-label">Aim</span><div class="aim-chips">${chips}</div></div>`;
+  }
+
   function renderDps() {
+    const enemy = state.enemy && enemyById.get(state.enemy);
+    const unit = enemy && unitFor(state.enemy), model = unit && HITBOXES.models[unit.model];
+    const aim = model ? resolvedAim(model) : null;
     let html = "";
     [...state.weapons, state.melee].forEach((slot) => {
       const r = computeWeapon(slot); if (!r) return;
-      html += `<div class="dps-w">${r.w.name}${r.cal ? " · " + r.cal.label : ""}</div>`;
-      html += `<div class="row big"><span class="k">DPS${r.enemy ? " vs " + r.enemy.name : " (raw)"}</span><span class="v">${fmt(r.enemy ? r.dpsEff : r.dpsRaw)}</span></div>`;
-      html += `<div class="row"><span class="k">Per shot${r.critChance > 0 ? " · crit " + Math.round(r.critChance * 100) + "%" : ""}</span><span class="v">${fmt(r.perShot)}</span></div>`;
-      if (r.enemy) {
-        html += `<div class="row"><span class="k">${r.channel ? r.channel + " " + r.resist + "%" : "unresisted"}</span><span class="v">×${round(r.mitig, 2)}</span></div>`;
-        html += `<div class="row ttk"><span class="k">Time to kill</span><span class="v">${r.ttk != null ? round(r.ttk, 2) + " s" : "—"}</span></div>`;
+      const w = r.w, ranged = w.weaponType !== "Melee";
+      const expected = r.perShot * (1 + r.critChance * (ENGINE.critMult - 1));   // crit-averaged per shot
+      // Avg DPS (5s) — AGNOSTIC of hit location (part ×1.0); resistance + reloads/mag/RPM included
+      const sus = sustained5s(expected * r.mitig, w.rpm, w.ammoMax, w.reloadTime);
+      const avgDps = sus ? sus.dps : r.dpsEff;
+      html += `<div class="dps-w">${w.name}${r.cal ? " · " + r.cal.label : ""}</div>`;
+      html += `<div class="row big"><span class="k">Avg DPS · 5s${enemy ? " vs " + enemy.name : ""}</span><span class="v">${fmt(avgDps)}</span></div>`;
+      if (enemy && model) {
+        let pm = partMultMeta(aim);
+        if (aim === "Head" && ranged) pm *= headshotBonus(slot);
+        const perHitLoc = expected * pm * r.mitig;
+        const stk = perHitLoc > 0 ? Math.ceil(enemy.hp / perHitLoc) : null;
+        const ttk = stk ? timeForShots(stk, w.rpm, w.ammoMax, w.reloadTime) : null;
+        html += `<div class="row"><span class="k">Per hit · ${aim} ×${round(pm, 2)}</span><span class="v">${fmt(perHitLoc)}</span></div>`;
+        html += `<div class="row"><span class="k">Shots to kill</span><span class="v">${stk != null ? stk : "—"}</span></div>`;
+        html += `<div class="row ttk"><span class="k">Time to kill</span><span class="v">${ttk != null ? round(ttk, 2) + " s" : "—"}</span></div>`;
+        if (r.channel) html += `<div class="row"><span class="k">${r.channel} resist ${r.resist}%</span><span class="v">×${round(r.mitig, 2)}</span></div>`;
+      } else {
+        html += `<div class="row"><span class="k">Per shot${r.critChance > 0 ? " · crit " + Math.round(r.critChance * 100) + "%" : ""}</span><span class="v">${fmt(expected)}</span></div>`;
       }
     });
     els.dps.innerHTML = html || `<div class="muted small">Equip a weapon to simulate damage.</div>`;
@@ -365,7 +470,9 @@
       els.overlayFilters.innerHTML = [`<button class="fchip on" data-f="">All</button>`]
         .concat(next.filters.map((f) => `<button class="fchip" data-f="${f}">${f}</button>`)).join("");
     } else { els.overlayFilters.hidden = true; els.overlayFilters.innerHTML = ""; }
-    els.overlayList.style.gridTemplateColumns = "repeat(" + (next.cols || 4) + ", 1fr)";
+    // minmax(0,1fr) — NOT 1fr (=minmax(auto,1fr)) — so tracks shrink below tile content
+    // and N columns always fit the viewport width instead of forcing a horizontal scrollbar
+    els.overlayList.style.gridTemplateColumns = "repeat(" + (next.cols || 4) + ", minmax(0, 1fr))";
     renderOptions();
     els.overlay.hidden = false;
     // no auto-focus: focusing the search field pops the mobile keyboard and obscures the list
@@ -549,11 +656,24 @@
   els.wdClose.addEventListener("click", closeWeaponDetail);
   els.wdOverlay.addEventListener("click", (ev) => { if (ev.target === els.wdOverlay) closeWeaponDetail(); });
 
-  // DPS overlay
-  els.openDps.addEventListener("click", () => { renderDps(); els.dpsOverlay.hidden = false; });
+  // DPS overlay — lazy-load hitmap geometry the first time it opens
+  els.openDps.addEventListener("click", async () => {
+    els.dpsOverlay.hidden = false;
+    renderTargetPanel(); renderDps();                           // paints immediately (shows "Loading…" if a target is set)
+    if (!HITBOXES) { await loadHitboxes(); renderTargetPanel(); renderDps(); }
+  });
   els.dpsClose.addEventListener("click", () => { els.dpsOverlay.hidden = true; });
   els.dpsOverlay.addEventListener("click", (ev) => { if (ev.target === els.dpsOverlay) els.dpsOverlay.hidden = true; });
-  els.enemy.addEventListener("change", () => { state.enemy = els.enemy.value || null; persist(); renderWeapons(); renderDps(); });
+  els.enemy.addEventListener("change", () => {
+    state.enemy = els.enemy.value || null; state.aimPart = null;  // new target -> default to its best weak-point
+    persist(); renderWeapons(); renderTargetPanel(); renderDps();
+  });
+  // click a body part on the SVG or an aim chip to set the hit location
+  els.targetPanel.addEventListener("click", (ev) => {
+    const t = ev.target.closest("[data-aim]"); if (!t) return;
+    state.aimPart = t.dataset.aim; persist();
+    renderTargetPanel(); renderDps();
+  });
 
   document.addEventListener("keydown", (ev) => {
     if (ev.key !== "Escape") return;
