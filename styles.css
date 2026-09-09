@@ -49,8 +49,8 @@ img { max-width: 100%; }
 .slot-foot-l::before { transform: scaleX(-1); }
 /* offset each foot's label INTO its shoe body (opposite sides) */
 /* nudge each foot label toward the centre (into the shoe body): left→right, right→left */
-.slot-foot-l .slot-label { transform: translateX(18%); }
-.slot-foot-r .slot-label { transform: translateX(-18%); }
+.slot-foot-l .slot-label { transform: translateX(12%); }
+.slot-foot-r .slot-label { transform: translateX(-12%); }
 .slot-gadget { width: clamp(56px, 18vw, 80px); aspect-ratio: 1; --shape: url("assets/ui/paperdoll/GadgetSlot_outline.png"); }
 
 /* ---------- weapon cards ---------- */
