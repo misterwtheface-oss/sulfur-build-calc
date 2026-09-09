@@ -269,7 +269,7 @@
         <div class="ws-name">${w ? w.name : emptyLbl}</div>
         <div class="ws-sub">${sub}</div>
       </div>
-      <button class="ws-weapon${w ? " filled" : ""}" data-act="weapon" data-loc="${loc}" type="button" title="${w ? "Long-press / right-click to change" : "Select a weapon"}">${wIcon}<span class="ws-hint">${w ? "" : (isMelee ? "＋ melee" : "＋ weapon")}</span></button>
+      <button class="ws-weapon${w ? " filled" : ""}" data-act="weapon" data-loc="${loc}" type="button" title="${w ? "Long-press / right-click to change" : "Select a weapon"}">${wIcon}<span class="ws-hint">${w ? "" : (isMelee ? "＋ melee" : "＋ weapon")}</span>${w ? clearX("weapon") : ""}</button>
       ${w ? modsHtml + enchHtml + `<div class="ws-live">${liveHtml}</div>` : ""}`;
     return box;
   }
@@ -365,7 +365,7 @@
   const closeSelector = () => { els.overlay.hidden = true; ctx = null; };
 
   // image-forward tile: icon on top, name below, no superfluous sub-text
-  const optHTML = (o) => `<button class="opt${o.disabled ? " disabled" : ""}" data-i="${o._i}" ${o.disabled ? "disabled" : ""}>${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span class="opt-name">${o.name}</span></button>`;
+  const optHTML = (o) => `<button class="opt${o.disabled ? " disabled" : ""}${o.dupe ? " dupe" : ""}" data-i="${o._i}" ${o.disabled ? "disabled" : ""} ${o.dupe ? 'title="Already applied to this weapon"' : ""}>${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span class="opt-name">${o.name}</span></button>`;
   function renderOptions() {
     if (!ctx) return;
     const q = (els.overlaySearch.value || "").toLowerCase();
@@ -421,7 +421,7 @@
   const weaponOpts = () => WEAPONS.filter((w) => RANGED_TYPES.has(w.weaponType)).map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon }));
   const meleeOpts = () => WEAPONS.filter((w) => w.weaponType === "Melee").map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon }));
   const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: e.icon, filter: e.group }));
-  const caliberOpts = () => CALIBERS.filter((c) => c.hasChisel).map((c) => ({ ref: c, calId: c.id, name: c.label, sub: `${c.baseDamage} base dmg${c.pellets > 1 ? " · " + c.pellets + " pellets" : ""}`, icon: null }));
+  const caliberOpts = () => CALIBERS.filter((c) => c.hasChisel).map((c) => ({ ref: c, calId: c.id, name: c.label, sub: `${c.baseDamage} base dmg${c.pellets > 1 ? " · " + c.pellets + " pellets" : ""}`, icon: c.icon }));
 
   // =====================================================================
   //  Slot -> selector wiring
@@ -477,6 +477,7 @@
       if (kind === "attach") slot.attachments[t.dataset.slot] = null;
       else if (kind === "caliber") slot.caliber = null;
       else if (kind === "ench") slot.enchants.splice(Number(t.dataset.ei), 1);
+      else if (kind === "weapon") { assignSlot(loc, freshWeapon()); if (focusedWeapon === loc) closeWeaponDetail(); }
       renderAll();
     } else if (act === "attach") {
       const s = t.dataset.slot; const w = weaponByKey.get(slot.weapon); const keys = w ? (w.attachSlots[s] || []) : [];
@@ -495,7 +496,10 @@
     } else if (act === "ench") {
       if (slot.enchants.length >= MAX_ENCH) return;
       const hasScroll = slot.enchants.some((id) => (enchById.get(id) || {}).isElemental);
-      const oils = enchOpts(false), scrolls = enchOpts(true).map((o) => hasScroll ? Object.assign(o, { disabled: true, sub: o.sub + " · 1 scroll max" }) : o);
+      const applied = new Set(slot.enchants);                    // duplicates aren't allowed on the same weapon
+      const dupe = (o) => applied.has(o.key) ? Object.assign(o, { disabled: true, dupe: true }) : o;
+      const oils = enchOpts(false).map(dupe);
+      const scrolls = enchOpts(true).map((o) => applied.has(o.key) ? dupe(o) : (hasScroll ? Object.assign(o, { disabled: true, sub: o.sub + " · 1 scroll max" }) : o));
       openSelector({ title: "Add oil / scroll", opts: indexed([...oils, ...scrolls]),
         filters: ["Oils", "Scrolls"], filterKey: (o) => (o.ref.isElemental ? "Scrolls" : "Oils"),
         groupBy: (o) => (o.ref.isElemental ? "Scroll" : (OIL_BUCKET[o.ref.group] || "Other")),

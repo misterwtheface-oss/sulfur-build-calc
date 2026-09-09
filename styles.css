@@ -97,11 +97,13 @@ img { max-width: 100%; }
 .cell-x { position: absolute; top: -4px; right: -4px; width: 15px; height: 15px; border-radius: 50%;
   background: var(--bg); border: 1px solid var(--edge); color: var(--muted); font-size: 0.6rem; line-height: 13px;
   text-align: center; opacity: 0.75; transition: color 0.12s, border-color 0.12s, opacity 0.12s; }
-.acell:hover .cell-x, .ecell:hover .cell-x { opacity: 1; }
+.acell:hover .cell-x, .ecell:hover .cell-x, .ws-weapon:hover .cell-x { opacity: 1; }
+.ws-weapon .cell-x { top: 4px; right: 4px; }   /* inside the CSS container, not on a corner edge */
 .cell-x:hover { color: var(--bad); border-color: var(--bad); opacity: 1; }
 
-.ecells { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
-.ecell { position: relative; width: clamp(54px, 16vw, 64px); height: clamp(50px, 15vw, 60px); flex: none; cursor: pointer; border: 1px solid var(--grid-line);
+/* all 5 enchant cells in a single row (grid keeps them from overflowing) */
+.ecells { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; max-width: 360px; margin: 0 auto; }
+.ecell { position: relative; width: 100%; aspect-ratio: 1; cursor: pointer; border: 1px solid var(--grid-line);
   border-radius: 5px; background: var(--panel-2); display: flex; align-items: center; justify-content: center; color: var(--slot-line); font-size: 1.2rem; transition: border-color 0.15s; }
 .ecell:hover { border-color: var(--amber); }
 .ecell img { width: 78%; height: 78%; object-fit: contain; }
@@ -116,9 +118,9 @@ img { max-width: 100%; }
 .lv .lvv { font-variant-numeric: tabular-nums; font-weight: 600; }
 .lv .lvv.pos { color: var(--good); } .lv .lvv.neg { color: var(--bad); }
 
-/* ---------- weapon info: half-page bottom-anchored overlay ---------- */
-.wd-overlay { align-items: flex-end; padding: 0; }
-.overlay-box.wd-box { height: 60dvh; max-height: 60dvh; max-width: 900px; border-radius: 12px 12px 0 0; }
+/* ---------- weapon info: docked drawer over the bottom half of the planner ---------- */
+.overlay.wd-overlay { inset: auto 0 0 0; height: 50dvh; z-index: 40; background: none; align-items: stretch; padding: 0; }
+.overlay-box.wd-box { height: 100%; max-height: 100%; max-width: 900px; margin: 0 auto; border-radius: 12px 12px 0 0; box-shadow: 0 -8px 28px rgba(0,0,0,0.55); }
 .wd-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 0.7rem 0.9rem; }
 .wd-sub-h { font-size: 0.64rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
 .wd-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -161,6 +163,7 @@ img { max-width: 100%; }
 .opt { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.5rem 0.3rem; background: var(--panel-2); border: 1px solid var(--grid-line); border-radius: 5px; cursor: pointer; text-align: center; color: var(--text); }
 .opt:hover:not(.disabled) { border-color: var(--amber); }
 .opt.disabled { opacity: 0.4; cursor: not-allowed; }
+.opt.dupe { opacity: 1; border-color: var(--amber); background: rgba(224,169,27,0.14); cursor: not-allowed; }   /* already on this weapon */
 .opt img, .opt .opt-noimg { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
 .opt .opt-noimg { border: 1px dashed var(--grid-line); border-radius: 4px; }
 .opt .opt-name { font-size: 0.74rem; line-height: 1.15; }
