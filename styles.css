@@ -57,7 +57,6 @@ img { max-width: 100%; }
 /* ---------- weapon cards ---------- */
 .weapon-slots { display: flex; flex-direction: column; gap: 0.8rem; }
 .weapon-slot { border: 1px solid var(--edge); border-radius: 6px; padding: 0.6rem; background: rgba(0,0,0,0.18); }
-.weapon-slot.focused { border-color: var(--amber); }
 .ws-head { cursor: pointer; margin-bottom: 0.5rem; }
 .ws-name { font-weight: 600; font-size: 0.95rem; }
 .ws-sub { color: var(--muted); font-size: 0.74rem; }
@@ -74,8 +73,8 @@ img { max-width: 100%; }
 .ws-mods, .ws-ench { margin-top: 0.7rem; }
 .mg-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
 .mg-note { color: var(--slot-line); letter-spacing: 0; text-transform: none; }
-.acells { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-.acell { width: clamp(54px, 16vw, 64px); flex: none; cursor: pointer; padding: 0.25rem 0.15rem 0.15rem;
+.acells { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.acell { position: relative; width: clamp(54px, 16vw, 64px); flex: none; cursor: pointer; padding: 0.25rem 0.15rem 0.15rem;
   border: 1px solid var(--grid-line); border-radius: 5px; background: var(--panel-2);
   display: flex; flex-direction: column; align-items: center; gap: 0.15rem; transition: border-color 0.15s; color: var(--text); }
 .acell:hover:not(:disabled) { border-color: var(--amber); }
@@ -87,16 +86,26 @@ img { max-width: 100%; }
 .acell.invalid .acell-label { color: var(--bad); }
 .acell-label { font-size: 0.54rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
 .acell.filled .acell-label { color: var(--amber); }
+/* caliber cell: always shows the round's ammo icon (never a "+"); dim when locked */
 .acell.caliber { justify-content: center; }
-.acell.caliber .cal-txt { font-size: 0.72rem; font-weight: 700; color: var(--amber); height: clamp(26px,8vw,34px); display: flex; align-items: center; }
-.acell.caliber.invalid .cal-txt { color: var(--bad); }
-.acell.caliber.add .cal-txt { color: var(--slot-line); }
+.acell.caliber.base { border-color: var(--slot-line); }
+.acell.caliber.locked { opacity: 0.55; cursor: not-allowed; }
+.acell.caliber .cal-txt { font-size: 0.68rem; font-weight: 700; color: var(--amber); height: clamp(26px,8vw,34px); display: flex; align-items: center; }
+.acell.caliber.locked .cal-txt { color: var(--bad); }
 
-.ecells { display: flex; gap: 0.35rem; flex-wrap: wrap; }
-.ecell { width: clamp(38px, 11vw, 44px); height: clamp(38px, 11vw, 44px); flex: none; cursor: pointer; border: 1px solid var(--grid-line);
-  border-radius: 5px; background: var(--panel-2); display: flex; align-items: center; justify-content: center; color: var(--slot-line); font-size: 1.05rem; transition: border-color 0.15s; }
+/* subtle ✕ clear badge on filled containers */
+.cell-x { position: absolute; top: -4px; right: -4px; width: 15px; height: 15px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--edge); color: var(--muted); font-size: 0.6rem; line-height: 13px;
+  text-align: center; opacity: 0.75; transition: color 0.12s, border-color 0.12s, opacity 0.12s; }
+.acell:hover .cell-x, .ecell:hover .cell-x { opacity: 1; }
+.cell-x:hover { color: var(--bad); border-color: var(--bad); opacity: 1; }
+
+.ecells { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.ecell { position: relative; width: clamp(54px, 16vw, 64px); height: clamp(50px, 15vw, 60px); flex: none; cursor: pointer; border: 1px solid var(--grid-line);
+  border-radius: 5px; background: var(--panel-2); display: flex; align-items: center; justify-content: center; color: var(--slot-line); font-size: 1.2rem; transition: border-color 0.15s; }
 .ecell:hover { border-color: var(--amber); }
-.ecell img { width: 82%; height: 82%; object-fit: contain; }
+.ecell img { width: 78%; height: 78%; object-fit: contain; }
+.acell.caliber img { width: clamp(26px, 8vw, 34px); height: clamp(26px, 8vw, 34px); object-fit: contain; }
 .ecell.filled.oil { border-color: var(--amber); }
 .ecell.filled.scroll { border-color: var(--scroll); }
 .ecell .ench-glyph { color: var(--amber); }
@@ -107,9 +116,12 @@ img { max-width: 100%; }
 .lv .lvv { font-variant-numeric: tabular-nums; font-weight: 600; }
 .lv .lvv.pos { color: var(--good); } .lv .lvv.neg { color: var(--bad); }
 
-/* ---------- weapon detail (base vs modified) ---------- */
-.weapon-detail h2 { font-size: 0.8rem; margin: 0 0 0.5rem; color: var(--amber); }
-.wd-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+/* ---------- weapon info: half-page bottom-anchored overlay ---------- */
+.wd-overlay { align-items: flex-end; padding: 0; }
+.overlay-box.wd-box { height: 60dvh; max-height: 60dvh; max-width: 900px; border-radius: 12px 12px 0 0; }
+.wd-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 0.7rem 0.9rem; }
+.wd-sub-h { font-size: 0.64rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.wd-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
 .wd-table th { text-align: left; color: var(--muted); font-weight: 600; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.4rem; border-bottom: 1px solid var(--edge); }
 .wd-table td { padding: 0.2rem 0.4rem; border-bottom: 1px solid rgba(58,47,28,0.4); font-variant-numeric: tabular-nums; }
 .wd-table td:first-child { color: var(--muted); }
@@ -174,9 +186,9 @@ img { max-width: 100%; }
 .dps-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 0.8rem; }
 
 /* slim themed scrollbars (palette-derived) */
-.overlay-list, .od-scroll, .dps-body, .equip-matrix { scrollbar-width: thin; scrollbar-color: var(--edge) transparent; }
-.overlay-list::-webkit-scrollbar, .od-scroll::-webkit-scrollbar, .dps-body::-webkit-scrollbar, .equip-matrix::-webkit-scrollbar { width: 8px; height: 8px; }
-.overlay-list::-webkit-scrollbar-thumb, .od-scroll::-webkit-scrollbar-thumb, .dps-body::-webkit-scrollbar-thumb, .equip-matrix::-webkit-scrollbar-thumb { background: var(--edge); border-radius: 4px; }
+.overlay-list, .od-scroll, .dps-body, .wd-body, .equip-matrix { scrollbar-width: thin; scrollbar-color: var(--edge) transparent; }
+.overlay-list::-webkit-scrollbar, .od-scroll::-webkit-scrollbar, .dps-body::-webkit-scrollbar, .wd-body::-webkit-scrollbar, .equip-matrix::-webkit-scrollbar { width: 8px; height: 8px; }
+.overlay-list::-webkit-scrollbar-thumb, .od-scroll::-webkit-scrollbar-thumb, .dps-body::-webkit-scrollbar-thumb, .wd-body::-webkit-scrollbar-thumb, .equip-matrix::-webkit-scrollbar-thumb { background: var(--edge); border-radius: 4px; }
 .target-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; }
 .target-label { font-size: 0.72rem; color: var(--muted); flex: none; }
 .dps .dps-w { font-size: 0.68rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.6rem; }

@@ -47,9 +47,6 @@
       </div>
     </section>
 
-    <!-- WEAPON DETAIL (base vs modified) — planner info panel, below the paperdoll -->
-    <section class="panel weapon-detail" id="weapon-detail" hidden aria-label="Weapon detail"></section>
-
     <!-- EQUIPMENT DETAIL — shared matrix, one column per slot -->
     <section class="panel equip-detail" aria-label="Equipment stats">
       <h2>Equipment stats</h2>
@@ -70,6 +67,17 @@
         <div id="overlay-list" class="overlay-list"></div>
         <div id="overlay-detail" class="overlay-detail"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- WEAPON INFO (base vs modified) — half-page overlay -->
+  <div id="wd-overlay" class="overlay wd-overlay" hidden>
+    <div class="overlay-box wd-box" role="dialog" aria-modal="true" aria-labelledby="wd-title">
+      <div class="overlay-head">
+        <h3 id="wd-title">Weapon</h3>
+        <button id="wd-close" class="btn-ghost" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="wd-body" id="weapon-detail"></div>
     </div>
   </div>
 

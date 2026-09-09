@@ -27,10 +27,11 @@ assets/*
 !assets/gadgets/
 !assets/oils/
 !assets/scrolls/
-# ui sprites: re-include the ui/ dir, ignore its subsets, keep only paperdoll (used by CSS)
+# ui sprites: re-include the ui/ dir, ignore its subsets, keep only what the UI loads
 !assets/ui/
 assets/ui/*
 !assets/ui/paperdoll/
+!assets/ui/calibers/
 # still local-only: oils, scrolls, consumables, manuals, organs, valuables, currencies,
 # ammo, keys, misc, abstract, specials, passives, storage; ui/{chrome,damage_types,
 # portraits,status}; icon_manifest.csv, ui_manifest.csv
