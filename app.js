@@ -216,9 +216,8 @@
   function paintSlot(node, item, lbl) {
     node.classList.toggle("filled", !!item);
     node.innerHTML = (item && item.icon ? `<img class="slot-icon" src="${item.icon}" alt="">` : "") +
-      `<span class="slot-label">${item ? item.name : lbl}</span>` +
-      (item && item.set ? `<span class="slot-set">${item.set}</span>` : "");
-    node.title = item ? `${item.name}${item.set ? ` · ${item.set} set` : ""} — click to change` : "Select " + lbl;
+      `<span class="slot-label">${item ? item.name : lbl}</span>`;
+    node.title = item ? `${item.name} — click to change` : "Select " + lbl;
   }
   function renderPaperdoll() {
     for (const [slot, lbl] of Object.entries(SLOT_LABELS)) {

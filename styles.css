@@ -44,12 +44,6 @@ img { max-width: 100%; }
 .slot .slot-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
   font-size: 0.56rem; line-height: 1.1; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; pointer-events: none; padding: 0 0.25rem; }
 .slot.filled .slot-label { display: none; }
-/* naming-convention set tag on a filled set piece (display only — no combined bonus in-game) */
-.slot .slot-set { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); z-index: 2;
-  font-size: 0.44rem; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
-  padding: 2px 4px; border-radius: 3px; background: rgba(0,0,0,0.72); color: var(--amber);
-  white-space: nowrap; pointer-events: none; }
-.slot-foot .slot-set { bottom: auto; top: 2px; }
 .slot-head { width: clamp(84px, 28vw, 122px); aspect-ratio: 164/136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
 .slot-torso { width: clamp(116px, 40vw, 168px); aspect-ratio: 192/184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
 /* paperdoll silhouette (game-UI ::before mask) stays untouched; only the equipped equipment png
@@ -57,8 +51,11 @@ img { max-width: 100%; }
 .slot-head .slot-icon, .slot-torso .slot-icon { width: 82%; height: 82%; }
 .slot-foot { width: clamp(64px, 23vw, 92px); aspect-ratio: 100/76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
 .slot-foot-l::before { transform: scaleX(-1); }
-/* the shoe ARTWORK faces one way; flip the right foot's equipped icon so the pair mirror */
-.slot-foot-r .slot-icon { transform: scaleX(-1); }
+/* equipped foot icon mirrors its label's inner-bottom alignment + offset (18px in, 6px up): left
+   foot hugs its right/inner edge, right foot its left/inner edge; right icon flipped so they mirror */
+.slot-foot .slot-icon { inset: auto; bottom: 6px; margin: 0; }
+.slot-foot-l .slot-icon { right: 18px; }
+.slot-foot-r .slot-icon { left: 18px; transform: scaleX(-1); }
 /* Foot labels live INSIDE each slot's invisible square container, anchored to the
    bottom (small offset off the border) and pushed to the inner edge: left foot's label
    right-aligned, right foot's label left-aligned, each 10px off that edge. */
