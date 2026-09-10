@@ -53,9 +53,9 @@ img { max-width: 100%; }
 .slot-foot-l::before { transform: scaleX(-1); }
 /* equipped foot icon mirrors its label's inner-bottom alignment + offset (18px in, 6px up): left
    foot hugs its right/inner edge, right foot its left/inner edge; right icon flipped so they mirror */
-.slot-foot .slot-icon { inset: auto; bottom: 6px; margin: 0; }
-.slot-foot-l .slot-icon { right: 18px; }
-.slot-foot-r .slot-icon { left: 18px; transform: scaleX(-1); }
+.slot-foot .slot-icon { inset: auto; bottom: 12px; margin: 0; }
+.slot-foot-l .slot-icon { right: 10px; }
+.slot-foot-r .slot-icon { left: 10px; transform: scaleX(-1); }
 /* Foot labels live INSIDE each slot's invisible square container, anchored to the
    bottom (small offset off the border) and pushed to the inner edge: left foot's label
    right-aligned, right foot's label left-aligned, each 10px off that edge. */
