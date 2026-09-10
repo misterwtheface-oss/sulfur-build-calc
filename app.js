@@ -545,8 +545,9 @@
     .sort((a, b) => (a.filter || "").localeCompare(b.filter || "") || (a.ref.mag || 0) - (b.ref.mag || 0) || a.name.localeCompare(b.name));
   const weaponOpts = () => WEAPONS.filter((w) => RANGED_TYPES.has(w.weaponType)).map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, keywords: kw(w.name, w.weaponType, w.damageType, w.caliber) }));
   const meleeOpts = () => WEAPONS.filter((w) => w.weaponType === "Melee").map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, keywords: kw(w.name, w.weaponType, w.damageType) }));
-  // recipe (e.g. "Earth + Earth") surfaces as the info-panel sub for crafted scrolls, not on the tile
-  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.recipe || e.group, icon: e.icon, filter: e.group, keywords: kw(e.name, e.group, e.recipe, modKw(e.mods)) }));
+  // info-panel sub for scrolls: crafted -> its recipe ("Earth + Earth"); base (uncrafted) -> "Stage 1"
+  // (the raw combining ingredient). Oils keep their functional group.
+  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.recipe || (e.isElemental ? "Stage 1" : e.group), icon: e.icon, filter: e.group, keywords: kw(e.name, e.group, e.recipe, modKw(e.mods)) }));
   const caliberOpts = () => CALIBERS.filter((c) => c.hasChisel).map((c) => ({ ref: c, key: "cal" + c.id, calId: c.id, name: c.label, sub: `${c.baseDamage} base dmg${c.pellets > 1 ? " · " + c.pellets + " pellets" : ""}`, icon: c.icon, keywords: kw(c.label, "ammo caliber chisel") }));
 
   // =====================================================================
