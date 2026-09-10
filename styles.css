@@ -52,9 +52,9 @@ img { max-width: 100%; }
 .slot-foot .slot-set { bottom: auto; top: 2px; }
 .slot-head { width: clamp(84px, 28vw, 122px); aspect-ratio: 164/136; --shape: url("assets/ui/paperdoll/Head_outline.png"); }
 .slot-torso { width: clamp(116px, 40vw, 168px); aspect-ratio: 192/184; --shape: url("assets/ui/paperdoll/Torso_outline.png"); }
-/* enlarge the ARTWORK inside the head/torso slots by 25% — container/footprint stays the same */
-.slot-head::before, .slot-torso::before { transform: scale(1.25); }
-.slot-head .slot-icon, .slot-torso .slot-icon { width: 72.5%; height: 72.5%; }
+/* paperdoll silhouette (game-UI ::before mask) stays untouched; only the equipped equipment png
+   sits larger on top (base .slot-icon is 58%) so it fills more of the head/torso slot */
+.slot-head .slot-icon, .slot-torso .slot-icon { width: 82%; height: 82%; }
 .slot-foot { width: clamp(64px, 23vw, 92px); aspect-ratio: 100/76; --shape: url("assets/ui/paperdoll/Shoe_outline.png"); }
 .slot-foot-l::before { transform: scaleX(-1); }
 /* the shoe ARTWORK faces one way; flip the right foot's equipped icon so the pair mirror */
