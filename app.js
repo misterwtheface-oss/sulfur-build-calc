@@ -34,7 +34,8 @@
     Multishot: "Projectile", Penetration: "Projectile", Bounce: "Projectile", Size: "Projectile",
     CritChance: "Crit", Durability: "Utility", Knockback: "Utility", Weight: "Utility",
   };
-  const OIL_BUCKET_ORDER = ["Damage", "Fire Rate", "Accuracy", "Projectile", "Crit", "Utility", "Other", "Scroll"];
+  // Scroll first: combination scrolls are the headline pick in the enchant selector, oils below.
+  const OIL_BUCKET_ORDER = ["Scroll", "Damage", "Fire Rate", "Accuracy", "Projectile", "Crit", "Utility", "Other"];
   const PASSIVE_SLOTS = ["passive0", "passive1", "passive2", "passive3"];
   const EQUIP_ORDER = ["head", "torso", "footL", "footR", ...PASSIVE_SLOTS];
   const SLOT_LABELS = { head: "Head", torso: "Torso", footL: "Left Foot", footR: "Right Foot",
@@ -266,7 +267,8 @@
         const id = slot.enchants[i], e = id && enchById.get(id);
         if (e) {
           const inner = e.icon ? `<img src="${e.icon}" alt="">` : `<span class="ench-glyph">${e.isElemental ? "✦" : "◈"}</span>`;
-          return `<button class="ecell filled ${e.isElemental ? "scroll" : "oil"}" data-act="clear" data-kind="ench" data-loc="${loc}" data-ei="${i}" type="button" title="${e.name} — remove">${inner}<span class="cell-x">✕</span></button>`;
+          // tap the cell to REPLACE this enchant (opens the selector); the ✕ badge removes it
+          return `<button class="ecell filled ${e.isElemental ? "scroll" : "oil"}" data-act="ench" data-loc="${loc}" data-ei="${i}" type="button" title="${e.name} — tap to replace">${inner}<span class="cell-x" data-act="clear" data-kind="ench" data-loc="${loc}" data-ei="${i}" title="Remove">✕</span></button>`;
         }
         return `<button class="ecell add" data-act="ench" data-loc="${loc}" type="button" title="Add oil / scroll">+</button>`;
       }).join("");
@@ -484,7 +486,7 @@
   const closeSelector = () => { els.overlay.hidden = true; ctx = null; };
 
   // image-forward tile: icon on top, name below, no superfluous sub-text
-  const optHTML = (o) => `<button class="opt${o.disabled ? " disabled" : ""}${o.dupe ? " dupe" : ""}${ctx && o.key === ctx.current ? " selected" : ""}" data-i="${o._i}" ${o.disabled ? "disabled" : ""} ${o.dupe ? 'title="Already applied to this weapon"' : ""}>${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span class="opt-name">${o.name}</span></button>`;
+  const optHTML = (o) => `<button class="opt${o.disabled ? " disabled" : ""}${o.dupe ? " dupe" : ""}${ctx && o.key === ctx.current ? " selected" : ""}" data-i="${o._i}" ${o.disabled ? "disabled" : ""} ${o.dupe ? 'title="Already applied to this weapon"' : ""}>${o.icon ? `<img src="${o.icon}" alt="">` : `<span class="opt-noimg"></span>`}<span class="opt-name">${o.name}</span>${o.recipe ? `<span class="opt-recipe">${o.recipe}</span>` : ""}</button>`;
   function renderOptions() {
     if (!ctx) return;
     const q = (els.overlaySearch.value || "").toLowerCase();
@@ -543,7 +545,7 @@
     .sort((a, b) => (a.filter || "").localeCompare(b.filter || "") || (a.ref.mag || 0) - (b.ref.mag || 0) || a.name.localeCompare(b.name));
   const weaponOpts = () => WEAPONS.filter((w) => RANGED_TYPES.has(w.weaponType)).map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, keywords: kw(w.name, w.weaponType, w.damageType, w.caliber) }));
   const meleeOpts = () => WEAPONS.filter((w) => w.weaponType === "Melee").map((w) => ({ ref: w, key: w.key, name: w.name, sub: `${w.weaponType} · ${fmt(w.baseDamage)}dmg`, icon: w.icon, keywords: kw(w.name, w.weaponType, w.damageType) }));
-  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.group, icon: e.icon, filter: e.group, keywords: kw(e.name, e.group, modKw(e.mods)) }));
+  const enchOpts = (elemental) => ENCH.filter((e) => !!e.isElemental === elemental).map((e) => ({ ref: e, key: e.id, name: e.name, sub: e.recipe || e.group, recipe: e.recipe || null, icon: e.icon, filter: e.group, keywords: kw(e.name, e.group, e.recipe, modKw(e.mods)) }));
   const caliberOpts = () => CALIBERS.filter((c) => c.hasChisel).map((c) => ({ ref: c, key: "cal" + c.id, calId: c.id, name: c.label, sub: `${c.baseDamage} base dmg${c.pellets > 1 ? " · " + c.pellets + " pellets" : ""}`, icon: c.icon, keywords: kw(c.label, "ammo caliber chisel") }));
 
   // =====================================================================
@@ -622,19 +624,33 @@
         statLines: (o) => { const c = o.ref; return [{ k: "Base damage", v: fmt(c.baseDamage) }, { k: "Pellets", v: c.pellets }, { k: "Knockback", v: fmt(c.knockback) }]; },
         onPick: (o) => { slot.caliber = o.calId; }, onClear: () => { slot.caliber = null; } });
     } else if (act === "ench") {
-      if (slot.enchants.length >= MAX_ENCH) return;
-      const hasScroll = slot.enchants.some((id) => (enchById.get(id) || {}).isElemental);
-      const applied = new Set(slot.enchants);                    // duplicates aren't allowed on the same weapon
-      const dupe = (o) => applied.has(o.key) ? Object.assign(o, { disabled: true, dupe: true }) : o;
-      const oils = enchOpts(false).map(dupe);
-      const scrolls = enchOpts(true).map((o) => applied.has(o.key) ? dupe(o) : (hasScroll ? Object.assign(o, { disabled: true, sub: o.sub + " · 1 scroll max" }) : o));
-      openSelector({ title: "Add oil / scroll", opts: indexed([...oils, ...scrolls]), cols: 6,
-        filters: ["Oils", "Scrolls"], filterKey: (o) => (o.ref.isElemental ? "Scrolls" : "Oils"),
-        groupBy: (o) => (o.ref.isElemental ? "Scroll" : (OIL_BUCKET[o.ref.group] || "Other")),
-        groupOrder: OIL_BUCKET_ORDER, statLines: (o) => modLines(o.ref.mods),
-        onPick: (o) => { if (o.disabled) return; slot.enchants.push(o.key); } });
+      openEnchSelector(loc, t.dataset.ei != null ? Number(t.dataset.ei) : null);
     }
   });
+
+  // Oil/scroll selector. replaceIndex=null -> ADD into an empty cell; a number -> REPLACE that cell.
+  // Scroll rule (≤1 scroll per weapon): scrolls are hidden entirely when another scroll already sits
+  // in a DIFFERENT cell. Opening from the scroll's own cell (replace) frees it, so scrolls show again
+  // — that's the "swap this scroll for a different one" path.
+  function openEnchSelector(loc, replaceIndex) {
+    const slot = slotFromLoc(loc);
+    const isReplace = replaceIndex != null;
+    if (!isReplace && slot.enchants.length >= MAX_ENCH) return;
+    const others = slot.enchants.filter((_, idx) => idx !== replaceIndex);   // enchants in the OTHER cells
+    const applied = new Set(others);                             // duplicates aren't allowed on the same weapon
+    const hasOtherScroll = others.some((id) => (enchById.get(id) || {}).isElemental);
+    const dupe = (o) => applied.has(o.key) ? Object.assign(o, { disabled: true, dupe: true }) : o;
+    const scrolls = hasOtherScroll ? [] : enchOpts(true).map(dupe);
+    const oils = enchOpts(false).map(dupe);
+    openSelector({ title: isReplace ? "Replace enchantment" : "Add oil / scroll",
+      opts: indexed([...scrolls, ...oils]), cols: 6, current: isReplace ? slot.enchants[replaceIndex] : null,
+      allowClear: isReplace,
+      filters: scrolls.length ? ["Scrolls", "Oils"] : ["Oils"], filterKey: (o) => (o.ref.isElemental ? "Scrolls" : "Oils"),
+      groupBy: (o) => (o.ref.isElemental ? "Scroll" : (OIL_BUCKET[o.ref.group] || "Other")),
+      groupOrder: OIL_BUCKET_ORDER, statLines: (o) => modLines(o.ref.mods),
+      onPick: (o) => { if (o.disabled) return; if (isReplace) slot.enchants[replaceIndex] = o.key; else slot.enchants.push(o.key); },
+      onClear: isReplace ? () => { slot.enchants.splice(replaceIndex, 1); } : undefined });
+  }
 
   // overlay interactions
   els.overlayFilters.addEventListener("click", (ev) => {

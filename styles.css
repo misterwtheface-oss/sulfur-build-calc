@@ -179,6 +179,8 @@ img { max-width: 100%; }
 .opt img, .opt .opt-noimg { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
 .opt .opt-noimg { border: 1px dashed var(--grid-line); border-radius: 4px; }
 .opt .opt-name { font-size: 0.74rem; line-height: 1.15; overflow-wrap: anywhere; max-width: 100%; }
+/* recipe line under a crafted scroll's name, e.g. "Earth + Earth" */
+.opt .opt-recipe { font-size: 0.62rem; line-height: 1.1; color: var(--scroll); opacity: 0.85; overflow-wrap: anywhere; max-width: 100%; }
 .opt.clear-opt { flex-direction: row; justify-content: center; color: var(--bad); border-style: dashed; grid-column: 1 / -1; }
 /* group header spanning the grid (weapon type sections) */
 .opt-group { grid-column: 1 / -1; font-size: 0.64rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.09em; padding: 0.5rem 0.1rem 0.15rem; border-bottom: 1px solid var(--edge); }
